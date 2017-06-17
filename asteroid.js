@@ -42,7 +42,7 @@ export const websockClient = (type, resource, params) =>{
             	};
             	case GET_ONE:{
             		const { id } = params;
-            		return asteroid.call('agent.order.get',id)
+            		return asteroid.call('order.get',id)
             		.then(response => mapResponse2Rest(response, type, params));
             	}
             	case UPDATE:{
@@ -57,6 +57,7 @@ export const websockClient = (type, resource, params) =>{
             	}
 
             }
+            break;
 
 		};
 		case 'ApplyItem':{
@@ -70,10 +71,81 @@ export const websockClient = (type, resource, params) =>{
 			        .then(response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{					
-					return asteroid.call('agent.order.get',params.id)
+					return asteroid.call('order.get',params.id)
 					.then(response => mapResponse2Rest(response, type, params) );
 				}
 			}
+			break;
+		};
+		case 'MyCheck':{
+			switch(type){
+				case GET_LIST:{
+    				const { page, perPage } = params.pagination;
+			        const { field, order } = params.sort;
+			        const { username, role } = params;
+			        return asteroid.call('tester.orders.get',username, role, page, perPage, field, order)
+			        .then(response => mapResponse2Rest(response, type, params));					
+				};
+				case GET_ONE:{
+					const { id } = params;
+					return asteroid.call('order.get',id)
+            		.then(response => mapResponse2Rest(response, type, params));
+				}
+				case UPDATE:{
+					const { id, data, previousData } = params;
+					previousData.items.map(
+						(item)=>{
+								if (data[item.name] != undefined){
+									item.requirement = data[item.name];
+								}
+							}
+						);
+					return asteroid.call('tester.order.update', id, previousData)
+					.then(response => mapResponse2Rest(response, type, params));
+				}
+			}
+			break;
+		};
+		case 'Allocatoritems':{
+			switch(type){
+				case GET_LIST:{
+					const { page, perPage } = params.pagination;
+			        const { field, order } = params.sort;
+			        return asteroid.call('orders.get',page, perPage, field, order)
+			        .then(response => mapResponse2Rest(response, type, params));
+				};
+				case UPDATE:{
+					const { id, data, previousData } = params;
+					if(data === previousData){
+						return mapResponse2Rest(previousData, type, params);
+					}
+					return asteroid.call('assigner.tester.set', id, data)
+					.then(response => mapResponse2Rest(response, type, params));
+				};
+				case GET_ONE:{
+					const { id } = params;
+					return asteroid.call('order.get',id)
+            		.then(response => mapResponse2Rest(response, type, params));
+				}
+				
+			}
+			break;
+		}
+		case 'Keepers':{
+			switch(type){
+				case GET_LIST:{
+					const { page, perPage } = params.pagination;
+			        const { field, order } = params.sort;
+			        return asteroid.call('orders.get',page, perPage, field, order)
+			        .then(response => mapResponse2Rest(response, type, params));
+				}
+				case GET_ONE:{
+					const { id } = params;
+					return asteroid.call('order.get',id)
+            		.then(response => mapResponse2Rest(response, type, params));
+				}
+			}
+			break;
 		}
 	}
 }

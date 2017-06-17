@@ -49,19 +49,18 @@ export const KeepersList = ({ ...props }) => (
         <Responsive
             small={
                 <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => `${record.Product} Product`}
-                    tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
+                    primaryText={record => record.sampleName}
+                    secondaryText={record => `${record.sampleProducer} Product`}
+                    tertiaryText={record => new Date(record.sampleProducer).toLocaleDateString()}
                 />
             }
             medium={
                 <Datagrid  >
-                    <TextField source="id" />
-                    <TextField source="ProductName" />
-                    <DateField source="published_at" style={{ fontStyle: 'italic' }} />
-                    <TextField source="CommissionedUnit" />
-                    <TextField source="notes" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
-                    <TextField source="status" />
+                    <TextField source="sampleName" />
+                    <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+                    <TextField source="sampleProducer" />
+                    <TextField source="producerBatch" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                    <TextField source="sampleType" />
                     <StatusField />                    
                     <ShowButton/>
                     <EditButton label='审核'  addLabel/>
@@ -73,17 +72,20 @@ export const KeepersList = ({ ...props }) => (
 export const KeepersShow = ({ ...props }) => (
     <Show  {...props}>
         <SimpleShowLayout>
-            <TextField source="id"  style={{ display: 'inline-block' }} />
-            <TextField source="ProductName"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="ModelType" />
-            <DateField source="published_at" style={{ fontStyle: 'italic' }} />
-            <TextField source="TradeMark" />
-            <TextField source="ManufactureredDate" />
-            <TextField source="Contact" style={{ display: 'inline-block' }} />
-            <TextField source="TelNum" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="Adress" />
-            <TextField source="Manufacturer" /><TextField source="CommissionedUnit" /><TextField source="KindofTest" />
-            <TextField source="Product" />
+            <TextField source="sampleName"   />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
         </SimpleShowLayout>
     </Show>
 );
@@ -92,24 +94,38 @@ export class KeepersEdit extends Component {
         return(
     <Edit {...this.props} >
         <SimpleForm>
-            <TextField source="id"  style={{ display: 'inline-block' }} />
-            <TextField source="ProductName"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="ModelType"  style={{ display: 'inline-block', marginLeft: 32 }} />
-            <DateField source="published_at" style={{ fontStyle: 'italic', display: 'inline-block', marginLeft: 32 }} />
-            <TextField source="TradeMark" style={{ display: 'inline-block', marginLeft: 32  }}  />
-            <TextField source="ManufactureredDate" style={{ display: 'inline-block', marginLeft: 32  }} />
+            <TextField source="sampleName"   />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand" />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
             <br/>
-            <TextField source="Contact" style={{ display: 'inline-block'  }}  />
-            <TextField source="TelNum" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="Adress" style={{ display: 'inline-block' , marginLeft: 32 }} />
-            <TextField source="Manufacturer" style={{ display: 'inline-block', marginLeft: 32}} />
-            <TextField source="CommissionedUnit"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="KindofTest" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <br/>
-            <NullableBooleanInput source="isApproved" />
-            <TextInput source="Notes" style={{ display: 'inline-block'  }} />
-
+            <WorkSpace/>
         </SimpleForm>
     </Edit>);
 }
+}
+class WorkSpace extends Component{
+    render(){
+        const { record } = this.props;
+        if(record.status == 6){
+            return(
+                <div>
+            <NullableBooleanInput source="isApproved" />
+            <TextInput source="Notes" style={{ display: 'inline-block'  }} />
+            </div>);
+        }
+        else{
+            return (<div></div>);
+        }
+    }
 }

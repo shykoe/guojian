@@ -40,8 +40,7 @@ import {
 import SelectField from 'material-ui/SelectField'
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
-import { Field, FieldArray, option, formValueSelector } from 'redux-form';
-import { reduxForm } from 'redux-form';
+import { Field, FieldArray,reduxForm, option, formValueSelector } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
 import { choices } from '../MyItem/TypeDefine';
@@ -53,6 +52,7 @@ const styles = {
     main: { display: 'flex', flexWrap: 'wrap' },
     chip: { margin: 4 },
 };
+const selector = formValueSelector('record-form');
 export class WorkSpace extends Component {
     renderField = ({ input, label, type, meta: { touched, error },...custom }) => (
         <TextField hintText={label}
@@ -62,11 +62,10 @@ export class WorkSpace extends Component {
         {...custom}
         />
     )
-    renderMembers = ({ fields, meta: { touched, error } }) => {
-        console.log(fields);
+    renderMembers = ({ fields, meta: { touched, error }, ind }) => {
         return(
         <div>
-        <Chip style={{ display: 'inline-block' }}>{fields.name.split('.')[1]}</Chip>
+        <Chip style={{ display: 'inline-block' }}>{fields.name}</Chip>
       <RaisedButton  style={{ display: 'inline-block',margin: '5em 0 0 12em',fontSize: '1px' }} onTouchTap={() => fields.push({})} label="添加结果"/>
       {touched && error && <span>{error}</span>}
         {fields.map((member, index) =>
@@ -78,32 +77,42 @@ export class WorkSpace extends Component {
               <Icon/>
               </IconButton>
             <Field
-              name={`${member}.TestItem`}
+              name={`${fields.name}[${index}].name`}
               type="text"
               component={this.renderField}
               label="检测项目"/>
             <Field
-              name={`${member}.TestBasis`}
-              type="text"
-              component={this.renderField}
-              label="检测依据"/>
-            <Field
-              name={`${member}.TestRes`}
+              name={`${fields.name}[${index}].result`}
               type="text"
               component={this.renderField}
               label="检测结果"/>
+            <Field
+              name={`${fields.name}[${index}].verdict`}
+              type="text"
+              component={this.renderField}
+              label="是否通过"/>
           </div>
         )}
         </div>)
     }
     render() {
         const { record } = this.props;
+        console.log();
         return(
             <div>
-                {record.InsItems.map(item => (
-                  <FieldArray key={item} name={`TestItems.${choices.find(s => s.id === item).Dtype.split(":")[0]}`} component={this.renderMembers}/>  
+                {record.items.map((item, ind) => (
+                  <FieldArray key={item.name} ind={ind} name={item.name} component={this.renderMembers}/>  
                      ))}
             </div>
             )
     }
 }
+WorkSpace = reduxForm({
+  form: 'testerItems',
+  enableReinitialize: true,
+})(WorkSpace)
+WorkSpace = connect(
+  (state,props) => ({
+    initialValues: selector(state,'items').reduce( (s,i)=>{ s[i.name] = i.requirement; return s}, {})
+  })            
+)(WorkSpace)

@@ -13,10 +13,9 @@ import { translate, DashboardMenuItem } from 'admin-on-rest';
 const items = [
     { name: 'ApplyItem', icon: <ApplyIcon /> ,role:'agent'},
     { name: 'MyItem', icon: <MyItemIcon />,role:'agent' },
-    { name: 'Pick', icon: <PickIcon />,role:'tester' },
     { name: 'MyCheck', icon: <MyCheckIcon />,role:'tester' },
     { name:'Allocatoritems', icon:<AitemsIcon/>, role:'assigner'},
-    { name:'Keepers', icon:<KeepersIcon/>, role:'Keeper'}
+    { name:'Keepers', icon:<KeepersIcon/>, role:'keeper'}
 ];
 const styles = {
     main: {

@@ -56,16 +56,15 @@ export const AitemsList = ({ ...props }) => (
             }
             medium={
                 <Datagrid  >
-                    <TextField source="id" />
-                    <TextField source="ProductName" />
-                    <DateField source="published_at" style={{ fontStyle: 'italic' }} />
-                    <TextField source="CommissionedUnit" />
-                    <TextField source="notes" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
-                    <TextField source="status" />
+                    <TextField source="sampleName" />
+                    <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+                    <TextField source="sampleProducer" />
+                    <TextField source="clientName" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                    <TextField source="sampleType" />
                     <CheckersField />                    
                     <ShowButton/>
+                    <AddCheckers source="tester" />
                     
-                    <AddCheckers/>
                     
                 </Datagrid>
             }
@@ -75,17 +74,20 @@ export const AitemsList = ({ ...props }) => (
 export const AitemsShow = ({ ...props }) => (
     <Show  {...props}>
         <SimpleShowLayout>
-            <TextField source="id"  style={{ display: 'inline-block' }} />
-            <TextField source="ProductName"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="ModelType" />
-            <DateField source="published_at" style={{ fontStyle: 'italic' }} />
-            <TextField source="TradeMark" />
-            <TextField source="ManufactureredDate" />
-            <TextField source="Contact" style={{ display: 'inline-block' }} />
-            <TextField source="TelNum" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="Adress" />
-            <TextField source="Manufacturer" /><TextField source="CommissionedUnit" /><TextField source="KindofTest" />
-            <TextField source="Product" />
+            <TextField source="sampleName"   />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
         </SimpleShowLayout>
     </Show>
 );

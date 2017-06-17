@@ -28,7 +28,8 @@ class TextButton extends Component {
     render() {
     	const { record } = this.props;
     	const Text = this.dealText(record);
-    	if(record.finished === false && record.status === '待审核'){
+    	
+    	if(record.status == 9){
 	        return (
 	            <span>
 	                <RaisedButton containerElement={ <Link to={ `/MyCheck/${record.id}`} /> }  primary={true} label={Text}/>

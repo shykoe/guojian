@@ -91,18 +91,20 @@ export class MyItemEdit extends Component {
     <Edit {...this.props} >
         <SimpleForm>
 			
-            <TextField source="sampleName"  style={{ display: 'inline-block' }} />
-            <TextField source="producerBatch"  style={{ display: 'inline-block', marginLeft: 32 }} />
-            <TextField source="sampleProducer" style={{ fontStyle: 'italic', display: 'inline-block', marginLeft: 32 }} />
-            <TextField source="sampleType" style={{ display: 'inline-block', marginLeft: 32  }}  />
-            <TextField source="sampleBrand" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <br/>
-            <TextField source="sampleNum" style={{ display: 'inline-block'  }}  />
-            <TextField source="clientName" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="clientContactPhone" style={{ display: 'inline-block' , marginLeft: 32 }} />
-            <TextField source="clientContactIdent" style={{ display: 'inline-block', marginLeft: 32}} />
-            <TextField source="clientEconomicType"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="KindofTest" style={{ display: 'inline-block', marginLeft: 32  }} />
+            <TextField source="sampleName"   />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
             <StatusSelect addLabel label="status"  />
             <ProductType categories={this.state} addLabel label="categoryName" />
             <TestCriteria categories={this.state} addLabel label="levelName" />

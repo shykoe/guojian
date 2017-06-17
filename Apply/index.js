@@ -78,19 +78,20 @@ export const ApplyList = ({ ...props }) => (
 export const ApplyShow = ({ ...props }) => (
     <Show  {...props}>
         <SimpleShowLayout>
-            <TextField source="id"  style={{ display: 'inline-block' }} />
-            <TextField source="sampleName"  style={{ display: 'inline-block', marginLeft: 32  }} />
+            <TextField source="sampleName"   />
             <TextField source="sampleProducer" />
             <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
-            <DateField source="deadline" style={{ fontStyle: 'italic' }} />
-            <TextField source="clientName" />
+            <TextField source="producerBatch" />
             <TextField source="sampleType" />
-            <TextField source="clientContactPhone" style={{ display: 'inline-block' }} />
-            <TextField source="clientContactName" style={{ display: 'inline-block' }} />
-            <TextField source="clientContactAddress.phone" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="clientContactAddress.phone" />
-            <TextField source="Manufacturer" /><TextField source="CommissionedUnit" /><TextField source="KindofTest" />
-            <TextField source="Product" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
         </SimpleShowLayout>
     </Show>
 );

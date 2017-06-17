@@ -11,18 +11,18 @@ const CheckField = ({ record, translate,detail }) => {
     if(detail){
         return(
         <span style={styles.main}>
-            {record.InsItems.map(item => (
-                <Chip key={item} style={styles.chip}>
-                    {choices.find(s => s.id === item).Dtype}
+            {record.items.map(item => (
+                <Chip key={item.name} style={styles.chip}>
+                    {item.name}
                 </Chip>
             ))}
         </span>);
     }
     return(
     <span style={styles.main}>
-        {record.InsItems.map(item => (
-            <Chip key={item} style={styles.chip}>
-                {choices.find(s => s.id === item).Dtype.split(":")[0]}
+        {record.items.map(item => (
+            <Chip key={item.name} style={styles.chip}>
+                {item.name}
             </Chip>
         ))}
     </span>);

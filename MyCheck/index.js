@@ -61,14 +61,14 @@ export const MyCheckList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
-                    <TextField source="id" />
-                    <TextField source="ProductName" />
-                    <DateField source="published_at" style={{ fontStyle: 'italic' }} />
-                    <TextField source="CommissionedUnit" />
+                    <TextField source="sampleName" />
+                    <TextField source="sampleProducer" />
+                    <TextField source="clientName" style={{ fontStyle: 'italic' }} />
+                    <TextField source="producerBatch" />
                     <TextField source="notes" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
 
                     <CheckField />
-                    <TextField source="status" /> 
+                     
                     <TextButton  />
                 </Datagrid>
             }
@@ -80,29 +80,23 @@ export class MyCheckEdit extends Component {
         return(
     <Edit {...this.props} >
         <SimpleForm>
-            <TextField source="id"  style={{ display: 'inline-block' }} />
-            <TextField source="ProductName"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="ModelType"  style={{ display: 'inline-block', marginLeft: 32 }} />
-            <DateField source="published_at" style={{ fontStyle: 'italic', display: 'inline-block', marginLeft: 32 }} />
-            <TextField source="TradeMark" style={{ display: 'inline-block', marginLeft: 32  }}  />
-            <TextField source="ManufactureredDate" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <br/>
-            <TextField source="Contact" style={{ display: 'inline-block'  }}  />
-            <TextField source="TelNum" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="Adress" style={{ display: 'inline-block' , marginLeft: 32 }} />
-            <TextField source="Manufacturer" style={{ display: 'inline-block', marginLeft: 32}} />
-            <TextField source="CommissionedUnit"  style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="KindofTest" style={{ display: 'inline-block', marginLeft: 32  }} />
+            <TextField source="sampleName"   />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
             <CheckField detail={true} />
-            <br/>
-            <TextInput source="TestCount" style={{ display: 'inline-block'  }} />
-            <DateInput source="Receive_at" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <DateInput source="SamplingDate" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <br/>
-            <TextInput source="SealingStaff" style={{ display: 'inline-block' }} />
-            <TextInput source="TestPlace" style={{ display: 'inline-block', marginLeft: 32  }} />
-            <TextInput source="SealingStaff" style={{ display: 'inline-block', marginLeft: 32  }} />
             <WorkSpace />
+            
         </SimpleForm>
     </Edit>);
 }

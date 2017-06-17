@@ -9,7 +9,7 @@ import Title from '../layout/Title';
 import { crudGetOne as crudGetOneAction, crudUpdate as crudUpdateAction } from '../../actions/dataActions';
 import DefaultActions from './EditActions';
 import translate from '../../i18n/translate';
-
+import { getFormValues } from 'redux-form';
 /**
  * Turns a children data structure (either single child or array of children) into an array.
  * We can't use React.Children.toArray as it loses references.
@@ -72,6 +72,11 @@ export class Edit extends Component {
     }
 
     handleSubmit(record) {
+        if(this.props.testerItems != undefined){
+            const recordModify = this.props.testerItems;
+            this.props.crudUpdate(this.props.resource, this.props.id, recordModify, this.props.data, this.getBasePath());
+            return
+        }
         this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath());
     }
 
@@ -79,7 +84,6 @@ export class Edit extends Component {
         const { actions = <DefaultActions />, children, data, hasDelete, hasShow, id, isLoading, resource, title, translate } = this.props;
         const { key } = this.state;
         const basePath = this.getBasePath();
-
         const resourceName = translate(`resources.${resource}.name`, {
             smart_count: 1,
             _: inflection.humanize(inflection.singularize(resource)),
@@ -95,7 +99,7 @@ export class Edit extends Component {
         // so the form doesn't disappear while refreshing
         const isRefreshing = key !== this.previousKey;
         this.previousKey = key;
-
+        console.log(this.props.testerItems)
         return (
             <div className="edit-page">
                 <Card style={{ opacity: isLoading ? 0.8 : 1 }} key={key}>
@@ -138,12 +142,12 @@ Edit.propTypes = {
     title: PropTypes.any,
     translate: PropTypes.func,
 };
-
 function mapStateToProps(state, props) {
     return {
         id: props.match.params.id,
         data: state.admin[props.resource].data[props.match.params.id],
         isLoading: state.admin.loading > 0,
+        testerItems:getFormValues('testerItems')(state),
     };
 }
 

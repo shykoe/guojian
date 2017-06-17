@@ -35,7 +35,6 @@ render(
     <Admin authClient={authClient}  customSagas={saga} restClient={websockClient} title="Test" locale="cn" menu={Menu} messages={messages}>
         <Resource name="ApplyItem" list={ApplyList}  show={ApplyShow} icon={ApplyIcon} role='agent' />
         <Resource name="MyItem" list={MyItemList} edit={MyItemEdit} icon={MyItemIcon} role='agent' />
-        <Resource name="Pick"  list={PickList}  show={PickShow} role='tester'/>
         <Resource name="MyCheck"  list={MyCheckList} edit={MyCheckEdit} role='tester'/>
         <Resource name="Allocatoritems" list={AitemsList} show={AitemsShow} icon={AitemsIcon} role='assigner'/>
         <Resource name="Keepers" list={KeepersList}  show={KeepersShow} edit={KeepersEdit} icon={KeepersIcon} role='keeper' />
