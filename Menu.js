@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import compose from 'recompose/compose';
 import MenuItem from 'material-ui/MenuItem';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import { ApplyIcon } from './Apply';
 import { MyItemIcon } from './MyItem';
 import { PickIcon } from './Pick';
@@ -10,12 +11,18 @@ import { MyCheckIcon } from './MyCheck';
 import { AitemsIcon } from './Allocatoritems';
 import { KeepersIcon } from './Keepers';
 import { translate, DashboardMenuItem } from 'admin-on-rest';
+import { AddUserIcon } from './AddUser';
+import { AllOrderIcon }from './AllOrder';
+import {CheckTestIcon} from './CheckTest';
 const items = [
     { name: 'ApplyItem', icon: <ApplyIcon /> ,role:'agent'},
     { name: 'MyItem', icon: <MyItemIcon />,role:'agent' },
     { name: 'MyCheck', icon: <MyCheckIcon />,role:'tester' },
     { name:'Allocatoritems', icon:<AitemsIcon/>, role:'assigner'},
-    { name:'Keepers', icon:<KeepersIcon/>, role:'keeper'}
+    { name:'Keepers', icon:<KeepersIcon/>, role:'keeper'},
+    { name: 'AddUser', icon: <AddUserIcon />,role:'admin'} ,
+    { name: 'AllOrder', icon: <AllOrderIcon />,role:'admin' },
+    { name: 'CheckTest', icon: <CheckTestIcon />,role:'admin' }
 ];
 const styles = {
     main: {
@@ -40,6 +47,12 @@ class Menu extends Component{
                 onTouchTap={onMenuTap}
             />
         ))}
+        <MenuItem
+            containerElement={<Link to="/UserInfo" />}
+            primaryText={"个人设置"}
+            leftIcon={<SettingsIcon />}
+            onTouchTap={onMenuTap}
+        />
         {logout}
     </div>)
 }

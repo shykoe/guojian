@@ -27,7 +27,60 @@ export const messages = {
         Keepers:{
             name:'审核',
             fields:fields
-        }
+        },
+        AddUser:{
+            name:'账户管理',
+            fields: {
+                username: '账户名',
+                password: '密码', 
+                role:'角色', 
+                reset:'修改角色',
+                addusers:'新建 账户', 
+                1: '管理员' ,
+                6: '业务员' ,
+                7: '仓库操作员' , 
+                8: '检测任务分配员' , 
+                9: '检测员' , 
+                20: '正常' , 
+                30: '不可见' , 
+                31: '已删除' , 
+            },
+        },
+        AllOrder:{
+            name:'订单',
+            fields: {
+                status: '订单状态',
+                sampleName: '样品名称',
+                sampleProducer: '样品生产厂',
+                producerBatch: '生产批号',
+                sampleType: '样品型号规格',
+                sampleLevel: '样品质量等级',
+                sampleBrand: '样品商标',
+                sampleNum: '样品数量',
+                clientName: '客户姓名',
+                clientContactName: '联系人',
+                clientContactPhone: '联系人电话',
+                clientContactIdent: '通讯地址',
+                clientEconomicType: '经济类型', 
+                contactInf:'联系人信息',
+                clientInf:'客户信息',
+                sampleInf:'样品信息',
+            },
+        },
+        CheckTest:{
+            name:'检测录入查看',
+            fields: {
+                orderId:'订单号',
+                userId:'检测员ID',
+                categoryName:'种类',  
+                levelName:'等级',
+                itemName:'项目',
+                requirement :'要求',
+                createdAt :'创建时间',
+                result :'检测结果',
+                verdict  :'判定',
+            },
+        },        
     },
 };
 

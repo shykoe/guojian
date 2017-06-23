@@ -10,10 +10,12 @@ import {
     USER_LOGIN_FAILURE,
     USER_CHECK,
     USER_LOGOUT,
+    USER_PWD_RESET_CHECK
 } from '../../actions/authActions';
 import { FETCH_ERROR } from '../../actions/fetchActions';
 import { AUTH_LOGIN, AUTH_CHECK, AUTH_ERROR, AUTH_LOGOUT,AUTH_GETROLE } from '../../auth';
 import { roleMap } from '../../../Utils/role';
+import { asteroid } from '../../../asteroid';
 export default (authClient) => {
     if (!authClient) return () => null;
     function* handleAuth(action) {
@@ -46,6 +48,14 @@ export default (authClient) => {
                 roles = yield call(authClient, AUTH_GETROLE, userName);
                 yield put({type:SET_USER, payload: userName});
                 yield put({type:SET_ROLE, payload: roleMap(roles)});
+                var rel = yield asteroid.call('checkPWDReset', userName);
+                if(!rel){
+                    yield put(replace({
+                        pathname: '/UserInfo',
+                        state: { nextPathname: meta.pathName },
+                    }));
+                    yield put(showNotification('请先修改初始密码', 'warning'));
+                }
             } catch (e) {
                 yield call(authClient, AUTH_LOGOUT);
                 yield put(replace({
@@ -72,6 +82,7 @@ export default (authClient) => {
             }
             break;
         }
+        
     }
     return function* watchAuthActions() {
         yield [

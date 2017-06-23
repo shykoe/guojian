@@ -113,6 +113,6 @@ WorkSpace = reduxForm({
 })(WorkSpace)
 WorkSpace = connect(
   (state,props) => ({
-    initialValues: selector(state,'items').reduce( (s,i)=>{ s[i.name] = i.requirement; return s}, {})
+    initialValues: selector(state,'items').reduce( (s,i)=>{ s[i.name] = i.requirements; return s}, {})
   })            
 )(WorkSpace)

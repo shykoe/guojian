@@ -74,7 +74,7 @@ export class Edit extends Component {
     handleSubmit(record) {
         if(this.props.testerItems != undefined){
             const recordModify = this.props.testerItems;
-            this.props.crudUpdate(this.props.resource, this.props.id, recordModify, this.props.data, this.getBasePath());
+            this.props.crudUpdate(this.props.resource, this.props.id, {data:recordModify,record:record, userName:this.props.userName}, this.props.data, this.getBasePath());
             return
         }
         this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath());
@@ -99,7 +99,6 @@ export class Edit extends Component {
         // so the form doesn't disappear while refreshing
         const isRefreshing = key !== this.previousKey;
         this.previousKey = key;
-        console.log(this.props.testerItems)
         return (
             <div className="edit-page">
                 <Card style={{ opacity: isLoading ? 0.8 : 1 }} key={key}>
@@ -148,6 +147,7 @@ function mapStateToProps(state, props) {
         data: state.admin[props.resource].data[props.match.params.id],
         isLoading: state.admin.loading > 0,
         testerItems:getFormValues('testerItems')(state),
+        userName:state.admin.user.userName
     };
 }
 

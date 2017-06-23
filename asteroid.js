@@ -8,6 +8,7 @@ import {
     UPDATE,
     DELETE,
 } from 'admin-on-rest';
+import { CHANGEPWD } from './UserCenter/ChangePwdAction';
 const Asteroid = createClass();
 // Connect to a Meteor backend
 export const asteroid = new Asteroid({
@@ -92,15 +93,21 @@ export const websockClient = (type, resource, params) =>{
             		.then(response => mapResponse2Rest(response, type, params));
 				}
 				case UPDATE:{
-					const { id, data, previousData } = params;
+					const { id, data:{data, record, userName}, previousData } = params;
+					if(record.pictures != undefined){
+						const newPictures = record.pictures.filter(p => p instanceof File);
+						const reader = new FileReader();
+						reader.readAsDataURL(newPictures[0]);
+						reader.onload = () => ( asteroid.call('tester.img.update', id, reader.result));
+					}
 					previousData.items.map(
 						(item)=>{
 								if (data[item.name] != undefined){
-									item.requirement = data[item.name];
+									item.requirements = data[item.name];
 								}
 							}
 						);
-					return asteroid.call('tester.order.update', id, previousData)
+					return asteroid.call('tester.order.update', id, previousData, data, userName)
 					.then(response => mapResponse2Rest(response, type, params));
 				}
 			}
@@ -130,7 +137,7 @@ export const websockClient = (type, resource, params) =>{
 				
 			}
 			break;
-		}
+		};
 		case 'Keepers':{
 			switch(type){
 				case GET_LIST:{
@@ -138,14 +145,91 @@ export const websockClient = (type, resource, params) =>{
 			        const { field, order } = params.sort;
 			        return asteroid.call('orders.get',page, perPage, field, order)
 			        .then(response => mapResponse2Rest(response, type, params));
-				}
+				};
 				case GET_ONE:{
 					const { id } = params;
 					return asteroid.call('order.get',id)
             		.then(response => mapResponse2Rest(response, type, params));
+				};
+				case UPDATE:{
+					const { id, data, previousData } = params;
+					if(data === previousData){
+						return mapResponse2Rest(previousData, type, params);
+					}
+					return asteroid.call('keeper.order.update', id, data)
+					.then(response => mapResponse2Rest(response, type, params));
 				}
 			}
 			break;
-		}
+		};
+		case 'AddUser':{ 
+            switch(type){
+            	case GET_LIST:{
+    				const { page, perPage } = params.pagination; 
+			        const { field, order } = params.sort; 
+			        return asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+            	} 
+            	case GET_ONE:{ 
+            		const {Mytype,username} = params; 
+            		if(Mytype=='checkUsername')
+            		{ 
+            			var temp=asteroid.call('agent.adduser.checkUsername',username).then(response => mapResponse2Rest (response, type, params));
+            	        console.log('-checkUsername-get one result--',temp);  
+            	        return temp;
+            		}
+			        const {id} = params; 
+			        var temp=asteroid.call('agent.adduser.getOne',id).then(response => mapResponse2Rest (response, type, params));
+            	    return temp;
+            	}
+            	case UPDATE:{
+            		const{data,id}=params;
+            		 var temp=asteroid.call('agent.adduser.updateData',id,data).then(response => mapResponse2Rest (response, type, params));
+            	    return temp;
+            	}
+            	case CREATE:{
+            		const{data}=params; 
+            		return asteroid.call('agent.adduser.createUser',data).then(response => mapResponse2Rest (response, type, params));
+            	}
+
+            } 
+
+		};
+        case 'CheckTest':{ 
+            switch(type){
+            	case GET_LIST:{  
+            			const { page, perPage } = params.pagination; 
+			            const { field, order } = params.sort;
+			            return asteroid.call('agent.checktest.get', page, perPage, 'orderid', order).then(response => mapResponse2Rest (response, type, params));
+			       
+    			 }
+
+            } 
+		};
+		case 'AllOrder':{ 
+            switch(type){
+            	case GET_LIST:{ 
+            		if(params.filter)
+            		{
+                        const { page, perPage } = params.pagination; 
+			            const { field, order } = params.sort; 
+			            const {filter}=params 
+			            delete filter["id"]; 
+			            delete filter["q"]; 
+			            for(var key in filter){
+			            	var temp=filter[key];
+			            	temp='.*'+temp+'.*';
+			            	temp={ '$regex': temp, $options: '$i' };
+			            	filter[key]=temp;
+			            } 
+                        return asteroid.call('agent.allorder.getFilter', page, perPage, '_id', order,filter).then(response => mapResponse2Rest (response, type, params));
+            		}else{
+            			const { page, perPage } = params.pagination; 
+			            const { field, order } = params.sort;
+			            return asteroid.call('agent.allorder.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+			        }
+    			 }
+
+            } 
+		};				
 	}
 }

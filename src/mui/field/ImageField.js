@@ -20,17 +20,31 @@ export const ImageField = ({ elStyle = {}, record, source, title }) => {
     if (!srcValue) {
         return <div />;
     }
-
+    if(srcValue.map!=undefined){
+        return (
+            <div style={style}>
+                {srcValue.map((i,ind)=>(
+                    <img
+                    title={titleValue}
+                    alt={titleValue}
+                    src={i}
+                    key={ind}
+                    style={styles.image}
+                />))}
+            </div>
+        );
+    };
     return (
-        <div style={style}>
-            <img
-                title={titleValue}
-                alt={titleValue}
-                src={srcValue}
-                style={styles.image}
-            />
-        </div>
-    );
+            <div style={style}>
+
+                    <img
+                    title={titleValue}
+                    alt={titleValue}
+                    src={srcValue}
+                    style={styles.image}
+                />
+            </div>        
+        );
 };
 
 ImageField.propTypes = {

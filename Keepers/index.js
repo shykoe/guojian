@@ -20,7 +20,6 @@ import {
     ReferenceManyField,
     Responsive,
     RichTextField,
-    SelectField,
     SelectInput,
     Show,
     ShowButton,
@@ -42,6 +41,8 @@ import Chip from 'material-ui/Chip';
 import Icon from 'material-ui/svg-icons/action/event';
 import { Field, reduxForm } from 'redux-form';
 import StatusField from '../MyItem/StatusField';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
@@ -108,24 +109,35 @@ export class KeepersEdit extends Component {
             <TextField source="price" />
             <TextField source="note" />
             <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
+            <ImageInput source="pictures" label="Related pictures" accept="image/*" >
+                <ImageField source="src" title="title" />
+            </ImageInput>
             <br/>
-            <WorkSpace/>
+            <IsApproved/>
         </SimpleForm>
     </Edit>);
 }
 }
-class WorkSpace extends Component{
+class IsApproved extends Component{
+    selectValue = [{name:'样品审核通过',value:7}, {name:'样品审核未通过',value:8}]
+    renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
+    renderSelectField = ({ input, label, meta: { touched, error }, children,disabled, ...custom }) => (
+      <SelectField
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        onChange={(event, index, value) => input.onChange(value)}
+        children={children}
+        style={{width: 300}}
+        disabled={disabled}
+        {...custom}/>
+    ); 
     render(){
-        const { record } = this.props;
-        if(record.status == 6){
-            return(
-                <div>
-            <NullableBooleanInput source="isApproved" />
-            <TextInput source="Notes" style={{ display: 'inline-block'  }} />
-            </div>);
-        }
-        else{
-            return (<div></div>);
-        }
+        const { record } = this.props;       
+        return(
+        <Field name="status" component={this.renderSelectField} disabled={record.status!=6} >
+        {this.selectValue.map(this.renderItem)}
+        </Field>)
+
     }
 }

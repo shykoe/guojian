@@ -44,6 +44,7 @@ import Chip from 'material-ui/Chip';
 import CheckField from '../Pick/CheckField';
 import TextButton from './TextButton';
 import { WorkSpace } from './WorkSpace';
+import { FinishButton } from './FinishButton';
 export const MyCheckIcon = Icon;
 const rowStyle = (record) => {
     if (record.status === "检测完成") return { backgroundColor: '#dfd' };
@@ -70,6 +71,7 @@ export const MyCheckList = ({ ...props }) => (
                     <CheckField />
                      
                     <TextButton  />
+                    <FinishButton />
                 </Datagrid>
             }
         />
@@ -93,10 +95,13 @@ export class MyCheckEdit extends Component {
             <TextField source="clientEconomicType" />
             <TextField source="price" />
             <TextField source="note" />
-            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
+            <ImageField source="testingImages" title="Picture"  addLabel  label='图片'/>
+            <ImageInput source="pictures" label="Related pictures" accept="image/*" >
+                <ImageField source="src" title="title" />
+            </ImageInput>
             <CheckField detail={true} />
             <WorkSpace />
-            
+
         </SimpleForm>
     </Edit>);
 }
