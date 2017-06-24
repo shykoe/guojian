@@ -23,6 +23,7 @@ import * as customMessages from './i18n';
 import Menu from './Menu';
 import { asteroid, websockClient } from './asteroid';
 import customRoutes from './routes';
+import reportReducer from './reportReducer';
 const messages = {
     cn: { ...chineseMessages, ...customMessages.cn },
     en: { ...englishMessages, },
@@ -36,7 +37,17 @@ const restClient = jsonRestClient(data, true);
 const uploadCapableClient = addUploadFeature(restClient);
 const delayedRestClient = (type, resource, params) => new Promise(resolve => setTimeout(() => resolve(uploadCapableClient(type, resource, params)), 1000));
 render(
-    <Admin authClient={authClient}  customSagas={saga}  customRoutes={customRoutes} restClient={websockClient} title="Test" locale="cn" menu={Menu} messages={messages}>
+    <Admin 
+        authClient={authClient}
+        customSagas={saga}  
+        customRoutes={customRoutes} 
+        restClient={websockClient} 
+        title="Test" 
+        locale="cn" 
+        menu={Menu} 
+        messages={messages}
+        customReducers={{ report: reportReducer }}
+    >
         <Resource name="ApplyItem" list={ApplyList}  show={ApplyShow} icon={ApplyIcon} role='agent' />
         <Resource name="MyItem" list={MyItemList} edit={MyItemEdit} icon={MyItemIcon} role='agent' />
         <Resource name="MyCheck"  list={MyCheckList} edit={MyCheckEdit} role='tester'/>
