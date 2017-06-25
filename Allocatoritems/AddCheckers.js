@@ -71,7 +71,7 @@ class AddCheckers extends React.Component{
 		      onRequestClose={this.handleClose}
 		    >
          添加质检员
-          { tester.map((item) => <Field name={`${record.id}.tester`} key={item._id} userid={item._id} component={this.renderCheckbox} label={item.profile.name}/> ) }
+          { tester.map((item) => <Field name={`${record.id}.tester`} key={item._id} userid={item._id} component={this.renderCheckbox} label={item.name}/> ) }
         </Dialog>
 			</div>
 			);

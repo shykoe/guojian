@@ -23,7 +23,7 @@ class CheckersField extends Component  {
         <span style={styles.main}>
             {record.tester.map(item => (
                 <Chip key={item} style={styles.chip}>
-                    {tester.find(i=>i._id ==item).profile.name}
+                    {tester.find(i=>i._id ==item).name}
                 </Chip>
             ))}
         </span>);
