@@ -61,7 +61,7 @@ export const ApplyList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
-                    <TextField source="id" />
+                    
                     <TextField source="sampleName" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleProducer" />

@@ -93,7 +93,7 @@ export const KeepersShow = ({ ...props }) => (
 export class KeepersEdit extends Component {
     render(){
         return(
-    <Edit {...this.props} >
+    <Edit title={<Title />} {...this.props} >
         <SimpleForm>
             <TextField source="sampleName"   />
             <TextField source="sampleProducer" />
@@ -117,6 +117,13 @@ export class KeepersEdit extends Component {
         </SimpleForm>
     </Edit>);
 }
+}
+class Title extends Component{
+    render(){
+        const { record } = this.props;
+        const date = new Date(record.createdAt*1000);
+        return(<span> { `${record.sampleProducer}于${date.toLocaleDateString()}提交`}</span>);
+    }
 }
 class IsApproved extends Component{
     selectValue = [{name:'样品审核通过',value:7}, {name:'样品审核未通过',value:8}]

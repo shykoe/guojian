@@ -82,7 +82,7 @@ export class MyCheckEdit extends Component {
         return(
     <Edit {...this.props} >
         <SimpleForm>
-            <TextField source="sampleName"   />
+            <TextField source="sampleName" elStyle={{ fontStyle: 'italic' }}  />
             <TextField source="sampleProducer" />
             <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
             <TextField source="producerBatch" />

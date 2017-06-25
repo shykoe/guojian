@@ -6,6 +6,7 @@ import FieldTitle from '../../util/FieldTitle';
 const defaultLabelStyle = {
     paddingTop: '2em',
     height: 'auto',
+    
 };
 
 /**
@@ -33,6 +34,7 @@ class Labeled extends Component {
             <TextField
                 floatingLabelText={<FieldTitle label={label} source={source} resource={resource} />}
                 floatingLabelFixed
+                floatingLabelStyle={{fontWeight:"bolder",color:"#686868"}}
                 fullWidth
                 disabled={disabled}
                 underlineShow={false}
