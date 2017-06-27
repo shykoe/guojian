@@ -21,12 +21,38 @@ const mapResponse2Rest = (response, type, params)=>{
 			return { data: response,total: response.length };
 		case GET_ONE:
 			response['id'] = response._id;
-			return {data: response};
-		default:
+			return {data: response}; 
+		default: 
 			response['id'] = response._id ? response._id : response.id ;
 			return {data: response};		
 	}
 }
+
+const mapResponse2RestAddI = (response, type, params,page, perpage)=>{
+	// const { headers, json } = response;
+	switch(type){
+		case GET_LIST: 
+		     //skiped = ( parseInt(page) - 1 ) * parseInt(perpage);
+		     var i=( parseInt(page) - 1 ) * parseInt(perpage)+1;
+			 for (var key in response){ 
+			        	response[key]["id"]=response[key]["_id"]; 
+                            ++i; 
+			        }   
+			return {data: response,total: response.length };
+		case GET_ONE: 
+		    if(response==false){
+		    	//console.log('--zero-')
+		    	return false; 
+		    }
+		    return {data:response}; 	
+		case  UPDATE:
+		 	return {data:response};
+		case  CREATE: 
+		    response['id'] = response._id ;
+		 	return {data:response};  
+	}
+}
+
 export const websockClient = (type, resource, params) =>{
 	console.log(type, resource, params);
 	switch (resource){
@@ -167,28 +193,34 @@ export const websockClient = (type, resource, params) =>{
             	case GET_LIST:{
     				const { page, perPage } = params.pagination; 
 			        const { field, order } = params.sort; 
-			        return asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+			        var temp=asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+            	    console.log('--adduser---getlist---',temp);
+            	    return temp;
             	} 
             	case GET_ONE:{ 
             		const {Mytype,username} = params; 
             		if(Mytype=='checkUsername')
             		{ 
-            			var temp=asteroid.call('agent.adduser.checkUsername',username).then(response => mapResponse2Rest (response, type, params));
+            			var temp=asteroid.call('agent.adduser.checkUsername',username).then(response => mapResponse2RestAddI (response, type, params, 0,0));
             	        console.log('-checkUsername-get one result--',temp);  
             	        return temp;
             		}
 			        const {id} = params; 
-			        var temp=asteroid.call('agent.adduser.getOne',id).then(response => mapResponse2Rest (response, type, params));
+			        var temp=asteroid.call('agent.adduser.getOne',id).then(response => mapResponse2RestAddI (response, type, params, 0,0));
+            	    console.log('--adduser-get one-',temp,id,params);
             	    return temp;
             	}
             	case UPDATE:{
-            		const{data,id}=params;
-            		 var temp=asteroid.call('agent.adduser.updateData',id,data).then(response => mapResponse2Rest (response, type, params));
+            		const{data,id}=params; 
+            		console.log('-adduser-update-',id,data);
+
+            		var temp=asteroid.call('agent.adduser.updateData',id,data).then(response => mapResponse2RestAddI (response, type, params,0,0));
             	    return temp;
             	}
             	case CREATE:{
             		const{data}=params; 
-            		return asteroid.call('agent.adduser.createUser',data).then(response => mapResponse2Rest (response, type, params));
+            		console.log('--create-',data,params);
+            		return asteroid.call('agent.adduser.createUser',data).then(response => mapResponse2RestAddI (response, type, params,0,0));
             	}
 
             } 

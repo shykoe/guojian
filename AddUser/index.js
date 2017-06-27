@@ -54,16 +54,10 @@ const rowStyle = (record) => {
 export const AddUserList = ({ ...props }) => (
     <List {...props} perPage={25} sort={{ field: 'id', order: 'ASC' }}  >
         <Responsive
-            small={
-                <SimpleList
-                    primaryText={record => record.title} 
-                />
-            }
+            
             medium={
-                <Datagrid rowStyle={rowStyle}  >
-                    <TextField source="id" />
-                    <TextField source="username" /> 
-                    <TextField source="password" /> 
+                <Datagrid  > 
+                    <TextField source="username" />  
                     <TextRoles source="role"  />    
                     <MyEditButton source="reset"/> 
                 </Datagrid>
@@ -71,14 +65,29 @@ export const AddUserList = ({ ...props }) => (
         />
     </List>
 );
+
+const validateUserUpdate= (values) => {
+    const errors = {}; 
+    //console.log('--valuse -',values);
+   
+    var password=values.password;
+    console.log(password);
+    if(!password){
+       
+    }else if(password.length<6)
+    {
+       errors.password = ['密码太短了'];
+    } 
+    return errors 
+};
+
 export class AddUserEdit extends Component {
     render(){
         return(
     <Edit {...this.props} >
-        <SimpleForm > 
-            <TextField source="id"  style={{  width: 128,display: 'inline-block' }} />
-            <TextField source="username"  style={{  width: 128,display: 'inline-block', marginLeft: 32  }} />
-            <TextField source="password"  style={{  width: 128,display: 'inline-block', marginLeft: 32 }} />
+        <SimpleForm  validate={validateUserUpdate}>  
+            <TextField source="username" /> 
+            <TextInput source="password" /> 
             <SelectInput source="role" choices={choices} optionText="name" optionValue="role" />
          </SimpleForm>
     </Edit>);
@@ -96,40 +105,28 @@ const choices=[
     { role: 31, name: '已删除' }, 
 ];
  
-const handleOnBlur=(e)=>{
-      var setusername=e.target.value;
-      var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername}); 
-      checkResult.then(response => console.log('---',response.data)); 
-      e.target.value='x';
+ 
 
-}
-
-var err="x";
-const validateUserSetusername = (values) => {
-    var  errors = [];
-    var setusername=values;
-    console.log('---',setusername);
-    var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername}); 
-    checkResult.then(response => {if(response.data){ console.log('--存在-',); return errors = ['账户已存在'];}});   
-   
-    
-    return errors
-};
+ 
 
 var flagCheckUsername=0;
 const validateUserCreation = (values) => {
     const errors = {}; 
-   console.log('--valuse -',values);
+    console.log('--valuse -',values);
     //errors.username = ['The firstName is required'];
- 
+     
     var setusername=values.username;
+    if(setusername=='账户名已存在')
+    {
+        errors.username = ['账户名已存在'];
+    }
     if(!setusername){
        errors.username = ['账户名不能为空'];
-    }else  if((setusername!='用户名已存在')){ 
+    }else  if((setusername!='账户名已存在')){ 
     console.log('---',setusername);
      // var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername}); 
       websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername})
-       .then(response => {if(response.data){ console.log('--存在-',); flagCheckUsername=1; values.username='用户名已存在';errors.username = ['用户名已存在']; return errors}});   
+       .then(response => {if(response.data){ console.log('--存在-',); flagCheckUsername=1; values.username='账户名已存在';errors.username = ['用户名已存在']; validateUserCreation(values);return errors}});   
     } 
     var setpassword=values.password;
     console.log(setpassword);

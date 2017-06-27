@@ -61,8 +61,8 @@ export const CheckTestList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  > 
-                    <TextField source="OrderID" /> 
-                    <TextField source="userID" />
+                    <TextField source="order" /> 
+                    <TextField source="user" />
                     <TextField source="categoryName" />    
                     <TextField source="levelName" />  
                     <TextField source="itemName" />  
