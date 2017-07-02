@@ -82,7 +82,7 @@ export const websockClient = (type, resource, params) =>{
             			data.status = 11;
             		}
             		if(previousData.status === 3){
-            			data.status =6
+            			data.status = 13;
             		}
         			return asteroid.call('agent.order.approve', id, data)
         			.then(response => mapResponse2Rest(response, type, params));
