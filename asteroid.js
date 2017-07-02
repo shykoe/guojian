@@ -14,6 +14,7 @@ const Asteroid = createClass();
 export const asteroid = new Asteroid({
   endpoint: 'ws://localhost:9000/websocket',
 });
+export const asteroidMethod = asteroid.call;
 const mapResponse2Rest = (response, type, params)=>{
 	switch(type){
 		case GET_LIST:
@@ -74,13 +75,18 @@ export const websockClient = (type, resource, params) =>{
             	}
             	case UPDATE:{
             		const { id, data, previousData } = params;
-            		if(data.status === previousData.status){
+            		if(data === previousData){
             			return mapResponse2Rest(previousData, type, params);
             		}
-            		if(data.status == 4){
-            			return asteroid.call('agent.order.approve', id, data)
-            			.then(response => mapResponse2Rest(response, type, params));
+            		if(previousData.status === 10){
+            			data.status = 11;
             		}
+            		if(previousData.status === 3){
+            			data.status =6
+            		}
+        			return asteroid.call('agent.order.approve', id, data)
+        			.then(response => mapResponse2Rest(response, type, params));
+            		
             	}
 
             }
@@ -119,21 +125,23 @@ export const websockClient = (type, resource, params) =>{
             		.then(response => mapResponse2Rest(response, type, params));
 				}
 				case UPDATE:{
-					const { id, data:{data, record, userName}, previousData } = params;
-					if(record.pictures != undefined){
-						const newPictures = record.pictures.filter(p => p instanceof File);
+					const { id, data, previousData, username } = params;
+					var ops = {};
+					if(data.pictures != undefined){
+						const newPictures = data.pictures.filter(p => p instanceof File);
 						const reader = new FileReader();
 						reader.readAsDataURL(newPictures[0]);
 						reader.onload = () => ( asteroid.call('tester.img.update', id, reader.result));
 					}
-					previousData.items.map(
-						(item)=>{
-								if (data[item.name] != undefined){
-									item.requirements = data[item.name];
+					data.items.map(
+						(item,ind)=>{
+								if (item.requirements != previousData.items[ind].requirements){
+									ops[item.name] = item.requirements;
 								}
 							}
 						);
-					return asteroid.call('tester.order.update', id, previousData, data, userName)
+					//console.log(ops);
+					return asteroid.call('tester.order.update', id, data, ops, username)
 					.then(response => mapResponse2Rest(response, type, params));
 				}
 			}
@@ -144,7 +152,7 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST:{
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        return asteroid.call('orders.get',page, perPage, field, order)
+			        return asteroid.call('orders.get',page, perPage, field, order, params.filter)
 			        .then(response => mapResponse2Rest(response, type, params));
 				};
 				case UPDATE:{
@@ -169,7 +177,7 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST:{
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        return asteroid.call('orders.get',page, perPage, field, order)
+			        return asteroid.call('orders.get',page, perPage, field, order, params.filter)
 			        .then(response => mapResponse2Rest(response, type, params));
 				};
 				case GET_ONE:{

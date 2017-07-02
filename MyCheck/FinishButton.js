@@ -23,10 +23,8 @@ export class FinishButton extends Component {
   		const { target } = e;
   		const { record } = this.props;
   		const { _id } = record;
-  		console.log(_id);
 		var rel = asteroid.call('documents.download',{documentId:_id});
 		rel.then((response) =>{
-			console.log(response);
 			const blob = base64ToBlob(response.base64);
 			fileSaver.saveAs(blob, response.fileName);
 		});
@@ -38,9 +36,9 @@ export class FinishButton extends Component {
 		.then((response) =>{
 			//console.log(response);
 			if(response){				
-				disabled |= false;
+				disabled = false;
 			}else{
-				disabled |= true;
+				disabled = true;
 			}
 		})
 		var finished = true;
@@ -51,7 +49,7 @@ export class FinishButton extends Component {
     				}
     	)
     	finished = finished === 1 ? true:false;
-    	disabled = disabled === 1 || (record.status != 9) ? true:false;
+    	disabled = disabled === 1 || (record.status != 10) ? true:false;
     	this.setState({disabled: disabled, finished:finished});
 	}
 	state = {

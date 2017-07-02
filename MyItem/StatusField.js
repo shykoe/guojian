@@ -1,37 +1,52 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
 import { translate } from 'admin-on-rest';
+import {
+	ORDER_STATUS_UNCLAIMED,
+	ORDER_STATUS_CLAIMED,
+	ORDER_STATUS_REJECTED,
+	ORDER_STATUS_APPROVED,
+	ORDER_STATUS_CLOSED,
+	ORDER_STATUS_PAID,
+	ORDER_STATUS_PROCESSED,
+	ORDER_STATUS_SAMPLE_RECEIVED,
+	ORDER_STATUS_ASSIGNED,
+	ORDER_STATUS_TESTED,
+	ORDER_STATUS_REPORT_SHIPPED,
+	ORDER_STATUS_COMPLETED,
+	ORDER_STATUS_REFUNDED,
+} from '../Utils';
 const styles = {
     main: { display: 'flex', flexWrap: 'wrap' },
     chip: { margin: 4 },
 };
 const dealText = (record) =>{
 	switch(record.status){
-		case 1:
+		case ORDER_STATUS_UNCLAIMED :
 			return "订单未认领";
-		case 2:
+		case ORDER_STATUS_CLAIMED :
 			return "订单已认领";
-		case 3:
+		case ORDER_STATUS_REJECTED :
 			return "订单被拒绝";
-		case 4:
+		case ORDER_STATUS_APPROVED :
 			return "订单审核通过";
-		case 5:
+		case ORDER_STATUS_CLOSED :
 			return "订单关闭";
-		case 6:
+		case ORDER_STATUS_PAID :
 			return "已支付";
-		case 7:
-			return "样品审核通过";		
-		case 8:
-			return "样品审核未通过";
-		case 9:
+		case ORDER_STATUS_PROCESSED:
+			return "订单处理中";		
+		case ORDER_STATUS_SAMPLE_RECEIVED :
+			return "收到样品";
+		case ORDER_STATUS_ASSIGNED :
 			return "检测任务已分配";
-		case 10:
+		case ORDER_STATUS_TESTED :
 			return "检测完成";
-		case 11:
+		case ORDER_STATUS_REPORT_SHIPPED :
 			return "检测报告已寄出";
-		case 12:
+		case ORDER_STATUS_COMPLETED :
 			return "订单完成";
-		case 13:
+		case ORDER_STATUS_REFUNDED :
 			return "已退款";
 	}	
 };

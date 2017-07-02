@@ -50,7 +50,7 @@ const rowStyle = (record) => {
 export const ApplyIcon = Icon;
 
 export const ApplyList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ispicked:false}}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList

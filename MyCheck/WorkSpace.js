@@ -48,71 +48,60 @@ import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/svg-icons/content/clear';
-const styles = {
-    main: { display: 'flex', flexWrap: 'wrap' },
-    chip: { margin: 4 },
+const defaultLabelStyle = {
+    paddingTop: '2.58em',
+    height: 'auto',
+    
 };
 const selector = formValueSelector('record-form');
 export class WorkSpace extends Component {
     renderField = ({ input, label, type, meta: { touched, error },...custom }) => (
         <TextField hintText={label}
         floatingLabelText={label}
+        
         errorText={touched && error}
         {...input}
         {...custom}
         />
     )
-    renderMembers = ({ fields, meta: { touched, error }, ind }) => {
-        return(
-        <div>
-        <Chip style={{ display: 'inline-block' }}>{fields.name}</Chip>
-      <RaisedButton  style={{ display: 'inline-block',margin: '5em 0 0 12em',fontSize: '1px' }} onTouchTap={() => fields.push({})} label="添加结果"/>
-      {touched && error && <span>{error}</span>}
-        {fields.map((member, index) =>
-          <div key={index}>
-            <IconButton 
-              label="删除"
-              style={{ display: 'inline-block',margin: '0em 0 0 0em',fontSize: '1px' }}
-              onTouchTap={() => fields.remove(index)}>
-              <Icon/>
-              </IconButton>
-            <Field
-              name={`${fields.name}[${index}].name`}
-              type="text"
-              component={this.renderField}
-              label="检测项目"/>
-            <Field
-              name={`${fields.name}[${index}].result`}
-              type="text"
-              component={this.renderField}
-              label="检测结果"/>
-            <Field
-              name={`${fields.name}[${index}].verdict`}
-              type="text"
-              component={this.renderField}
-              label="是否通过"/>
-          </div>
-        )}
-        </div>)
-    }
+   renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+      <SelectField
+        floatingLabelText={label}
+        errorText={touched && error}
+        hintText={label}
+        
+        {...input}
+        onChange={(event, index, value) => input.onChange(value)}
+        children={children}
+        {...custom}/>
+    )
     render() {
         const { record } = this.props;
         console.log();
         return(
             <div>
-                {record.items.map((item, ind) => (
-                  <FieldArray key={item.name} ind={ind} name={item.name} component={this.renderMembers}/>  
+              {record.items.map((item, ind) => (
+                  <div key={item.name}>
+                    <Chip style={{ display: 'inline-block' }}>{item.name}</Chip>
+                      <div >
+                        <Field
+                          name={`items[${ind}].requirements.result`}
+                          type="text"
+                          component={this.renderField}
+                          label="检测结果"/>
+                        <Field
+                          name={`items[${ind}].requirements.verdict`}
+                          type="text"
+                          component={this.renderSelectField}
+                          label="是否通过">
+                          <MenuItem value={'true'} primaryText="通过"/>
+                          <MenuItem value={'false'} primaryText="未通过"/>
+                          </Field>
+                      </div>
+                    </div>
+
                      ))}
             </div>
             )
     }
 }
-WorkSpace = reduxForm({
-  form: 'testerItems',
-  enableReinitialize: true,
-})(WorkSpace)
-WorkSpace = connect(
-  (state,props) => ({
-    initialValues: selector(state,'items').reduce( (s,i)=>{ s[i.name] = i.requirements; return s}, {})
-  })            
-)(WorkSpace)

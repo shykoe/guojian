@@ -58,11 +58,12 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children,di
     disabled={disabled}
     {...custom}/>
 );
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+const renderTextField = ({ input, label, meta: { touched, error },disabled, ...custom }) => (
     <TextField
         hintText={label}
         floatingLabelText={label}
         errorText={touched && error}
+        disabled={disabled}
         {...input}
         {...custom}
     />
@@ -75,7 +76,7 @@ export class ProductType extends Component {
         if(categories.Categories == undefined){
             return(<div></div>)
         }
-        if(status == 4 ){
+        if(status == 7 && record.status === 2){
             return (    
               <Field name="categoryName" component={renderSelectField} >
               {categories.Categories.map(this.renderItem)}
@@ -109,7 +110,7 @@ export class TestCriteria extends Component {
         if(categories.Categories == undefined){
             return(<div></div>)
         }        
-        if(status == 4 && categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0 ){
+        if(status == 7 && categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0  && record.status === 2 ){
             return (    
               <Field name="levelName" component={renderSelectField} >
               {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
@@ -145,22 +146,30 @@ TestCriteria = connect(
 export class PriceField extends Component {
 
     render() {
-        const { record } = this.props;
-         if(record.status == 2){
+        const { status,record } = this.props;
+         if(status === 7 && record.status === 2){
+
+
             return (    
                 <Field name="price" component={renderTextField} label="price"/>
             
             );
         }
         else{
-            return(<div></div>)
+            return(<Field name="price" component={renderTextField} disabled={true} label="price"/>);
         }
 
     }
 }
+PriceField = connect(
+  state => {
+    const status = selector(state, 'status')
+    return { status };
+  }
+  )(PriceField)
 export class StatusSelect extends Component {
     renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
-    selectValue = [{name:'审核通过',value:4}, {name:'审核拒绝',value:3}]
+    selectValue = [{name:'审核通过',value:7}, {name:'审核拒绝',value:5}]
     render() {
         const { record } = this.props;
          if(record.status == 2){
@@ -180,3 +189,28 @@ export class StatusSelect extends Component {
 
     }
 }
+export class MsgField extends Component {
+
+    render() {
+        const { status,record } = this.props;
+         if(status === 7 && record.status === 2){
+
+
+            return (    
+                <Field name="agentMsg" component={renderTextField} label="agentMsg"/>
+            
+            );
+        }
+        else{
+            return(<Field name="agentMsg" component={renderTextField} disabled={true} label="agentMsg"/>);
+        }
+
+    }
+}
+MsgField = connect(
+  state => {
+    const status = selector(state, 'status')
+    return { status };
+  }
+  )(MsgField)
+  

@@ -42,10 +42,10 @@ import {
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import DoButton from './DoButton';
-import { ProductType,TestCriteria, PriceField, StatusSelect } from './WorkSpace';
+import { ProductType,TestCriteria, PriceField, StatusSelect, MsgField } from './WorkSpace';
 import {productType, productMap, choices} from './TypeDefine';
 import { CheckboxGr, Pppp } from './CheckBox';
-import ExpressNum from './ExpressNum';
+import { ExpressNum } from './ExpressNum';
 import StatusField from './StatusField';
 import { asteroid } from '../asteroid';
 export const MyItemIcon = Icon;
@@ -115,7 +115,8 @@ export class MyItemEdit extends Component {
                     optionValue="id"
                 />
             <PriceField  />
-            <TextInput source="agentMsg" style={{ display: 'inline-block'}} />
+            <MsgField  />
+            <ExpressNum/>
         </SimpleForm>
     </Edit>);
 }

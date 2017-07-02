@@ -77,7 +77,7 @@ export class Edit extends Component {
             this.props.crudUpdate(this.props.resource, this.props.id, {data:recordModify,record:record, userName:this.props.userName}, this.props.data, this.getBasePath());
             return
         }
-        this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath());
+        this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath(), this.props.userName);
     }
 
     render() {

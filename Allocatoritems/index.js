@@ -45,7 +45,7 @@ import { Field, reduxForm } from 'redux-form'
 export const AitemsIcon = Icon;
 
 export const AitemsList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ispicked:false}}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status:[4, 9]}}  >
         <Responsive
             small={
                 <SimpleList

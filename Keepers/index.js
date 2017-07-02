@@ -39,14 +39,15 @@ import React, { Component } from 'react';
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import Icon from 'material-ui/svg-icons/action/event';
-import { Field, reduxForm } from 'redux-form';
+import { Field, option, reduxForm, formValueSelector } from 'redux-form';
 import StatusField from '../MyItem/StatusField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import KeepMsg from './KeepMsg';
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status: [3, 4, 8] }}  >
         <Responsive
             small={
                 <SimpleList
@@ -114,6 +115,7 @@ export class KeepersEdit extends Component {
             </ImageInput>
             <br/>
             <IsApproved/>
+            <KeepMsg />
         </SimpleForm>
     </Edit>);
 }
@@ -126,7 +128,7 @@ class Title extends Component{
     }
 }
 class IsApproved extends Component{
-    selectValue = [{name:'样品审核通过',value:7}, {name:'样品审核未通过',value:8}]
+    selectValue = [{name:'样品审核通过',value:4}, {name:'样品审核未通过',value:3}]
     renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
     renderSelectField = ({ input, label, meta: { touched, error }, children,disabled, ...custom }) => (
       <SelectField
@@ -142,7 +144,7 @@ class IsApproved extends Component{
     render(){
         const { record } = this.props;       
         return(
-        <Field name="status" component={this.renderSelectField} disabled={record.status!=6} >
+        <Field name="status" component={this.renderSelectField} disabled={record.status!=8} >
         {this.selectValue.map(this.renderItem)}
         </Field>)
 
