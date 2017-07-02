@@ -43,7 +43,6 @@ import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import DoButton from './DoButton';
 import { ProductType,TestCriteria, PriceField, StatusSelect, MsgField } from './WorkSpace';
-import {productType, productMap, choices} from './TypeDefine';
 import { CheckboxGr, Pppp } from './CheckBox';
 import { ExpressNum } from './ExpressNum';
 import StatusField from './StatusField';

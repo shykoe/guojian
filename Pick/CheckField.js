@@ -1,7 +1,6 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
 import { translate } from 'admin-on-rest';
-import { choices } from '../MyItem/TypeDefine';
 const styles = {
     main: { display: 'flex', flexWrap: 'wrap' },
     chip: { margin: 4 },

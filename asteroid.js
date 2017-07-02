@@ -81,9 +81,6 @@ export const websockClient = (type, resource, params) =>{
             		if(previousData.status === 10){
             			data.status = 11;
             		}
-            		if(previousData.status === 3){
-            			data.status = 13;
-            		}
         			return asteroid.call('agent.order.approve', id, data)
         			.then(response => mapResponse2Rest(response, type, params));
             		
@@ -99,8 +96,10 @@ export const websockClient = (type, resource, params) =>{
 					
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        const { username, role } = params;
-			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order)
+			        const { username, role, filter } = params;
+			        var wrapFilter = filter;
+			        wrapFilter['agent'] = null;
+			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, wrapFilter)
 			        .then(response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{					
@@ -135,12 +134,12 @@ export const websockClient = (type, resource, params) =>{
 					}
 					data.items.map(
 						(item,ind)=>{
-								if (item.requirements != previousData.items[ind].requirements){
+								if ((item.requirements.result != previousData.items[ind].requirements.result)
+								 	|| (item.requirements.verdict != previousData.items[ind].requirements.verdict) ){
 									ops[item.name] = item.requirements;
 								}
 							}
 						);
-					//console.log(ops);
 					return asteroid.call('tester.order.update', id, data, ops, username)
 					.then(response => mapResponse2Rest(response, type, params));
 				}
@@ -156,10 +155,11 @@ export const websockClient = (type, resource, params) =>{
 			        .then(response => mapResponse2Rest(response, type, params));
 				};
 				case UPDATE:{
-					const { id, data, previousData } = params;
+					var { id, data, previousData } = params;
 					if(data === previousData){
 						return mapResponse2Rest(previousData, type, params);
 					}
+					data.status = 9;
 					return asteroid.call('assigner.tester.set', id, data)
 					.then(response => mapResponse2Rest(response, type, params));
 				};

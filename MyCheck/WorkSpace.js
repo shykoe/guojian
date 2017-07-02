@@ -43,7 +43,6 @@ import { Link } from 'react-router-dom';
 import { Field, FieldArray,reduxForm, option, formValueSelector } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
-import { choices } from '../MyItem/TypeDefine';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';

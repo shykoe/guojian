@@ -41,11 +41,12 @@ import Chip from 'material-ui/Chip';
 import Icon from 'material-ui/svg-icons/action/event';
 import CheckersField from './CheckersField';
 import AddCheckers from './AddCheckers';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import { Title }  from '../Utils';
 export const AitemsIcon = Icon;
 
 export const AitemsList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status:[4, 9]}}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status:{$in:[8,9]}}}  >
         <Responsive
             small={
                 <SimpleList
@@ -72,7 +73,7 @@ export const AitemsList = ({ ...props }) => (
     </List>
 );
 export const AitemsShow = ({ ...props }) => (
-    <Show  {...props}>
+    <Show  title={<Title />} {...props}>
         <SimpleShowLayout>
             <TextField source="sampleName"   />
             <TextField source="sampleProducer" />

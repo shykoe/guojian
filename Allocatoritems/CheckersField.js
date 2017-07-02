@@ -1,7 +1,6 @@
 import  React, { Component } from 'react';
 import Chip from 'material-ui/Chip';
 import { translate } from 'admin-on-rest';
-import { Checkers } from '../MyItem/TypeDefine';
 import { asteroid } from '../asteroid';
 const styles = {
     main: { display: 'flex', flexWrap: 'wrap' },

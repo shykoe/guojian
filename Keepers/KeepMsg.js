@@ -17,7 +17,7 @@ class KeepMsg extends Component {
 
     render() {
         const { status,record } = this.props;
-         if((status === 3 || status === 4) && record.status === 8){
+         if((status === 6 || status === 8) && record.status === 7){
 
 
             return (    

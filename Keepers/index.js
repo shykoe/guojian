@@ -44,10 +44,11 @@ import StatusField from '../MyItem/StatusField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import KeepMsg from './KeepMsg';
+import { Title }  from '../Utils';
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status: [3, 4, 8] }}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status: 7 }}  >
         <Responsive
             small={
                 <SimpleList
@@ -120,15 +121,9 @@ export class KeepersEdit extends Component {
     </Edit>);
 }
 }
-class Title extends Component{
-    render(){
-        const { record } = this.props;
-        const date = new Date(record.createdAt*1000);
-        return(<span> { `${record.sampleProducer}于${date.toLocaleDateString()}提交`}</span>);
-    }
-}
+
 class IsApproved extends Component{
-    selectValue = [{name:'样品审核通过',value:4}, {name:'样品审核未通过',value:3}]
+    selectValue = [{name:'样品审核通过',value:8}, {name:'样品审核未通过',value:6}]
     renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
     renderSelectField = ({ input, label, meta: { touched, error }, children,disabled, ...custom }) => (
       <SelectField
@@ -144,7 +139,7 @@ class IsApproved extends Component{
     render(){
         const { record } = this.props;       
         return(
-        <Field name="status" component={this.renderSelectField} disabled={record.status!=8} >
+        <Field name="status" component={this.renderSelectField} disabled={record.status!=7} >
         {this.selectValue.map(this.renderItem)}
         </Field>)
 

@@ -10,6 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import { Field, reduxForm, formValueSelector, reset  } from 'redux-form';
 import { reportInit } from './reportAction';
+import { push } from 'react-router-redux';
 export class FinishButton extends Component {
     renderField = ({ input, label, type, meta: { touched, error },...custom }) => (
     <TextField hintText={label}
@@ -50,6 +51,7 @@ export class FinishButton extends Component {
     	)
     	finished = finished === 1 ? true:false;
     	disabled = disabled === 1 || (record.status != 10) ? true:false;
+    	console.log(disabled);
     	this.setState({disabled: disabled, finished:finished});
 	}
 	state = {
@@ -78,7 +80,9 @@ export class FinishButton extends Component {
     	const userName = this.props.user;
     	delete value._id;
     	asteroid.call('reports.upsert', value, orderId, userName);
-      	this.setState({open: false});
+      	this.setState({open: false,disabled: false});
+      	this.props.dispatch(push('/'));
+      	
     }  	  	 
     render() {
     	const { record } = this.props;
@@ -125,8 +129,12 @@ export class FinishButton extends Component {
            	<Field name="CommissionedUnits" key="CommissionedUnits"  component={this.renderField} label="委托单位"/>
            	<Field name="SamplingCondition" key="SamplingCondition"  component={this.renderField} label="样品状态"/>
 			<Field name="ManufacturedLot" key="ManufacturedLot"  component={this.renderField} label="生产日期/批号"/>
+			<Field name="SampleBase" key="SampleBase"  component={this.renderField} label="抽样基数"/>
+			<Field name="ReceivedDate" key="ReceivedDate"  component={this.renderField} label="到样日期"/>
+			
 			<Field name="SampleDate" key="SampleDate"  component={this.renderField} label="抽样日期"/>
 			<Field name="SampleStaff" key="SampleStaff"  component={this.renderField} label="抽样人员"/>
+			<Field name="TestItems" key="TestItems"  component={this.renderField} label="检测项目"/>
 			<Field name="TestPlace" key="TestPlace"  component={this.renderField} label="检测地点"/>
 			<Field name="TestDate" key="TestDate"  component={this.renderField} label="检测日期"/>
 			<Field name="TestCriteria" key="TestCriteria"  component={this.renderField} label="检测依据"/>

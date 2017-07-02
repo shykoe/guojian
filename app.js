@@ -42,7 +42,7 @@ render(
         customSagas={saga}  
         customRoutes={customRoutes} 
         restClient={websockClient} 
-        title="Test" 
+        title="系统" 
         locale="cn" 
         menu={Menu} 
         messages={messages}

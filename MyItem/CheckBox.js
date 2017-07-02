@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Checkbox from 'material-ui/Checkbox';
 import { connect } from 'react-redux';
 import Labeled from 'admin-on-rest';
-import {productType, productMap, choices} from './TypeDefine';
 import { Field, option, formValueSelector, arrayRemoveAll } from 'redux-form';
 export class CheckboxGr extends Component {
     handleCheck = (event, isChecked) => {

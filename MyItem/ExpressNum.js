@@ -43,7 +43,6 @@ import { Link } from 'react-router-dom';
 import { Field, FieldArray,reduxForm, option, formValueSelector } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
-import { choices } from '../MyItem/TypeDefine';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
@@ -100,11 +99,13 @@ export class ExpressNum extends Component {
             </div>
             )
         }
-
-        return(
-            <div>
-                <FieldArray  name="productShippingInfo" Lable="样品物流信息" component={this.renderMembers}/>  
-            </div>
-            )
-    }
+        else if(record.status === 6){
+            return(
+                <div>
+                    <FieldArray  name="productShippingInfo" Lable="样品物流信息" component={this.renderMembers}/>  
+                </div>
+                )
+        }
+        return (<div></div>);
+    } 
 }

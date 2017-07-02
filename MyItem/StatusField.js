@@ -35,7 +35,7 @@ const dealText = (record) =>{
 		case ORDER_STATUS_PAID :
 			return "已支付";
 		case ORDER_STATUS_PROCESSED:
-			return "订单处理中";		
+			return "已安排物流";		
 		case ORDER_STATUS_SAMPLE_RECEIVED :
 			return "收到样品";
 		case ORDER_STATUS_ASSIGNED :

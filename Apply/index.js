@@ -1,66 +1,37 @@
 import React from 'react';
 import {
-    BooleanField,
-    BooleanInput,
-    CheckboxGroupInput,
-    Create,
     Datagrid,
     DateField,
-    DateInput,
-    DisabledInput,
-    Edit,
-    EditButton,
     Filter,
-    FormTab,
     ImageField,
-    ImageInput,
     List,
-    LongTextInput,
-    NumberField,
-    NumberInput,
-    ReferenceManyField,
-    Responsive,
-    RichTextField,
-    SelectField,
-    SelectInput,
     Show,
     ShowButton,
     SimpleForm,
     SimpleList,
     SimpleShowLayout,
-    TabbedForm,
     TextField,
-    TextInput,
-    minValue,
-    number,
-    required,
-    translate,
+    Responsive
 } from 'admin-on-rest';
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import AcceptButton from './acceptButton';
 import Icon from 'material-ui/svg-icons/action/event';
-
-const rowStyle = (record) => {
-    if (record.status === 'Accepted') return { backgroundColor: '#dfd' };
-    if (record.status === 'pending') return { backgroundColor: '#ffd' };
-    if (record.status === 'Rejected') return { backgroundColor: '#fdd' };
-    return {};
-};
+import OrderFilter from '../Utils/OrderFilter';
 export const ApplyIcon = Icon;
 
 export const ApplyList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} perPage={5} filters={<OrderFilter />} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => `${record.Product} Product`}
-                    tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
+                    primaryText={record => record.clientName}
+                    secondaryText={record => `${record.sampleName} Product`}
+                    tertiaryText={record => new Date(record.createdAt).toLocaleDateString()}
                 />
             }
             medium={
-                <Datagrid rowStyle={rowStyle}  >
+                <Datagrid   >
                     
                     <TextField source="sampleName" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
