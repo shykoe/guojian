@@ -87,7 +87,7 @@ export class AddUserEdit extends Component {
     <Edit {...this.props} >
         <SimpleForm  validate={validateUserUpdate}>  
             <TextField source="username" /> 
-            <TextInput source="password" /> 
+            <TextInput source="password"/>
             <SelectInput source="role" choices={choices} optionText="name" optionValue="role" />
          </SimpleForm>
     </Edit>);
@@ -109,7 +109,6 @@ const choices=[
 
  
 
-var flagCheckUsername=0;
 const validateUserCreation = (values) => {
     const errors = {}; 
     console.log('--valuse -',values);
@@ -123,10 +122,9 @@ const validateUserCreation = (values) => {
     if(!setusername){
        errors.username = ['账户名不能为空'];
     }else  if((setusername!='账户名已存在')){ 
-    console.log('---',setusername);
      // var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername}); 
       websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername})
-       .then(response => {if(response.data){ console.log('--存在-',); flagCheckUsername=1; values.username='账户名已存在';errors.username = ['用户名已存在']; validateUserCreation(values);return errors}});   
+       .then(response => {if(response.data){  errors.username = ['用户名已存在']; return errors}});   
     } 
     var setpassword=values.password;
     console.log(setpassword);
@@ -148,7 +146,8 @@ export const AddUserCreate = (props) => (
     <Create {...props}  title="新建 账户">
         <SimpleForm  validate={validateUserCreation}>  
             <TextInput source="username"  />   
-            <TextInput source="password" /> 
+            <TextInput source="password" type="password" /> 
+            <TextInput source="phone" />
             <SelectInput source="role" choices={choices} optionText="name" optionValue="role" />
         </SimpleForm>
     </Create>

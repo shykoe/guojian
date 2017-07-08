@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import Labeled from '../input/Labeled';
 
-export const SimpleShowLayout = ({ basePath, children, record, resource }) => (
+export const SimpleShowLayout = ({ basePath, children, record, resource, Sstyle }) => (
     <div style={{ padding: '0 1em 1em 1em' }}>
         {Children.map(children, field => (
             <div key={field.props.source} style={field.props.style} className={`aor-field-${field.props.source}`}>

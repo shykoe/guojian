@@ -90,7 +90,7 @@ class Layout extends Component {
             prefixedStyles.contentSmall = prefix(styles.contentSmall);
         }
         //console.log(menu);
-        const resource = resources.filter((item)=>(item.role === this.props.role))
+        const resource = resources.filter((item)=>(item.role === this.props.role || item.role === undefined))
         // resources = resources.
         return (
             <MuiThemeProvider muiTheme={muiTheme}>

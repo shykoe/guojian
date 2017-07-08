@@ -46,6 +46,7 @@ import { ProductType,TestCriteria, PriceField, StatusSelect, MsgField } from './
 import { CheckboxGr, Pppp } from './CheckBox';
 import { ExpressNum } from './ExpressNum';
 import StatusField from './StatusField';
+import UnpickButton from './UnpickButton';
 import { asteroid } from '../asteroid';
 export const MyItemIcon = Icon;
 const rowStyle = (record) => {
@@ -71,6 +72,7 @@ export const MyItemList = ({ ...props }) => (
                     <TextField source="sampleType" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                     <TextField source="status" />                    
                     <StatusField/>
+                    <UnpickButton/>
                     <EditButton label='编辑'  addLabel/>
                 </Datagrid>
             }

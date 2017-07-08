@@ -13,7 +13,7 @@ import { MyCheckList, MyCheckEdit } from './MyCheck';
 import { AitemsIcon, AitemsList, AitemsShow } from './Allocatoritems';
 import { KeepersList, KeepersShow, KeepersIcon, KeepersEdit} from './Keepers';
 import { AddUserList, AddUserEdit,AddUserCreate } from './AddUser';
-import { AllOrderList, AllOrderEdit,AllOrderCreate} from './AllOrder';
+import { AllOrderList, AllOrderEdit,AllOrderCreate, AllOrderShow} from './AllOrder';
 import { CheckTestList,CheckTestIcon } from './CheckTest';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import data from './data';
@@ -54,7 +54,7 @@ render(
         <Resource name="Allocatoritems" list={AitemsList} show={AitemsShow} icon={AitemsIcon} role='assigner'/>
         <Resource name="Keepers" list={KeepersList}  show={KeepersShow} edit={KeepersEdit} icon={KeepersIcon} role='keeper' />
         <Resource name="AddUser"  list={AddUserList} create={AddUserCreate} edit={AddUserEdit} role='admin' />
-        <Resource name="AllOrder" list={AllOrderList}  edit={AllOrderEdit} create={AllOrderCreate} role='admin' />
+        <Resource name="AllOrder" list={AllOrderList}  show={AllOrderShow} create={AllOrderCreate} />
         <Resource name="CheckTest" list={CheckTestList}  icon={CheckTestIcon} role='admin' />
     </Admin>,
     document.getElementById('root'),

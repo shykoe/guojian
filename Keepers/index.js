@@ -48,7 +48,7 @@ import { Title }  from '../Utils';
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status: 7 }}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList

@@ -82,7 +82,7 @@ export class WorkSpace extends Component {
               {record.items.map((item, ind) => (
                   <div key={item.name}>
                     <Chip style={{ display: 'inline-block' }}>{item.name}</Chip>
-                      <div >
+                      <div style={{ display:'flex', flexDirection: 'row'}} >
                         <Field
                           name={`items[${ind}].requirements.result`}
                           type="text"
@@ -92,9 +92,9 @@ export class WorkSpace extends Component {
                           name={`items[${ind}].requirements.verdict`}
                           type="text"
                           component={this.renderSelectField}
-                          label="是否通过">
-                          <MenuItem value={'true'} primaryText="通过"/>
-                          <MenuItem value={'false'} primaryText="未通过"/>
+                          label="是否合格">
+                          <MenuItem value={'true'} primaryText="合格"/>
+                          <MenuItem value={'false'} primaryText="不合格"/>
                           </Field>
                       </div>
                     </div>

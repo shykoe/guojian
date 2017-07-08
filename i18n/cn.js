@@ -43,7 +43,8 @@ export const messages = {
                 9: '检测员' , 
                 20: '正常' , 
                 30: '不可见' , 
-                31: '已删除' , 
+                31: '已删除' ,
+                phone:'电话', 
             },
         },
         AllOrder:{
@@ -81,6 +82,7 @@ export const messages = {
                 createAt :'创建时间',
                 result :'检测结果',
                 verdict  :'判定',
+
             },
         },        
     },

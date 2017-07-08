@@ -68,7 +68,8 @@ const AllOrderFilter = (props) => {
             <TextInput source="clientContactPhone"  />
             <TextInput source="clientContactIdent"/>
             <TextInput source="clientEconomicType" />
-            <TextInput source="status"  /> 
+            <TextInput source="status"  />
+            
         </Filter>
          ); 
 } ;
@@ -90,11 +91,30 @@ export const AllOrderList = ({ ...props }) => (
                     <SegmentsFieldSampleInf/>
                     <SegmentsFieldClientInf/>
                     <SegmentsFieldContactInf /> 
-                    <TextStatus source="status" />
+                    <ShowButton/>
                   
                 </Datagrid>
             }
         />
     </List>
 );
-
+export const AllOrderShow = ({ ...props }) => (
+    <Show  {...props}>
+        <SimpleShowLayout>
+            <TextField source="sampleName"  style={{display:'inline-block',margin: '0 1em 1em 1em' }} />
+            <TextField source="sampleProducer" style={{display:'inline-block' }} />
+            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+            <TextField source="producerBatch" />
+            <TextField source="sampleType" />
+            <TextField source="sampleLevel"  />
+            <TextField source="sampleBrand"  />
+            <TextField source="sampleNum" />
+            <TextField source="clientName" /><TextField source="clientContactName" /><TextField source="clientContactPhone" />
+            <TextField source="clientContactIdent" />
+            <TextField source="clientEconomicType" />
+            <TextField source="price" />
+            <TextField source="note" />
+            <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
+        </SimpleShowLayout>
+    </Show>
+);

@@ -96,10 +96,32 @@ export const websockClient = (type, resource, params) =>{
 					
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        const { username, role, filter } = params;
-			        var wrapFilter = filter;
-			        wrapFilter['agent'] = null;
-			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, wrapFilter)
+			        var { username, role, filter } = params;
+			        if(filter){
+			            for(var key in filter){
+			            	var temp=filter[key];
+			            	if(key === 'status'){
+			            		if(temp === ''){
+			            			delete filter['status'];
+			            		}
+			            		continue;
+			            	}
+			            	if(key === 'agent'){
+			            		if(temp === 'all'){
+			            			delete filter['agent'];
+			            		}
+			            		continue;
+			            	}
+			            	if(temp !== undefined){
+			            		temp='.*'+temp+'.*';
+			            		temp={ '$regex': temp, $options: '$i' };
+			            		filter[key]=temp;
+			            	}else{
+			            		filter = {};
+			            	}
+			            }
+			        }
+			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
 			        .then(response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{					
@@ -134,10 +156,9 @@ export const websockClient = (type, resource, params) =>{
 					}
 					data.items.map(
 						(item,ind)=>{
-								if ((item.requirements.result != previousData.items[ind].requirements.result)
-								 	|| (item.requirements.verdict != previousData.items[ind].requirements.verdict) ){
+								
 									ops[item.name] = item.requirements;
-								}
+
 							}
 						);
 					return asteroid.call('tester.order.update', id, data, ops, username)
@@ -251,7 +272,10 @@ export const websockClient = (type, resource, params) =>{
             		if(params.filter)
             		{
                         const { page, perPage } = params.pagination; 
-			            const { field, order } = params.sort; 
+			            var { field, order } = params.sort;
+			            if (field === 'id'){
+			            	field = '_id';
+			            } 
 			            const {filter}=params 
 			            delete filter["id"]; 
 			            delete filter["q"]; 
@@ -261,13 +285,24 @@ export const websockClient = (type, resource, params) =>{
 			            	temp={ '$regex': temp, $options: '$i' };
 			            	filter[key]=temp;
 			            } 
-                        return asteroid.call('agent.allorder.getFilter', page, perPage, '_id', order,filter).then(response => mapResponse2Rest (response, type, params));
+			            const orders = [field,order];
+                        return asteroid.call('agent.allorder.get', page, perPage, '_id', orders).then(response => mapResponse2Rest (response, type, params));
             		}else{
             			const { page, perPage } = params.pagination; 
-			            const { field, order } = params.sort;
-			            return asteroid.call('agent.allorder.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+			            var { field, order } = params.sort;
+			            if (field === 'id'){
+			            	field = '_id';
+			            }
+
+			            const orders = [field,order];
+			            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders,{}).then(response => mapResponse2Rest (response, type, params));
 			        }
     			 }
+				case GET_ONE:{
+					const { id } = params;
+					return asteroid.call('order.get',id)
+            		.then(response => mapResponse2Rest(response, type, params));
+				};
 
             } 
 		};				

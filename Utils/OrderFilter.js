@@ -9,7 +9,6 @@ const OrderFilter = (props) => {
             <TextInput source="sampleName"  />
             <TextInput source="sampleProducer" />
             <TextInput source="clientName" />
-            <TextInput source="status"  /> 
         </Filter>
          ); 
 };

@@ -184,6 +184,7 @@ export class List extends Component {
                         displayedFilters: this.state,
                         showFilter: this.showFilter,
                         refresh: this.refresh,
+                        hideFilter: this.hideFilter
                     })}
                     <ViewTitle title={titleElement} />
                     {filters && React.cloneElement(filters, {

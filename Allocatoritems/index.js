@@ -46,7 +46,7 @@ import { Title }  from '../Utils';
 export const AitemsIcon = Icon;
 
 export const AitemsList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ status:{$in:[8,9]}}}  >
+    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList
