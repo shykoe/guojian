@@ -1,0 +1,658 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"re",
+				"record"
+			],
+			[
+				"fi",
+				"fiterVal"
+			],
+			[
+				"co",
+				"connect"
+			],
+			[
+				"con",
+				"continue"
+			],
+			[
+				"un",
+				"undefined"
+			],
+			[
+				"stat",
+				"state"
+			],
+			[
+				"sta",
+				"state"
+			],
+			[
+				"on",
+				"ontap"
+			],
+			[
+				"App",
+				"ApplyActions"
+			],
+			[
+				"A",
+				"ApplyActions"
+			],
+			[
+				"h",
+				"hideFilter"
+			],
+			[
+				"ag",
+				"agentName"
+			],
+			[
+				"p",
+				"phone"
+			],
+			[
+				"us",
+				"userId"
+			],
+			[
+				"fiel",
+				"filter"
+			],
+			[
+				"find",
+				"findOne"
+			],
+			[
+				"pr",
+				"price"
+			],
+			[
+				"or",
+				"order2"
+			],
+			[
+				"pa",
+				"pathName"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"new",
+				"newPictures"
+			],
+			[
+				"ex",
+				"extends"
+			],
+			[
+				"ge",
+				"GET_ONE"
+			],
+			[
+				"up",
+				"UPDATE"
+			],
+			[
+				"u",
+				"Update"
+			],
+			[
+				"get",
+				"GET_LIST"
+			],
+			[
+				"g",
+				"GET_ONE"
+			],
+			[
+				"G",
+				"GET_LIST"
+			],
+			[
+				"map",
+				"mapResponse2Rest"
+			],
+			[
+				"nex",
+				"nextProps"
+			],
+			[
+				"ca",
+				"categoryName"
+			],
+			[
+				"pro",
+				"props"
+			],
+			[
+				"filt",
+				"filter"
+			],
+			[
+				"st",
+				"state"
+			],
+			[
+				"sat",
+				"state"
+			],
+			[
+				"ma",
+				"mapResponse2Rest"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"t",
+				"takeEvery"
+			],
+			[
+				"Get",
+				"GET_ONE"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"ke",
+				"KeepersIcon"
+			],
+			[
+				"kee",
+				"Keepers"
+			],
+			[
+				"k",
+				"KeepersList"
+			],
+			[
+				"du",
+				"dump\tfunction"
+			],
+			[
+				"wir",
+				"write\tfunction"
+			],
+			[
+				"retr",
+				"retrieved_bbox"
+			],
+			[
+				"ch",
+				"checker"
+			],
+			[
+				"rend",
+				"renderCheckbox"
+			],
+			[
+				"c",
+				"checkers"
+			],
+			[
+				"fl",
+				"false"
+			],
+			[
+				"Ch",
+				"CheckersField"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Allocatoritems/AddCheckers.js",
+			"settings":
+			{
+				"buffer_size": 2696,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 104.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/web/webapp520",
+		"/D/web/webapp520/Allocatoritems",
+		"/D/web/webapp520/src/mui",
+		"/D/web/webapp520/src/mui/list"
+	],
+	"file_history":
+	[
+		"/D/web/webapp520/Apply/acceptAction.js",
+		"/D/web/webapp520/Apply/acceptSaga.js",
+		"/D/web/webapp520/saga.js",
+		"/D/web/webapp520/MyItem/UnpickSaga.js",
+		"/D/web/webapp520/MyItem/UnPickAction.js",
+		"/D/web/webapp520/MyItem/UnpickButton.js",
+		"/D/web/webapp520/MyItem/index.js",
+		"/D/web/webapp520/app.js",
+		"/D/web/webapp520/Apply/ApplyActions.js",
+		"/D/web/webapp520/Apply/FilterButton.js",
+		"/D/web/webapp520/asteroid.js",
+		"/D/web/webapp520/Apply/index.js",
+		"/D/web/webapp520/Apply/acceptButton.js",
+		"/D/web/webapp520/Apply/UnpickButton.js",
+		"/D/web/webapp520/src/actions/listActions.js",
+		"/D/web/webapp520/Utils/OrderFilter.js",
+		"/D/web/webapp520/src/mui/list/FilterButton.js",
+		"/D/web/webapp520/src/mui/list/Filter.js",
+		"/D/web/webapp520/src/mui/list/List.js",
+		"/D/web/webapp520/Apply/AgentField.js",
+		"/D/web/webapp520/Menu.js",
+		"/D/web/webapp520/node_modules/material-ui/svg-icons/navigation/arrow-drop-down.js",
+		"/D/web/webapp520/node_modules/material-ui/svg-icons/toggle/check-box.js",
+		"/D/web/webapp520/node_modules/material-ui/svg-icons/toggle/check-box-outline-blank.js",
+		"/D/web/webapp520/MyItem/DoButton.js",
+		"/D/web/webapp520/src/mui/detail/SimpleShowLayout.js",
+		"/D/web/webapp520/MyCheck/WorkSpace.js",
+		"/D/web/webapp520/AllOrder/index.js",
+		"/D/web/webapp520/src/mui/layout/Layout.js",
+		"/D/web/webapp520/src/AdminRoutes.js",
+		"/D/web/webapp520/src/CrudRoute.js",
+		"/D/web/webapp520/src/auth/Restricted.js",
+		"/D/web/webapp520/webapp.sublime-project",
+		"/D/web/backend66/backend.sublime-project",
+		"/D/web/backend66/gj-schema/models/users.js",
+		"/D/web/backend66/imports/sample.js",
+		"/D/web/backend66/server/methods/users.js",
+		"/C/Users/hasee/Desktop/sample.js",
+		"/D/web/backend620/imports/sample.js",
+		"/C/Users/hasee/Desktop/reports.js",
+		"/C/Users/hasee/Desktop/methods.js",
+		"/C/Users/hasee/Desktop/template.html",
+		"/D/web/webapp520/Allocatoritems/CheckersField.js",
+		"/D/web/webapp520/AllOrder/WorkSpace.js",
+		"/D/web/backend66/server/pdf/template.html",
+		"/D/web/backend66/server/methods/testerOps.js",
+		"/D/web/backend66/server/methods/reports.js",
+		"/D/web/backend66/server/methods/Categories.js",
+		"/D/web/backend66/server/methods/orders.js",
+		"/D/web/backend66/server/pdf/methods.js",
+		"/D/template.html",
+		"/D/androidReact/react-native-redux-FeInn/android/app/build.gradle",
+		"/D/androidReact/react-native-redux-FeInn/android/gradle.properties",
+		"/D/androidReact/react-native-redux-FeInn/android/settings.gradle",
+		"/D/VQA/local.properties",
+		"/D/androidReact/AwesomeProject/android/gradle/wrapper/gradle-wrapper.properties",
+		"/D/web/webapp520/src/mui/form/FormField.js",
+		"/D/web/webapp520/src/mui/form/SimpleForm.js",
+		"/D/web/webapp520/src/util/FieldTitle.js",
+		"/D/web/webapp520/Keepers/index.js",
+		"/D/web/webapp520/MyCheck/index.js",
+		"/D/web/webapp520/src/mui/input/Labeled.js",
+		"/D/web/webapp520/Allocatoritems/AddCheckers.js",
+		"/D/web/webapp520/.gitignore",
+		"/D/web/admin-on-rest-demo/admin-on-rest-demo-master/.gitignore",
+		"/D/web/webapp520/CheckTest/index.js",
+		"/D/web/webapp520/routes.js",
+		"/D/web/webapp520/UserCenter/ChangePwdAction.js",
+		"/D/web/webapp520/src/sideEffect/saga/auth.js",
+		"/D/web/webapp520/src/mui/detail/Edit.js",
+		"/D/web/webapp520/src/actions/dataActions.js",
+		"/D/web/webapp520/src/actions/authActions.js",
+		"/D/web/webapp520/UserCenter/ChangePwdSaga.js",
+		"/D/web/webapp520/UserCenter/UserInfo.js",
+		"/D/web/webapp520/src/mui/field/ImageField.js",
+		"/D/web/webapp520/src/mui/input/SelectInput.js",
+		"/D/web/webapp520/src/mui/input/NullableBooleanInput.js",
+		"/D/web/webapp520/src/mui/input/ImageInput.js",
+		"/C/Users/hasee/Documents/Tencent Files/57274501/FileRecv/sample (1).js",
+		"/C/Users/hasee/Documents/Tencent Files/57274501/FileRecv/addUploadPictures.js",
+		"/D/web/webapp520/i18n/cn.js",
+		"/C/Users/hasee/AppData/Local/Temp/scp52332/home/mmc_yksheng/05052017/natural-language-object-retrieval/data/metadata/kitchen_query_dict.json",
+		"/C/Users/hasee/AppData/Local/Temp/scp53673/home/mmc_yksheng/05052017/natural-language-object-retrieval/data/metadata/referit_query_dict.json",
+		"/C/Users/hasee/AppData/Local/Temp/scp40479/home/mmc_yksheng/05052017/natural-language-object-retrieval/server.py",
+		"/C/Users/hasee/AppData/Local/Temp/scp43095/home/mmc_yksheng/05052017/natural-language-object-retrieval/cp.sh",
+		"/C/Users/hasee/AppData/Local/Temp/scp52069/home/mmc_yksheng/05052017/natural-language-object-retrieval/data/metadata/referit_imcrop_dict.json",
+		"/C/Users/hasee/AppData/Local/Temp/scp52151/home/mmc_yksheng/05052017/natural-language-object-retrieval/data/metadata/referit_imcrop_bbox_dict.json",
+		"/D/web/web617/app/AddUser/index.js",
+		"/D/web/webapp520/src/mui/form/Toolbar.js",
+		"/D/web/webapp520/src/reducer/saving.js",
+		"/D/web/webapp520/Allocatoritems/index.js",
+		"/D/web/webapp520/MyCheck/TextButton.js",
+		"/D/web/webapp520/src/mui/field/ReferenceManyField.js",
+		"/D/web/webapp520/src/mui/field/DateField.js",
+		"/D/web/webapp530/webapp520/authClient.js",
+		"/D/web/webapp520/Pick/CheckField.js",
+		"/D/web/webapp520/data.js",
+		"/D/web/webapp520/MyItem/TypeDefine.js",
+		"/D/web/webapp520/MyItem/WorkSpace.js",
+		"/D/web/webapp520/MyItem/CheckBox.js",
+		"/D/web/webapp520/test.js",
+		"/D/web/webapp520/src/mui/auth/Login.js",
+		"/D/web/webapp520/src/mui/detail/Show.js",
+		"/D/web/webapp520/src/Admin.js",
+		"/D/web/webapp520/src/mui/input/ImageInputPreview.js",
+		"/C/Users/hasee/AppData/Local/Temp/scp41765/home/mmc_yksheng/05052017/natural-language-object-retrieval/server.py",
+		"/D/web/admin-on-rest-master/admin-on-rest-master/build.ps1",
+		"/D/web/webapp520/Utils/role.js",
+		"/D/web/webapp520/src/sideEffect/saga/crudFetch.js",
+		"/C/Users/hasee/Documents/Tencent Files/57274501/FileRecv/sample.js",
+		"/D/web/webapp520/src/sideEffect/saga/crudResponse.js",
+		"/D/web/webapp520/src/sideEffect/saga/referenceFetch.js",
+		"/D/web/webapp520/src/actions/referenceActions.js",
+		"/D/web/webapp520/src/mui/list/DatagridBody.js",
+		"/D/web/webapp520/src/reducer/resource/list/ids.js",
+		"/D/web/webapp520/authClient.js",
+		"/D/web/webapp520/src/mui/list/Datagrid.js",
+		"/C/Users/hasee/Desktop/pytools/serial",
+		"/C/Users/hasee/AppData/Local/Temp/scp03683/home/mmc_yksheng/05052017/natural-language-object-retrieval/data/metadata/referit_imcrop_dict.json",
+		"/D/web/webapp520/node_modules/aor-json-rest-client/src/index.js",
+		"/D/web/webapp520/src/rest/simple.js",
+		"/D/web/webapp520/src/util/fetch.js",
+		"/D/web/webapp520/MyItem/StatusField.js",
+		"/D/web/webapp520/addUploadFeature.js",
+		"/D/web/webapp520/src/index.js",
+		"/D/web/webapp520/restClient.js",
+		"/D/web/webapp520/src/sideEffect/saga/crudSaga.js",
+		"/C/Users/hasee/Desktop/pytools/scanport.py"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\webapp520",
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\backend620\\server",
+			"D:\\web\\backend620\\server\\methods",
+			"D:\\web\\backend620\\server",
+			"D:\\web\\backend620\\server\\methods",
+			"D:\\web\\webapp520",
+			"D:\\web\\backend66\\server\\methods",
+			"D:\\web\\webapp520\\src",
+			"D:\\androidReact\\react-native-redux-FeInn\\node_modules",
+			"D:\\web\\webapp520",
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\web617\\app\\AllOrder",
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\webapp520",
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\webapp520",
+			"D:\\web\\webapp520\\src",
+			"D:\\web\\webapp520\\MyCheck",
+			"D:\\web\\webapp520\\MyItem",
+			"D:\\web\\webapp520",
+			"D:\\web\\webapp520\\src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"changeListParams",
+			"CRUD_CHANGE_LIST_PARAMS",
+			"role",
+			"AddUserCreate",
+			"TextStatus",
+			"crud",
+			"$in",
+			"$",
+			"orders.get",
+			"TypeDefine",
+			"console",
+			"KindofTest",
+			"KindofTes2",
+			"InspectedBody",
+			"9",
+			" Missing translation for key",
+			"InitializeCore.js",
+			"filter",
+			"TestCriteria",
+			"KindofTest",
+			"requirement",
+			"crudGetList",
+			"GET_LIST",
+			"UPDATE",
+			"userCheck",
+			"NullableBooleanInput",
+			"ImageField",
+			"testerItems",
+			"ImageInput",
+			"6794_2",
+			"choicesId",
+			"FormSection",
+			"FormSection ",
+			"SaveButton",
+			"CRUD_UPDATE",
+			"addLabel",
+			"crudGetMany",
+			"GET_MANY",
+			"DateField",
+			"CRUD_UPDATE",
+			"setState",
+			"agent.order.get",
+			"CRUD_UPDATE",
+			"include",
+			"connect",
+			"componentWillUpdate",
+			"shouldComponentUpdate",
+			"redux-form",
+			"sleep",
+			"constructor",
+			"componentWillMount",
+			"getInitialState",
+			"crudGetList",
+			"GET_ONE",
+			"crudGetOne",
+			"crudGetList",
+			"AUTH_GETROLE",
+			"aqesg",
+			"159.226.21.45"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Allocatoritems/AddCheckers.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2696,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 239.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "webapp.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 269.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
