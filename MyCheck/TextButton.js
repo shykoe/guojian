@@ -9,40 +9,17 @@ const styles = {
     chip: { margin: 4 },
 };
 class TextButton extends Component {
-	dealText = (record) =>{
-	switch(record.status){
-		case "审核拒绝":
-			return "查看";
-		case "待审核":
-			return "填写检测结果";
-		case "已付款":
-			return "添加物流信息";
-		case "审核未通过":
-			return "添加物流信息";
-		case "检测完成":
-			return "添加物流信息";
-		default:
-			return "查看";		
-	}
-	};
+
     render() {
     	const { record } = this.props;
-    	const Text = this.dealText(record);
     	
-    	if(record.status == 9){
-	        return (
-	            <span>
-	                <RaisedButton containerElement={ <Link to={ `/MyCheck/${record.id}`} /> }  primary={true} label={Text}/>
-	            </span>
-	        );
-    	}
-    	else{
-	        return (
-            <Chip labelColor='#4CAF50' style={styles.chip}>
-                完成
-            </Chip>
-	        );
-    	}
+
+        return (
+            <span>
+                <RaisedButton containerElement={ <Link to={ `/MyCheck/${record.id}`} /> }  primary={true} label="编辑"/>
+            </span>
+        );
+
     }
 }
 export default connect(null, null)(TextButton);

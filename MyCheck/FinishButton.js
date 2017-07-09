@@ -51,7 +51,6 @@ export class FinishButton extends Component {
     	)
     	finished = finished === 1 ? true:false;
     	disabled = disabled === 1 || (record.status != 10) ? true:false;
-    	console.log(disabled);
     	this.setState({disabled: disabled, finished:finished});
 	}
 	state = {
@@ -81,7 +80,6 @@ export class FinishButton extends Component {
     	delete value._id;
     	asteroid.call('reports.upsert', value, orderId, userName);
       	this.setState({open: false,disabled: false});
-      	this.props.dispatch(push('/'));
       	
     }  	  	 
     render() {
@@ -100,6 +98,7 @@ export class FinishButton extends Component {
 		    onTouchTap={this.handleUpdate}
 		  />,
 		];
+		console.log(this.state.disabled);
     	return(
     		<div>
     		<RaisedButton  onTouchTap={this.handleOpen} label="检测报告"/>

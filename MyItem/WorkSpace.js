@@ -75,21 +75,14 @@ export class ProductType extends Component {
         if(categories.Categories == undefined){
             return(<div></div>)
         }
-        if(status == 4 && record.status === 2){
-            return (    
-              <Field name="categoryName" component={renderSelectField} >
-              {categories.Categories.map(this.renderItem)}
-              </Field>
-            
-            );
-        }
-        else{
-            return (    
-              <Field name="categoryName" disabled={true} component={renderSelectField} >
-              {categories.Categories.map(this.renderItem)}
-              </Field>
-            );
-        }
+
+        return (    
+          <Field name="categoryName" component={renderSelectField} >
+          {categories.Categories.map(this.renderItem)}
+          </Field>
+        
+        );
+    
 
     }
 }
@@ -109,7 +102,7 @@ export class TestCriteria extends Component {
         if(categories.Categories == undefined){
             return(<div></div>)
         }        
-        if(status == 4 && categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0  && record.status === 2 ){
+        if(categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0   ){
             return (    
               <Field name="levelName" component={renderSelectField} >
               {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
@@ -117,15 +110,6 @@ export class TestCriteria extends Component {
                 }
               </Field>
             
-            );
-        }
-        else if( categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0 ){
-            return (    
-              <Field name="levelName" disabled={true} component={renderSelectField} >
-              {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
-              .map((item) =>{return( <MenuItem value={item.name}  key={item.name} primaryText={item.name} />)} ) 
-                }
-              </Field>
             );
         }
         else{
@@ -146,17 +130,10 @@ export class PriceField extends Component {
 
     render() {
         const { status,record } = this.props;
-         if(status === 4 && record.status === 2){
+        return (    
+            <Field name="price" component={renderTextField} label="price"/>
 
-
-            return (    
-                <Field name="price" component={renderTextField} label="price"/>
-            
-            );
-        }
-        else{
-            return(<Field name="price" component={renderTextField} disabled={true} label="price"/>);
-        }
+        );
 
     }
 }
@@ -168,31 +145,15 @@ PriceField = connect(
   )(PriceField)
 export class StatusSelect extends Component {
     renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
-    selectValue = [{name:'审核通过',value:4}, {name:'审核拒绝',value:3}]
+    selectValue = [{name:'审核通过',value:4}, {name:'审核拒绝',value:3},{name:'退款',value:13}]
     render() {
         const { record } = this.props;
-         if(record.status === 2){
-            return (
-                <Field name="status" component={renderSelectField} >
-                {this.selectValue.map(this.renderItem)}
-                </Field>
-            );
-        }
-        if(record.status === 6){
-            const selectValue = [{name:'收货物流',value:7}, {name:'退货物流',value:13}]
-            return(
-                <Field name="status" component={renderSelectField} >
-                {selectValue.map(this.renderItem)}
-                </Field>
-            );
-        }
-        else{
-            return(             
-            <Field name="status"  disabled={true} component={renderSelectField} >
+        return (
+            <Field name="status" component={renderSelectField} >
             {this.selectValue.map(this.renderItem)}
             </Field>
-            )
-        }
+        );
+        
 
     }
 }
@@ -200,17 +161,10 @@ export class MsgField extends Component {
 
     render() {
         const { status,record } = this.props;
-         if((status === 4 || status === 3) && record.status === 2){
-
-
-            return (    
-                <Field name="agentMsg" component={renderTextField} label="agentMsg"/>
-            
-            );
-        }
-        else{
-            return(<Field name="agentMsg" component={renderTextField} disabled={true} label="agentMsg"/>);
-        }
+        return (    
+            <Field name="agentMsg" component={renderTextField} label="agentMsg"/>
+        
+        );
 
     }
 }

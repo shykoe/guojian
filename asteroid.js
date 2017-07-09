@@ -154,13 +154,16 @@ export const websockClient = (type, resource, params) =>{
 						reader.readAsDataURL(newPictures[0]);
 						reader.onload = () => ( asteroid.call('tester.img.update', id, reader.result));
 					}
-					data.items.map(
-						(item,ind)=>{
-								
-									ops[item.name] = item.requirements;
-
-							}
-						);
+					for(var i=0; i<data.items.length;i++){
+						if(previousData.items[i].requirements.result === undefined || previousData.items[i].requirements.verdict == undefined){
+							ops[data.items[i].name] = data.items[i].requirements;
+							continue;
+						}
+						if(previousData.items[i].requirements.result !== data.items[i].requirements.result 
+							||  previousData.items[i].requirements.verdict !== data.items[i].requirements.verdict ){
+							ops[data.items[i].name] = data.items[i].requirements;					
+						}
+					}
 					return asteroid.call('tester.order.update', id, data, ops, username)
 					.then(response => mapResponse2Rest(response, type, params));
 				}
@@ -198,8 +201,33 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST:{
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        return asteroid.call('orders.get',page, perPage, field, order, params.filter)
-			        .then(response => mapResponse2Rest(response, type, params));
+			        var { username, role, filter } = params;
+			        if(filter){
+			            for(var key in filter){
+			            	var temp=filter[key];
+			            	if(key === 'status'){
+			            		if(temp === 'all'){
+			            			delete filter['status'];
+			            		}
+			            		continue;
+			            	}
+			            	if(key === 'agent'){
+			            		if(temp === 'all'){
+			            			delete filter['agent'];
+			            		}
+			            		continue;
+			            	}
+			            	if(temp !== undefined){
+			            		temp='.*'+temp+'.*';
+			            		temp={ '$regex': temp, $options: '$i' };
+			            		filter[key]=temp;
+			            	}else{
+			            		filter = {};
+			            	}
+			            }
+			        }
+			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
+			        .then(response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{
 					const { id } = params;
@@ -208,8 +236,17 @@ export const websockClient = (type, resource, params) =>{
 				};
 				case UPDATE:{
 					const { id, data, previousData } = params;
-					if(data === previousData){
+					if(data.status === previousData.status){
 						return mapResponse2Rest(previousData, type, params);
+					}
+					if(data.status === ''){
+						data.status = previousData.status;
+					}
+					if(data.pictures != undefined){
+						const newPictures = data.pictures.filter(p => p instanceof File);
+						const reader = new FileReader();
+						reader.readAsDataURL(newPictures[0]);
+						reader.onload = () => ( asteroid.call('keeper.img.update', id, reader.result));
 					}
 					return asteroid.call('keeper.order.update', id, data)
 					.then(response => mapResponse2Rest(response, type, params));

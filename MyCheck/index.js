@@ -99,7 +99,7 @@ export class MyCheckEdit extends Component {
             <ImageInput source="pictures" label="Related pictures" accept="image/*" >
                 <ImageField source="src" title="title" />
             </ImageInput>
-            <CheckField detail={true} />
+            <br/>
             <WorkSpace />
 
         </SimpleForm>

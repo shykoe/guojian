@@ -24,7 +24,6 @@ export class CheckboxGr extends Component {
             optionValue,
             options,
         } = this.props;
-        const disable = this.props.record.finished || (this.props.record.status != 2);
         const choiceName = React.isValidElement(optionText) ? // eslint-disable-line no-nested-ternary
             React.cloneElement(optionText, { record: choice }) :
             (typeof optionText === 'function' ?
@@ -38,7 +37,6 @@ export class CheckboxGr extends Component {
                 onCheck={this.handleCheck}
                 value={choice[optionText]}
                 label={choiceName}
-                disabled={disable}
                 {...options}
             />
         );

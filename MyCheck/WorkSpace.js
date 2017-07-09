@@ -80,8 +80,8 @@ export class WorkSpace extends Component {
         return(
             <div>
               {record.items.map((item, ind) => (
-                  <div key={item.name}>
-                    <Chip style={{ display: 'inline-block' }}>{item.name}</Chip>
+                  <div key={item.name} style={{display: 'flex', flexWrap: 'wrap',alignItems: 'flex-end'}}>
+                    <Chip style={{ display: 'flex', height:''}}>{item.name}</Chip>
                       <div style={{ display:'flex', flexDirection: 'row'}} >
                         <Field
                           name={`items[${ind}].requirements.result`}

@@ -11,9 +11,9 @@ class FilterButton extends React.Component{
     	const { fiterVal } = this.props;
     	const { showFilter } = this.props;
     	if(this.props.fiterVal === undefined || this.props.fiterVal === 'all'){
-    		showFilter('agent',null);
+    		showFilter('status',7);
     	}else{
-    		showFilter('agent','all');
+    		showFilter('status','all');
     	}
     }
 	render(){
@@ -21,11 +21,11 @@ class FilterButton extends React.Component{
 
 		if(this.props.fiterVal === undefined || this.props.fiterVal === 'all' ){
 			return (
-				<FlatButton primary label="待领取的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
+				<FlatButton primary label="待处理的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
 				)
 		}else{
 			return (
-				<FlatButton primary label="待领取的订单" onClick={this.ontap} icon={<ToggleCheckBox/>} />
+				<FlatButton primary label="待处理的订单" onClick={this.ontap} icon={<ToggleCheckBox/>} />
 				)
 		}
 	}
@@ -33,6 +33,6 @@ class FilterButton extends React.Component{
 const selector = formValueSelector('filterForm');
 export default connect(
 	(state, props)=>(
-		{fiterVal:selector(state,'agent')}
+		{fiterVal:selector(state,'status')}
 		)
 	,null)(FilterButton)

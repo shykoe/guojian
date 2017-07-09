@@ -85,27 +85,22 @@ export class ExpressNum extends Component {
               disabled={disable}
               component={this.renderField}
               label="快递单号"/>
+            <Field
+              name={`${fields.name}[${index}].description`}
+              type="text"
+              disabled={disable}
+              component={this.renderField}
+              label="描述"/>
           </div>
         )}
         </div>)
     }
     render() {
         const { record } = this.props;
-        if(record.status === 10){
-            return(
-            <div>
-                <FieldArray  name="productShippingInfo" Lable="样品物流信息" disable={true} component={this.renderMembers}/> 
-                <FieldArray  name="reportShippingInfo" Lable="报告物流信息" component={this.renderMembers}/> 
-            </div>
-            )
-        }
-        else if(record.status === 6){
-            return(
-                <div>
-                    <FieldArray  name="productShippingInfo" Lable="样品物流信息" component={this.renderMembers}/>  
-                </div>
-                )
-        }
-        return (<div></div>);
+        return(
+        <div>
+            <FieldArray  name="ShippingInfo" Lable="物流信息"  component={this.renderMembers}/> 
+        </div>
+        )
     } 
 }

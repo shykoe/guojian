@@ -44,11 +44,13 @@ import StatusField from '../MyItem/StatusField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import KeepMsg from './KeepMsg';
+import OrderFilter from '../Utils/OrderFilter';
 import { Title }  from '../Utils';
+import KeepAction from './KeepAction';
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} actions={<KeepAction />} filters={<OrderFilter />} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList

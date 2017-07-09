@@ -9,7 +9,7 @@ import Checkbox from 'material-ui/Checkbox';
 import { Field, reduxForm, formValueSelector  } from 'redux-form';
 import { connect } from 'react-redux'
 class AddCheckers extends React.Component{
-	componentWillMount(){
+	componentDidMount(){
 		asteroid.call('tester.get').then(data=>{ this.setState({ tester: data })} );
 	}
 	state = {
@@ -43,6 +43,7 @@ class AddCheckers extends React.Component{
             	checked={input.value ? input.value.find(v => v === userid) !== undefined : false}
             	onCheck={handleCheck}
               value = {userid}
+              style={{display:'block', width: ''}}
             />
         );
     }  	
@@ -70,8 +71,9 @@ class AddCheckers extends React.Component{
 		      open={this.state.open}
 		      onRequestClose={this.handleClose}
 		    >
-         添加质检员
+        <div style={{display: 'flex', flexDirection: 'row'}} >
           { tester.map((item) => <Field name={`${record.id}.tester`} key={item._id} userid={item._id} component={this.renderCheckbox} label={item.name}/> ) }
+        </div>
         </Dialog>
 			</div>
 			);
