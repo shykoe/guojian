@@ -16,6 +16,7 @@ import { FETCH_ERROR } from '../../actions/fetchActions';
 import { AUTH_LOGIN, AUTH_CHECK, AUTH_ERROR, AUTH_LOGOUT,AUTH_GETROLE } from '../../auth';
 import { roleMap } from '../../../Utils/role';
 import { asteroid } from '../../../asteroid';
+
 export default (authClient) => {
     if (!authClient) return () => null;
     function* handleAuth(action) {
@@ -82,7 +83,7 @@ export default (authClient) => {
             }
             break;
         }
-        
+
     }
     return function* watchAuthActions() {
         yield [
