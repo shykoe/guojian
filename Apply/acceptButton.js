@@ -12,7 +12,7 @@ class AcceptButton extends Component {
 
     render() {
     	const { record } = this.props;
-    	const disable = !!record.agent;
+    	const disable = !!record.agentId;
       return (
           <span>
               <RaisedButton onClick={this.handleAccept} disabled={disable} primary label="领取"/>

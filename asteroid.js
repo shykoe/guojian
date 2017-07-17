@@ -93,7 +93,6 @@ export const websockClient = (type, resource, params) =>{
 		case 'ApplyItem':{
 			switch(type){
 				case GET_LIST:{
-
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
 			        var { username, role, filter } = params;

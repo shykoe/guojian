@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import { asteroid } from '../asteroid';
 import {AcceptApply as AcceptApplyAction } from './acceptAction'
+
 class AgentField extends Component {
     constructor(props) {
         super(props);
@@ -36,4 +37,5 @@ class AgentField extends Component {
         );
     }
 }
+
 export default AgentField;

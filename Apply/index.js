@@ -24,6 +24,7 @@ import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
 import CustServField from '../MyItem/CustServField';
+import TestersField from '../MyItem/TestersField';
 
 export const ApplyIcon = Icon;
 
@@ -83,7 +84,7 @@ export const ApplyShow = ({ ...props }) => (
             <TextField source="price" itemStyle={{ width: '25%' }} />
             <CustServField source="custServHistory" itemStyle={{ width: '100%' }} />
             <TextField source="agent" itemStyle={{ width: '25%' }} />
-            {/*<TextField source="testers" itemStyle={{ width: '25%' }} />*/}
+            <TestersField source="testers" itemStyle={{ width: '25%' }} />
             <TextField source="agentMsg" itemStyle={{ width: '25%' }} />
             <TextField source="keeperMsg" itemStyle={{ width: '25%' }} />
             <TextField source="ShippingInfo" itemStyle={{ width: '25%' }} />
