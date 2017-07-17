@@ -23,6 +23,7 @@ import ApplyActions from './ApplyActions';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
+import CustServField from '../MyItem/CustServField';
 
 export const ApplyIcon = Icon;
 
@@ -80,7 +81,7 @@ export const ApplyShow = ({ ...props }) => (
             <TextField source="levelName" itemStyle={{ width: '25%' }} />
             <ItemsField source="items" itemStyle={{ width: '100%' }} />
             <TextField source="price" itemStyle={{ width: '25%' }} />
-            {/*<TextField source="custServHistory" itemStyle={{ width: '25%' }} />*/}
+            <CustServField source="custServHistory" itemStyle={{ width: '100%' }} />
             <TextField source="agent" itemStyle={{ width: '25%' }} />
             {/*<TextField source="testers" itemStyle={{ width: '25%' }} />*/}
             <TextField source="agentMsg" itemStyle={{ width: '25%' }} />
