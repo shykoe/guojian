@@ -22,6 +22,7 @@ import OrderFilter from '../Utils/OrderFilter';
 import ApplyActions from './ApplyActions';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
+import ItemsField from '../MyItem/ItemsField';
 
 export const ApplyIcon = Icon;
 
@@ -77,7 +78,7 @@ export const ApplyShow = ({ ...props }) => (
             <TextField source="reportNo" itemStyle={{ width: '25%' }} />
             <TextField source="categoryName" itemStyle={{ width: '25%' }} />
             <TextField source="levelName" itemStyle={{ width: '25%' }} />
-            {/*<TextField source="items" itemStyle={{ width: '25%' }} />*/}
+            <ItemsField source="items" itemStyle={{ width: '100%' }} />
             <TextField source="price" itemStyle={{ width: '25%' }} />
             {/*<TextField source="custServHistory" itemStyle={{ width: '25%' }} />*/}
             <TextField source="agent" itemStyle={{ width: '25%' }} />
