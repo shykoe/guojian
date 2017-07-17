@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "title": "orders",
+  "properties": {
+    "userId": { "type": "string" },
+    "status": { "type": "integer", "minimum": 1, "maximum": 12 },
+    "createdAt": { "type": "integer" },
+    "approvedAt": { "type": "integer" },
+    "rejectedAt": { "type": "integer" },
+    "paidAt": { "type": "integer" },
+    "refundedAt": { "type": "integer" },
+    "sampleName": { "type": "string" },
+    "sampleProducer": { "type": "string" },
+    "producerBatch": { "type": "string" },
+    "sampleType": { "type": "string" },
+    "sampleLevel": { "type": "string" },
+    "sampleBrand": { "type": "string" },
+    "sampleNum": { "type": "integer", "minimum": 1 },
+    "clientName": { "type": "string" },
+    "clientContactAddress": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "tel": { "type": "string", "pattern": "^0?(13[0-9]|15[012356789]|18[0-9]|17[0-9])[0-9]{8}$" },
+        "province": { "type": "string" },
+        "city": { "type": "string" },
+        "district": { "type": "string" },
+        "street": { "type": "string" },
+        "zip": { "type": "string", "pattern": "^[0-9]{6}$" }
+      },
+      "required": [ "name", "tel", "province", "city", "district", "street" ]
+    },
+    "clientContactIdent": { "type": "string" },
+    "clientEconomicType": { "type": "string" },
+    "sampleDisposalType": { "type": "integer" },
+    "reportFetchingType": { "type": "integer" },
+    "descImages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reportNo": { "type": "integer", "minimum": 1 },
+    "categoryName": { "type": "string" },
+    "levelName": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "verdict": { "type": "boolean" }
+        },
+        "required": [ "name" ]
+      }
+    },
+    "activeCustServRequest": { "type": "string" },
+    "custServHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "request": { "type": "string" },
+          "reply": { "type": "string" }
+        },
+        "required": [ "request" ]
+      }
+    },
+    "price": { "type": "number", "exclusiveMinimum": 0 },
+    "deadline": { "type": "integer" },
+    "notes": { "type": "string" },
+    "agentId": { "type": "string" },
+    "testerIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agentMsg": { "type": "string" },
+    "keeperMsg": { "type": "string" },
+    "ShippingInfo": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "provider": { "type": "string" },
+          "no": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": [ "provider", "no", "description" ]
+      }
+    },
+    "sampleImages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "testingImages": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "refundNotes": { "type": "string" }
+  },
+  "required": [ "userId", "status", "createdAt", "sampleName", "sampleProducer", "producerBatch",
+    "sampleType", "sampleLevel", "sampleBrand", "sampleNum", "clientName", "clientContactAddress",
+    "sampleDisposalType", "reportFetchingType", "descImages"
+  ]
+}
