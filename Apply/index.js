@@ -21,6 +21,7 @@ import AgentField from './AgentField';
 import OrderFilter from '../Utils/OrderFilter';
 import ApplyActions from './ApplyActions';
 import StatusField from '../MyItem/StatusField';
+import AddrField from '../MyItem/AddrField';
 
 export const ApplyIcon = Icon;
 
@@ -68,7 +69,7 @@ export const ApplyShow = ({ ...props }) => (
             <TextField source="sampleBrand" itemStyle={{ width: '25%' }} />
             <TextField source="sampleNum" itemStyle={{ width: '25%' }} />
             <TextField source="clientName" itemStyle={{ width: '25%' }} />
-            {/*<TextField source="clientContactAddress" itemStyle={{ width: '25%' }} />*/}
+            <AddrField source="clientContactAddress" itemStyle={{ width: '25%' }} />
             <TextField source="clientContactIdent" itemStyle={{ width: '25%' }} />
             <TextField source="clientEconomicType" itemStyle={{ width: '25%' }} />
             <TextField source="sampleDisposalType" itemStyle={{ width: '25%' }} />
