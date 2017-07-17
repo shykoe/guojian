@@ -29,7 +29,7 @@ import {
     ShowButton,
     SimpleForm,
     SimpleList,
-    SimpleShowLayout,
+    GridShowLayout,
     TabbedForm,
     TextField,
     TextInput,
@@ -45,17 +45,17 @@ import SegmentsFieldClientInf from './SegmentsFieldClientInf';
 import SegmentsFieldSampleInf from './SegmentsFieldSampleInf';
 export const AllOrderIcon = Icon;
 
- 
+
 const choicesx=[
     { "roles": 'admin', "name": '管理员' },
     { "roles": 'clerk', "name": '业务员' },
-    { "roles": 'checker', "name": '检测员' }, 
+    { "roles": 'checker', "name": '检测员' },
 ];
 
-const AllOrderFilter = (props) => { 
-    return ( 
-        <Filter {...props} > 
-            <TextInput label="id" source="_id"/>     
+const AllOrderFilter = (props) => {
+    return (
+        <Filter {...props} >
+            <TextInput label="id" source="_id"/>
             <TextInput source="sampleName"  />
             <TextInput source="sampleProducer" />
             <TextInput source="producerBatch"  />
@@ -69,9 +69,9 @@ const AllOrderFilter = (props) => {
             <TextInput source="clientContactIdent"/>
             <TextInput source="clientEconomicType" />
             <TextInput source="status"  />
-            
+
         </Filter>
-         ); 
+         );
 } ;
 
 export const AllOrderList = ({ ...props }) => (
@@ -84,15 +84,15 @@ export const AllOrderList = ({ ...props }) => (
             }
             medium={
                 <Datagrid   >
-                    <TextField source="id" /> 
+                    <TextField source="id" />
                     <TextField source="sampleName"  />
                     <TextField source="sampleProducer"  />
                     <TextField source="producerBatch" />
                     <SegmentsFieldSampleInf/>
                     <SegmentsFieldClientInf/>
-                    <SegmentsFieldContactInf /> 
+                    <SegmentsFieldContactInf />
                     <ShowButton/>
-                  
+
                 </Datagrid>
             }
         />
@@ -100,10 +100,10 @@ export const AllOrderList = ({ ...props }) => (
 );
 export const AllOrderShow = ({ ...props }) => (
     <Show  {...props}>
-        <SimpleShowLayout>
-            <TextField source="sampleName"  style={{display:'inline-block',margin: '0 1em 1em 1em' }} />
-            <TextField source="sampleProducer" style={{display:'inline-block' }} />
-            <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
+        <GridShowLayout>
+            <TextField source="sampleName" />
+            <TextField source="sampleProducer" />
+            <DateField source="createdAt" />
             <TextField source="producerBatch" />
             <TextField source="sampleType" />
             <TextField source="sampleLevel"  />
@@ -115,6 +115,6 @@ export const AllOrderShow = ({ ...props }) => (
             <TextField source="price" />
             <TextField source="note" />
             <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
-        </SimpleShowLayout>
+        </GridShowLayout>
     </Show>
 );

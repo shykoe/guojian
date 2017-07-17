@@ -6,7 +6,7 @@ import FieldTitle from '../../util/FieldTitle';
 const defaultLabelStyle = {
     paddingTop: '2em',
     height: 'auto',
-    
+
 };
 
 /**

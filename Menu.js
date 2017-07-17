@@ -55,7 +55,7 @@ class Menu extends Component{
         ))}
         <MenuItem
             containerElement={<Link to="/UserInfo" />}
-            primaryText={"个人设置"}
+            primaryText={"修改密码"}
             leftIcon={<SettingsIcon />}
             onTouchTap={onMenuTap}
         />
