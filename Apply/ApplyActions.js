@@ -6,11 +6,13 @@ import { CardActions } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import FilterButton from './FilterButton';
+
 const cardActionStyle = {
     zIndex: 2,
     display: 'inline-block',
     float: 'right',
 };
+
 class ApplyActions extends React.Component{
 	render(){
 		const { resource, filters, displayedFilters, filterValues, basePath, showFilter, refresh, hideFilter } = this.props;
@@ -20,7 +22,7 @@ class ApplyActions extends React.Component{
 	        <FlatButton primary label="刷新" onClick={refresh} icon={<NavigationRefresh />} />
 	        <FilterButton showFilter={showFilter}  />
 	        {/* Add your custom actions */}
-	        
+
 	    	</CardActions>);
 	}
 }

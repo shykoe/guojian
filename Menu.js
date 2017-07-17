@@ -38,12 +38,6 @@ class Menu extends Component{
 	return(
     <div style={styles.main}>
         {hasDashboard && <DashboardMenuItem onTouchTap={onMenuTap} />}
-        <MenuItem
-            containerElement={<Link to="/AllOrder" />}
-            primaryText={"所有订单"}
-            leftIcon={<AllOrderIcon />}
-            onTouchTap={onMenuTap}
-        />
         {items.filter(i=>i.role===this.props.role).map(item => (
             <MenuItem
                 key={item.name}

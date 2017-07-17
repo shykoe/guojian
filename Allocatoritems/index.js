@@ -27,7 +27,7 @@ import {
     ShowButton,
     SimpleForm,
     SimpleList,
-    SimpleShowLayout,
+    GridShowLayout,
     TabbedForm,
     TextField,
     TextInput,
@@ -62,11 +62,11 @@ export const AitemsList = ({ ...props }) => (
                     <TextField source="sampleProducer" />
                     <TextField source="clientName" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                     <TextField source="sampleType" />
-                    <CheckersField />                    
+                    <CheckersField />
                     <ShowButton/>
                     <AddCheckers source="tester" />
-                    
-                    
+
+
                 </Datagrid>
             }
         />
@@ -74,7 +74,7 @@ export const AitemsList = ({ ...props }) => (
 );
 export const AitemsShow = ({ ...props }) => (
     <Show  title={<Title />} {...props}>
-        <SimpleShowLayout>
+        <GridShowLayout>
             <TextField source="sampleName"   />
             <TextField source="sampleProducer" />
             <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
@@ -89,6 +89,6 @@ export const AitemsShow = ({ ...props }) => (
             <TextField source="price" />
             <TextField source="note" />
             <ImageField source="sampleImages" title="Picture"  addLabel  label='图片'/>
-        </SimpleShowLayout>
+        </GridShowLayout>
     </Show>
 );
