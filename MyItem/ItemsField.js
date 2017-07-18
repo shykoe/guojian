@@ -15,7 +15,7 @@ const ItemsField = ({ record }) => {
     } else {
       verdict = '不合格';
     }
-    return <div style={styles.item}>{item.name}: {verdict}</div>
+    return <div key={item.name} style={styles.item}>{item.name}: {verdict}</div>
   });
 
   return(

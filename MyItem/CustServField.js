@@ -18,9 +18,9 @@ const CustServField = ({ record }) => {
 
   const items = history.map(item => {
     return (
-      <div>
-        <div>售后要求: {history.request}</div>
-        <div>答复: {history.reply || ''}</div>
+      <div key={item.request + (item.reply || '')}>
+        <div>售后要求: {item.request}</div>
+        <div>答复: {item.reply || ''}</div>
       </div>
     );
   });

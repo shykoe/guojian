@@ -7,7 +7,7 @@ const styles = {
 
 const TestersField = ({ record }) => {
   const items = (record.testers || []).map(item => {
-    return <div style={styles.item}>{item}</div>
+    return <div key={item} style={styles.item}>{item}</div>
   });
 
   return(
