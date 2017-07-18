@@ -80,7 +80,7 @@ export const ApplyShow = ({ ...props }) => (
             <SampleDisposalTypeField source="sampleDisposalType" itemStyle={{ width: '25%' }} />
             <ReportFetchingTypeField source="reportFetchingType" itemStyle={{ width: '25%' }} />
             <TextField source="reportNo" itemStyle={{ width: '25%' }} />
-            <TextField source="categoryName" itemStyle={{ width: '25%' }} />
+            <TextField source="categoryName" itemStyle={{ width: '50%' }} />
             <TextField source="levelName" itemStyle={{ width: '25%' }} />
             <ItemsField source="items" itemStyle={{ width: '100%' }} />
             <TextField source="price" itemStyle={{ width: '25%' }} />
@@ -91,7 +91,7 @@ export const ApplyShow = ({ ...props }) => (
             <TextField source="keeperMsg" itemStyle={{ width: '25%' }} />
             <ShippingField source="ShippingInfo" itemStyle={{ width: '100%' }} />
             <ImageField source="descImages" addLabel label="下单图片" itemStyle={{ width: '100%' }} />
-            <ImageField source="sampleImages" addLabel label="样品图片" itemStyle={{ width: '25%' }} />
+            <ImageField source="sampleImages" addLabel label="样品图片" itemStyle={{ width: '100%' }} />
             <ImageField source="testingImages" addLabel label="检验图片" itemStyle={{ width: '100%' }} />
         </GridShowLayout>
     </Show>
