@@ -56,73 +56,70 @@ const mapResponse2RestAddI = (response, type, params,page, perpage)=>{
 
 export const websockClient = (type, resource, params) =>{
 	console.log(type, resource, params);
-	switch (resource){
-		case 'MyItem':{
-            switch(type){
-            	case GET_LIST:{
-    				const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        const { username, role } = params;
+	switch (resource) {
+		case 'MyItem': {
+      switch(type) {
+      	case GET_LIST: {
+  				const { page, perPage } = params.pagination;
+	        const { field, order } = params.sort;
+	        const { username, role } = params;
 
-			        return asteroid.call('agent.myorders.get',username, role, page, perPage, field, order)
-			        .then(response => mapResponse2Rest(response, type, params));
-
-            	};
-            	case GET_ONE:{
-            		const { id } = params;
-            		return asteroid.call('order.get',id)
-            		.then(response => mapResponse2Rest(response, type, params));
-            	}
-            	case UPDATE:{
-            		const { id, data, previousData } = params;
-            		if(data === previousData){
-            			return mapResponse2Rest(previousData, type, params);
-            		}
-            		if(previousData.status === 10){
-            			data.status = 11;
-            		}
-        			return asteroid.call('agent.order.approve', id, data)
-        			.then(response => mapResponse2Rest(response, type, params));
-
-            	}
-
-            }
-            break;
-
+	        return asteroid.call('agent.myorders.get',username, role, page, perPage, field, order)
+	         .then(response => mapResponse2Rest(response, type, params));
+        }
+      	case GET_ONE: {
+      		const { id } = params;
+      		return asteroid.call('order.get',id)
+      		  .then(response => mapResponse2Rest(response, type, params));
+      	}
+      	case UPDATE: {
+      		const { id, data, previousData } = params;
+      		if (data === previousData) {
+      			return mapResponse2Rest(previousData, type, params);
+      		}
+      		if (previousData.status === 10) {
+      			data.status = 11;
+      		}
+    			return asteroid.call('agent.order.approve', id, data)
+    			   .then(response => mapResponse2Rest(response, type, params));
+      	}
+      }
+      break;
 		};
 		case 'ApplyItem':{
 			switch(type){
-				case GET_LIST:{
+				case GET_LIST: {
 					const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        var { username, role, filter } = params;
-			        if(filter){
-			            for(var key in filter){
-			            	var temp=filter[key];
-			            	if(key === 'status'){
-			            		if(temp === ''){
-			            			delete filter['status'];
-			            		}
-			            		continue;
-			            	}
-			            	if(key === 'agent'){
-			            		if(temp === 'all'){
-			            			delete filter['agent'];
-			            		}
-			            		continue;
-			            	}
-			            	if(temp !== undefined){
-			            		temp='.*'+temp+'.*';
-			            		temp={ '$regex': temp, $options: '$i' };
-			            		filter[key]=temp;
-			            	}else{
-			            		filter = {};
-			            	}
-			            }
-			        }
-			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
-			        .then(response => mapResponse2Rest(response, type, params) );
-				};
+	        const { field, order } = params.sort;
+	        let { username, role, filter } = params;
+	        if (filter) {
+            for (const key in filter) {
+            	let temp = filter[key];
+            	if (key === 'status') {
+            		if (temp === '') {
+            			delete filter['status'];
+            		}
+            		continue;
+            	}
+            	if (key === 'agentId') {
+            		if (temp === 'all') {
+            			delete filter['agentId'];
+            		}
+            		continue;
+            	}
+            	if (temp !== undefined) {
+            		temp = '.*' + temp + '.*';
+            		temp = { '$regex': temp, $options: '$i' };
+            		filter[key] = temp;
+            	} else {
+            		filter = {};
+                break;
+            	}
+            }
+	        }
+	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
+	           .then(response => mapResponse2Rest(response, type, params) );
+				}
 				case GET_ONE:{
 					return asteroid.call('order.get',params.id)
 					.then(response => mapResponse2Rest(response, type, params) );
@@ -195,38 +192,39 @@ export const websockClient = (type, resource, params) =>{
 			}
 			break;
 		};
-		case 'Keepers':{
-			switch(type){
-				case GET_LIST:{
+		case 'Keepers': {
+			switch(type) {
+				case GET_LIST: {
 					const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        var { username, role, filter } = params;
-			        if(filter){
-			            for(var key in filter){
-			            	var temp=filter[key];
-			            	if(key === 'status'){
-			            		if(temp === 'all'){
-			            			delete filter['status'];
-			            		}
-			            		continue;
-			            	}
-			            	if(key === 'agent'){
-			            		if(temp === 'all'){
-			            			delete filter['agent'];
-			            		}
-			            		continue;
-			            	}
-			            	if(temp !== undefined){
-			            		temp='.*'+temp+'.*';
-			            		temp={ '$regex': temp, $options: '$i' };
-			            		filter[key]=temp;
-			            	}else{
-			            		filter = {};
-			            	}
-			            }
-			        }
-			        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
-			        .then(response => mapResponse2Rest(response, type, params) );
+	        const { field, order } = params.sort;
+	        let { username, role, filter } = params;
+	        if (filter) {
+            for (const key in filter) {
+            	let temp = filter[key];
+            	if (key === 'status') {
+            		if (temp === 'all'){
+            			delete filter['status'];
+            		}
+            		continue;
+            	}
+            	if (key === 'agent') {
+            		if (temp === 'all') {
+            			delete filter['agent'];
+            		}
+            		continue;
+            	}
+            	if (temp !== undefined) {
+            		temp = '.*' + temp + '.*';
+            		temp = { '$regex': temp, $options: '$i' };
+            		filter[key] = temp;
+            	} else {
+            		filter = {};
+                break;
+            	}
+            }
+			    }
+	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
+	          .then(response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{
 					const { id } = params;

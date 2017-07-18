@@ -58,7 +58,7 @@ export const ApplyList = ({ ...props }) => (
 );
 
 export const ApplyShow = ({ ...props }) => (
-    <Show  {...props}>
+    <Show {...props}>
         <GridShowLayout>
             <TextField source="userId" itemStyle={{ width: '25%' }} />
             <StatusField source="status" itemStyle={{ width: '25%' }} />

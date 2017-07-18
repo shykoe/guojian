@@ -8,24 +8,23 @@ import FlatButton from 'material-ui/FlatButton';
 import { formValueSelector } from 'redux-form';
 
 class FilterButton extends React.Component{
-  ontap = () =>{
-  	const { fiterVal } = this.props;
-  	const { showFilter } = this.props;
-  	if(this.props.fiterVal === undefined || this.props.fiterVal === 'all'){
-  		showFilter('agent', null);
-  	}else{
-  		showFilter('agent', 'all');
+  ontap = () => {
+  	const { filterVal, showFilter } = this.props;
+  	if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
+  		showFilter('agentId', null);
+  	} else {
+  		showFilter('agentId', 'all');
   	}
   }
 
 	render(){
 		const { icon } = this.props;
 
-		if(this.props.fiterVal === undefined || this.props.fiterVal === 'all' ){
+		if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
 			return (
 				<FlatButton primary label="待领取的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
 			);
-		}else{
+		} else {
 			return (
 				<FlatButton primary label="待领取的订单" onClick={this.ontap} icon={<ToggleCheckBox/>} />
 			);
@@ -36,6 +35,6 @@ class FilterButton extends React.Component{
 const selector = formValueSelector('filterForm');
 export default connect(
 	(state, props) => (
-		{fiterVal:selector(state,'agent')}
+		{ filterVal: selector(state, 'agentId') }
 	)
-, null)(FilterButton)
+, null)(FilterButton);
