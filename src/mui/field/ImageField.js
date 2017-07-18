@@ -24,13 +24,23 @@ export const ImageField = ({ elStyle = {}, record, source, title }) => {
         return (
             <div style={style}>
                 {srcValue.map((i,ind)=>(
-                    <img
-                    title={titleValue}
-                    alt={titleValue}
-                    src={i}
-                    key={ind}
-                    style={styles.image}
-                />))}
+                    <a href="#" onClick={e => {
+                        e.preventDefault();
+                        const image = new Image();
+                        image.src = i;
+
+                        const w = window.open('');
+                        w.document.write(image.outerHTML);
+                    }}>
+                        <img
+                            title={titleValue}
+                            alt={titleValue}
+                            src={i}
+                            key={ind}
+                            style={styles.image}
+                        />
+                    </a>
+                ))}
             </div>
         );
     };
@@ -43,7 +53,7 @@ export const ImageField = ({ elStyle = {}, record, source, title }) => {
                     src={srcValue}
                     style={styles.image}
                 />
-            </div>        
+            </div>
         );
 };
 
