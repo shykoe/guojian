@@ -24,6 +24,9 @@ import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
 import CustServField from '../MyItem/CustServField';
 import TestersField from '../MyItem/TestersField';
+import ShippingField from '../MyItem/ShippingField';
+import SampleDisposalTypeField from '../MyItem/SampleDisposalTypeField';
+import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
 
 export const ApplyIcon = Icon;
 
@@ -58,11 +61,11 @@ export const ApplyShow = ({ ...props }) => (
     <Show  {...props}>
         <GridShowLayout>
             <TextField source="userId" itemStyle={{ width: '25%' }} />
-            <TextField source="status" itemStyle={{ width: '25%' }} />
-            <TextField source="createdAt" itemStyle={{ width: '25%' }} />
-            <TextField source="approvedAt" itemStyle={{ width: '25%' }} />
-            <TextField source="paidAt" itemStyle={{ width: '25%' }} />
-            <TextField source="refundedAt" itemStyle={{ width: '25%' }} />
+            <StatusField source="status" itemStyle={{ width: '25%' }} />
+            <DateField source="createdAt" itemStyle={{ width: '25%' }} />
+            <DateField source="approvedAt" itemStyle={{ width: '25%' }} />
+            <DateField source="paidAt" itemStyle={{ width: '25%' }} />
+            <DateField source="refundedAt" itemStyle={{ width: '25%' }} />
             <TextField source="sampleName" itemStyle={{ width: '25%' }} />
             <TextField source="sampleProducer" itemStyle={{ width: '25%' }} />
             <TextField source="producerBatch" itemStyle={{ width: '25%' }} />
@@ -74,8 +77,8 @@ export const ApplyShow = ({ ...props }) => (
             <AddrField source="clientContactAddress" itemStyle={{ width: '25%' }} />
             <TextField source="clientContactIdent" itemStyle={{ width: '25%' }} />
             <TextField source="clientEconomicType" itemStyle={{ width: '25%' }} />
-            <TextField source="sampleDisposalType" itemStyle={{ width: '25%' }} />
-            <TextField source="reportFetchingType" itemStyle={{ width: '25%' }} />
+            <SampleDisposalTypeField source="sampleDisposalType" itemStyle={{ width: '25%' }} />
+            <ReportFetchingTypeField source="reportFetchingType" itemStyle={{ width: '25%' }} />
             <TextField source="reportNo" itemStyle={{ width: '25%' }} />
             <TextField source="categoryName" itemStyle={{ width: '25%' }} />
             <TextField source="levelName" itemStyle={{ width: '25%' }} />
@@ -86,7 +89,7 @@ export const ApplyShow = ({ ...props }) => (
             <TestersField source="testers" itemStyle={{ width: '25%' }} />
             <TextField source="agentMsg" itemStyle={{ width: '25%' }} />
             <TextField source="keeperMsg" itemStyle={{ width: '25%' }} />
-            <TextField source="ShippingInfo" itemStyle={{ width: '25%' }} />
+            <ShippingField source="ShippingInfo" itemStyle={{ width: '100%' }} />
             <ImageField source="descImages" addLabel label="下单图片" itemStyle={{ width: '100%' }} />
             <ImageField source="sampleImages" addLabel label="样品图片" itemStyle={{ width: '25%' }} />
             <ImageField source="testingImages" addLabel label="检验图片" itemStyle={{ width: '100%' }} />
