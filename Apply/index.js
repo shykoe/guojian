@@ -17,7 +17,6 @@ import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import AcceptButton from './acceptButton';
 import Icon from 'material-ui/svg-icons/action/event';
-import AgentField from './AgentField';
 import OrderFilter from '../Utils/OrderFilter';
 import ApplyActions from './ApplyActions';
 import StatusField from '../MyItem/StatusField';
@@ -46,7 +45,7 @@ export const ApplyList = ({ ...props }) => (
                     <TextField source="clientName" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
                     <TextField source="producerBatch" />
                     <StatusField/>
-                    <AgentField addLabel label="agent"/>
+                    <TextField source="agent" />
                     <ShowButton/>
                     <AcceptButton />
                 </Datagrid>
