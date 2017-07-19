@@ -50,7 +50,7 @@ const rowStyle = (record) => {
 export const PickIcon = Icon;
 
 export const PickList = ({ ...props }) => (
-    <List {...props} perPage={5} sort={{ field: 'published_at', order: 'DESC' }} filter={{ispicked:false}}  >
+    <List {...props} perPage={25} sort={{ field: 'published_at', order: 'DESC' }} filter={{ispicked:false}}  >
         <Responsive
             small={
                 <SimpleList
@@ -66,8 +66,8 @@ export const PickList = ({ ...props }) => (
                     <DateField source="published_at" style={{ fontStyle: 'italic' }} />
                     <TextField source="CommissionedUnit" />
                     <TextField source="notes" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
-                    <TextField source="status" />                    
-                    
+                    <TextField source="status" />
+
                     <CheckField style={{maxWidth: '20em'}} />
                     <ShowButton/>
                     <PickButton/>

@@ -58,7 +58,7 @@ import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
 export const KeepersIcon = Icon;
 
 export const KeepersList = ({ ...props }) => (
-    <List {...props} actions={<KeepAction />} filters={<OrderFilter />} perPage={5} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} actions={<KeepAction />} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList

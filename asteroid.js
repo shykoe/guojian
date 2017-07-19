@@ -18,8 +18,8 @@ export const asteroidMethod = asteroid.call;
 const mapResponse2Rest = (response, type, params)=>{
 	switch(type){
 		case GET_LIST:
-			response.map((item)=>{item['id']=item._id});
-			return { data: response,total: response.length };
+			response.data.map((item)=>{item['id']=item._id});
+			return { data: response.data, total: response.total };
 		case GET_ONE:
 			response['id'] = response._id;
 			return {data: response};
@@ -46,9 +46,9 @@ const mapResponse2RestAddI = (response, type, params,page, perpage)=>{
 		    	return false;
 		    }
 		    return {data:response};
-		case  UPDATE:
+		case UPDATE:
 		 	return {data:response};
-		case  CREATE:
+		case CREATE:
 		    response['id'] = response._id ;
 		 	return {data:response};
 	}
@@ -171,7 +171,7 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST:{
 					const { page, perPage } = params.pagination;
 			        const { field, order } = params.sort;
-			        return asteroid.call('orders.get',page, perPage, field, order, params.filter)
+			        return asteroid.call('orders.get', page, perPage, field, order, params.filter)
 			        .then(response => mapResponse2Rest(response, type, params));
 				};
 				case UPDATE:{
