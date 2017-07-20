@@ -9,12 +9,14 @@ import {
     DELETE,
 } from 'admin-on-rest';
 import { CHANGEPWD } from './UserCenter/ChangePwdAction';
+
 const Asteroid = createClass();
 // Connect to a Meteor backend
 export const asteroid = new Asteroid({
   endpoint: 'ws://localhost:3333/websocket',
 });
 export const asteroidMethod = asteroid.call;
+
 const mapResponse2Rest = (response, type, params)=>{
 	switch(type){
 		case GET_LIST:
@@ -250,95 +252,89 @@ export const websockClient = (type, resource, params) =>{
 				}
 			}
 			break;
-		};
-		case 'AddUser':{
-            switch(type){
-            	case GET_LIST:{
-    				const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        var temp=asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
-            	    console.log('--adduser---getlist---',temp);
-            	    return temp;
-            	}
-            	case GET_ONE:{
-            		const {Mytype,username} = params;
-            		if(Mytype=='checkUsername')
-            		{
-            			var temp=asteroid.call('agent.adduser.checkUsername',username).then(response => mapResponse2RestAddI (response, type, params, 0,0));
-            	        console.log('-checkUsername-get one result--',temp);
-            	        return temp;
-            		}
-			        const {id} = params;
-			        var temp=asteroid.call('agent.adduser.getOne',id).then(response => mapResponse2RestAddI (response, type, params, 0,0));
-            	    console.log('--adduser-get one-',temp,id,params);
-            	    return temp;
-            	}
-            	case UPDATE:{
-            		const{data,id}=params;
-            		console.log('-adduser-update-',id,data);
+		}
+		case 'AddUser': {
+      switch(type) {
+      	case GET_LIST: {
+			  const { page, perPage } = params.pagination;
+        const { field, order } = params.sort;
+        var temp=asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+      	    console.log('--adduser---getlist---',temp);
+      	    return temp;
+      	}
+      	case GET_ONE: {
+      		const {Mytype,username} = params;
+      		if (Mytype=='checkUsername') {
+      			var temp=asteroid.call('agent.adduser.checkUsername',username).then(response => mapResponse2RestAddI (response, type, params, 0,0));
+      	        console.log('-checkUsername-get one result--',temp);
+      	        return temp;
+      		}
+          const {id} = params;
+          var temp=asteroid.call('agent.adduser.getOne',id).then(response => mapResponse2RestAddI (response, type, params, 0,0));
+      	  console.log('--adduser-get one-',temp,id,params);
+      	  return temp;
+      	}
+      	case UPDATE: {
+      		const{data,id}=params;
+      		console.log('-adduser-update-',id,data);
 
-            		var temp=asteroid.call('agent.adduser.updateData',id,data).then(response => mapResponse2RestAddI (response, type, params,0,0));
-            	    return temp;
-            	}
-            	case CREATE:{
-            		const{data}=params;
-            		console.log('--create-',data,params);
-            		return asteroid.call('agent.adduser.createUser',data).then(response => mapResponse2RestAddI (response, type, params,0,0));
-            	}
-
+      		var temp=asteroid.call('agent.adduser.updateData',id,data).then(response => mapResponse2RestAddI (response, type, params,0,0));
+      	  return temp;
+      	}
+      	case CREATE: {
+      		const{data}=params;
+      		console.log('--create-',data,params);
+      		return asteroid.call('agent.adduser.createUser',data).then(response => mapResponse2RestAddI (response, type, params,0,0));
+      	}
+      }
+		}
+    case 'CheckTest':{
+      switch(type){
+      	case GET_LIST: {
+    			const { page, perPage } = params.pagination;
+          const { field, order } = params.sort;
+          return asteroid.call('agent.checktest.get', page, perPage, 'orderid', order).then(response => mapResponse2Rest (response, type, params));
+			  }
+      }
+		}
+		case 'AllOrder': {
+      switch(type) {
+      	case GET_LIST: {
+      		if(params.filter)
+      		{
+            const { page, perPage } = params.pagination;
+            var { field, order } = params.sort;
+            if (field === 'id') {
+            	field = '_id';
+            }
+            const { filter } = params
+            delete filter["id"];
+            delete filter["q"];
+            for(var key in filter) {
+            	var temp = filter[key];
+            	temp = '.*' + temp + '.*';
+            	temp = { '$regex': temp, $options: '$i' };
+            	filter[key] = temp;
+            }
+            const orders = [field,order];
+            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders).then(response => mapResponse2Rest (response, type, params));
+      		} else {
+      			const { page, perPage } = params.pagination;
+            var { field, order } = params.sort;
+            if (field === 'id') {
+            	field = '_id';
             }
 
-		};
-        case 'CheckTest':{
-            switch(type){
-            	case GET_LIST:{
-            			const { page, perPage } = params.pagination;
-			            const { field, order } = params.sort;
-			            return asteroid.call('agent.checktest.get', page, perPage, 'orderid', order).then(response => mapResponse2Rest (response, type, params));
-
-    			 }
-
-            }
-		};
-		case 'AllOrder':{
-            switch(type){
-            	case GET_LIST:{
-            		if(params.filter)
-            		{
-                        const { page, perPage } = params.pagination;
-			            var { field, order } = params.sort;
-			            if (field === 'id'){
-			            	field = '_id';
-			            }
-			            const {filter}=params
-			            delete filter["id"];
-			            delete filter["q"];
-			            for(var key in filter){
-			            	var temp=filter[key];
-			            	temp='.*'+temp+'.*';
-			            	temp={ '$regex': temp, $options: '$i' };
-			            	filter[key]=temp;
-			            }
-			            const orders = [field,order];
-                        return asteroid.call('agent.allorder.get', page, perPage, '_id', orders).then(response => mapResponse2Rest (response, type, params));
-            		}else{
-            			const { page, perPage } = params.pagination;
-			            var { field, order } = params.sort;
-			            if (field === 'id'){
-			            	field = '_id';
-			            }
-
-			            const orders = [field,order];
-			            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders,{}).then(response => mapResponse2Rest (response, type, params));
-			        }
-    			 }
-				case GET_ONE:{
+            const orders = [field,order];
+            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders,{}).then(response => mapResponse2Rest (response, type, params));
+          }
+		    }
+				case GET_ONE: {
 					const { id } = params;
 					return asteroid.call('order.get',id)
             		.then(response => mapResponse2Rest(response, type, params));
-				};
-
-            }
-		};
+				}
+      }
+		}
 	}
 }
