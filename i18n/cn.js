@@ -38,30 +38,30 @@ export const messages = {
     resources: {
         ApplyItem: {
             name: '订单',
-            fields: fields,
+            fields
         },
-        MyItem:{
-            name:'我的订单',
-            fields: fields,
+        MyItem: {
+            name: '我的订单',
+            fields
         },
-        Pick:{
-            name:'领取任务',
-            fields: fields,
+        Pick: {
+            name: '领取任务',
+            fields
         },
-        MyCheck:{
-            name:'我的任务',
-            fields: fields,
+        MyCheck: {
+            name: '我的任务',
+            fields
         },
-         Allocatoritems:{
-            name:'分配任务',
-            fields: fields,
+        Allocatoritems: {
+            name: '分配任务',
+            fields
         },
-        Keepers:{
-            name:'审核',
-            fields:fields
+        Keepers: {
+            name: '审核',
+            fields
         },
-        AddUser:{
-            name:'账户管理',
+        AddUser: {
+            name: '账户管理',
             fields: {
                 username: '账户名',
                 password: '密码',
@@ -79,30 +79,12 @@ export const messages = {
                 phone:'电话',
             },
         },
-        AllOrder:{
-            name:'订单',
-            fields: {
-                status: '订单状态',
-                sampleName: '样品名称',
-                sampleProducer: '样品生产厂',
-                createdAt: '创建于',
-                producerBatch: '生产批号',
-                sampleType: '样品型号规格',
-                sampleLevel: '样品质量等级',
-                sampleBrand: '样品商标',
-                sampleNum: '样品数量',
-                clientName: '客户姓名',
-                clientContactName: '联系人',
-                clientContactPhone: '联系人电话',
-                clientContactIdent: '通讯地址',
-                clientEconomicType: '经济类型',
-                contactInf:'联系人信息',
-                clientInf:'客户信息',
-                sampleInf:'样品信息',
-            },
+        AllOrder: {
+            name: '订单',
+            fields
         },
-        CheckTest:{
-            name:'检测录入查看',
+        CheckTest: {
+            name: '检测录入查看',
             fields: {
                 order:'厂商+样品名',
                 user:'用户名',

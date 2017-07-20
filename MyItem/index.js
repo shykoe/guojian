@@ -41,6 +41,7 @@ import Chip from 'material-ui/Chip';
 import { ProductType,TestCriteria, PriceField, StatusSelect, MsgField } from './WorkSpace';
 import { CheckboxGr, Pppp } from './CheckBox';
 import { ExpressNum } from './ExpressNum';
+import OrderFilter from '../Utils/OrderFilter';
 import StatusField from './StatusField';
 import AddrField from './AddrField';
 import ItemsField from './ItemsField';
@@ -60,7 +61,7 @@ const rowStyle = (record) => {
 };
 
 export const MyItemList = ({ ...props }) => (
-    <List {...props} perPage={25} sort={{ field: 'id', order: 'DESC' }}   >
+    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'id', order: 'DESC' }}>
         <Responsive
             small={
                 <SimpleList

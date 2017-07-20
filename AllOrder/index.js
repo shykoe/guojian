@@ -41,6 +41,7 @@ import {
 import SegmentsFieldContactInf from './SegmentsFieldContactInf';
 import SegmentsFieldClientInf from './SegmentsFieldClientInf';
 import SegmentsFieldSampleInf from './SegmentsFieldSampleInf';
+import OrderFilter from '../Utils/OrderFilter';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
@@ -57,29 +58,8 @@ const choicesx=[
     { "roles": 'checker', "name": '检测员' },
 ];
 
-const AllOrderFilter = (props) => {
-    return (
-        <Filter {...props} >
-            <TextInput label="id" source="_id" />
-            <TextInput source="sampleName" />
-            <TextInput source="sampleProducer" />
-            <TextInput source="producerBatch" />
-            <TextInput source="sampleType" />
-            <TextInput source="sampleLevel" />
-            <TextInput source="sampleBrand" />
-            <TextInput source="sampleNum" />
-            <TextInput source="clientName" />
-            <TextInput source="clientContactName" />
-            <TextInput source="clientContactPhone" />
-            <TextInput source="clientContactIdent" />
-            <TextInput source="clientEconomicType" />
-            <TextInput source="status" />
-        </Filter>
-         );
-} ;
-
 export const AllOrderList = ({ ...props }) => (
-    <List {...props} filters={<AllOrderFilter />} perPage={25} sort={{ field: 'id', order: 'ASC' }}   >
+    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'id', order: 'ASC' }}   >
         <Responsive
             small={
                 <SimpleList

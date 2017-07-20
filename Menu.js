@@ -15,14 +15,14 @@ import { AddUserIcon } from './AddUser';
 import { AllOrderIcon }from './AllOrder';
 import {CheckTestIcon} from './CheckTest';
 const items = [
-    { name: 'ApplyItem', icon: <ApplyIcon /> ,role:'agent'},
-    { name: 'MyItem', icon: <MyItemIcon />,role:'agent' },
-    { name: 'MyCheck', icon: <MyCheckIcon />,role:'tester' },
-    { name:'Allocatoritems', icon:<AitemsIcon/>, role:'assigner'},
-    { name:'Keepers', icon:<KeepersIcon/>, role:'keeper'},
-    { name: 'AddUser', icon: <AddUserIcon />,role:'admin'} ,
-    { name: 'AllOrder', icon: <AllOrderIcon />,role:'admin' },
-    { name: 'CheckTest', icon: <CheckTestIcon />,role:'admin' }
+    { name: 'ApplyItem', icon: <ApplyIcon />, role: 'agent' },
+    { name: 'MyItem', icon: <MyItemIcon />, role: 'agent' },
+    { name: 'MyCheck', icon: <MyCheckIcon />, role: 'tester' },
+    { name: 'Allocatoritems', icon: <AitemsIcon/>, role: 'assigner' },
+    { name: 'Keepers', icon: <KeepersIcon/>, role: 'keeper' },
+    { name: 'AddUser', icon: <AddUserIcon />, role: 'admin' } ,
+    { name: 'AllOrder', icon: <AllOrderIcon />, role: 'admin' },
+    { name: 'CheckTest', icon: <CheckTestIcon />, role: 'admin' }
 ];
 const styles = {
     main: {

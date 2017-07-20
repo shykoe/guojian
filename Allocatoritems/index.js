@@ -39,6 +39,7 @@ import {
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import Icon from 'material-ui/svg-icons/action/event';
+import OrderFilter from '../Utils/OrderFilter';
 import CheckersField from './CheckersField';
 import AddCheckers from './AddCheckers';
 import { Field, reduxForm } from 'redux-form';
@@ -55,7 +56,7 @@ import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
 export const AitemsIcon = Icon;
 
 export const AitemsList = ({ ...props }) => (
-    <List {...props} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList
