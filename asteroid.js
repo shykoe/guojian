@@ -9,6 +9,118 @@ import {
     DELETE,
 } from 'admin-on-rest';
 import { CHANGEPWD } from './UserCenter/ChangePwdAction';
+import Consts from './pr-schema/consts';
+
+function mapStatusKey(filter) {
+  const key = 'status';
+  let temp = filter[key];
+  if (temp === '') {
+    delete filter[key];
+  } else {
+    switch(temp) {
+      case '未认领':
+        filter[key] = Consts.ORDER_STATUS_UNCLAIMED;
+        if (filter.agentId && filter.agentId.$eq !== undefined && filter.agentId.$eq !== null) {
+          filter.agentId = { eq: 'N/A' };
+        } else {
+          filter.agentId = {
+            ...filter.agentId,
+            $eq: null
+          };
+        }
+        break;
+      case '已认领':
+        filter[key] = Consts.ORDER_STATUS_UNCLAIMED;
+        if (filter.agentId && filter.agentId.$ne !== undefined && filter.agentId.$ne !== null) {
+          filter.agentId = { eq: 'N/A' };
+        } else {
+          filter.agentId = {
+            ...filter.agentId,
+            $ne: null
+          };
+        }
+        break;
+      case '审核被拒绝':
+        filter[key] = Consts.ORDER_STATUS_REJECTED;
+        break;
+      case '审核通过':
+        filter[key] = Consts.ORDER_STATUS_APPROVED;
+        break;
+      case '订单关闭':
+        filter[key] = Consts.ORDER_STATUS_CLOSED;
+        break;
+      case '已支付':
+        filter[key] = Consts.ORDER_STATUS_PAID;
+        break;
+      case '已安排物流':
+        filter[key] = Consts.ORDER_STATUS_PROCESSED;
+        break;
+      case '已收到样品':
+        filter[key] = Consts.ORDER_STATUS_SAMPLE_RECEIVED;
+        break;
+      case '检测任务已分配':
+        filter[key] = Consts.ORDER_STATUS_ASSIGNED;
+        break;
+      case '检测完成':
+        filter[key] = Consts.ORDER_STATUS_TESTED;
+        break;
+      case '检测报告已寄出':
+        filter[key] = Consts.ORDER_STATUS_REPORT_SHIPPED;
+        break;
+      case '订单完成':
+        filter[key] = Consts.ORDER_STATUS_COMPLETED;
+        break;
+      case '已退款':
+        filter[key] = Consts.ORDER_STATUS_REFUNDED;
+        break;
+      default:
+    }
+  }
+
+  return filter;
+}
+
+function procFilter(fltr, route) {
+  let filter = fltr;
+  if (filter) {
+    for (const key in filter) {
+      if (key === 'status') {
+        filter = mapStatusKey(filter);
+        continue;
+      } else {
+        let temp = filter[key];
+
+        if (route === 'ApplyItem') {
+          if (key === 'agentId2') {
+            if (temp === null) {
+              if (filter.agentId && filter.agentId.$eq !== undefined &&
+                  filter.agentId.$eq !== null) {
+                filter.agentId = { eq: 'N/A' };
+              } else {
+                filter.agentId = {
+                  ...filter.agentId,
+                  $eq: null
+                };
+              }
+            }
+            delete filter['agentId2'];
+            continue;
+          }
+        }
+
+        if (temp !== undefined) {
+          temp = '.*' + temp + '.*';
+          temp = { '$regex': temp, $options: '$i' };
+          filter[key] = temp;
+        } else {
+          return {};
+        }
+      }
+    }
+  }
+
+  return filter;
+}
 
 const Asteroid = createClass();
 // Connect to a Meteor backend
@@ -64,10 +176,11 @@ export const websockClient = (type, resource, params) =>{
       	case GET_LIST: {
   				const { page, perPage } = params.pagination;
 	        const { field, order } = params.sort;
-	        const { username, role } = params;
+	        const { username, role, filter } = params;
 
-	        return asteroid.call('agent.myorders.get',username, role, page, perPage, field, order)
-	         .then(response => mapResponse2Rest(response, type, params));
+	        return asteroid.call('agent.myorders.get', username, role, page, perPage, field, order,
+                               procFilter(filter, 'MyItem')).then(
+                               response => mapResponse2Rest(response, type, params));
         }
       	case GET_ONE: {
       		const { id } = params;
@@ -79,8 +192,8 @@ export const websockClient = (type, resource, params) =>{
       		if (data === previousData) {
       			return mapResponse2Rest(previousData, type, params);
       		}
-      		if (previousData.status === 10) {
-      			data.status = 11;
+      		if (previousData.status === Consts.ORDER_STATUS_TESTED) {
+      			data.status = Consts.ORDER_STATUS_REPORT_SHIPPED;
       		}
     			return asteroid.call('agent.order.approve', id, data)
     			   .then(response => mapResponse2Rest(response, type, params));
@@ -93,34 +206,10 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST: {
 					const { page, perPage } = params.pagination;
 	        const { field, order } = params.sort;
-	        let { username, role, filter } = params;
-	        if (filter) {
-            for (const key in filter) {
-            	let temp = filter[key];
-            	if (key === 'status') {
-            		if (temp === '') {
-            			delete filter['status'];
-            		}
-            		continue;
-            	}
-            	if (key === 'agentId') {
-            		if (temp === 'all') {
-            			delete filter['agentId'];
-            		}
-            		continue;
-            	}
-            	if (temp !== undefined) {
-            		temp = '.*' + temp + '.*';
-            		temp = { '$regex': temp, $options: '$i' };
-            		filter[key] = temp;
-            	} else {
-            		filter = {};
-                break;
-            	}
-            }
-	        }
-	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
-	           .then(response => mapResponse2Rest(response, type, params) );
+	        const { username, role, filter } = params;
+	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order,
+                               procFilter(filter, 'ApplyItem')).then(
+                               response => mapResponse2Rest(response, type, params));
 				}
 				case GET_ONE:{
 					return asteroid.call('order.get',params.id)

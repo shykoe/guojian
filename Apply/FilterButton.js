@@ -11,9 +11,9 @@ class FilterButton extends React.Component{
   ontap = () => {
   	const { filterVal, showFilter } = this.props;
   	if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
-  		showFilter('agentId', null);
+  		showFilter('agentId2', null);
   	} else {
-  		showFilter('agentId', 'all');
+  		showFilter('agentId2', 'all');
   	}
   }
 
@@ -35,6 +35,6 @@ class FilterButton extends React.Component{
 const selector = formValueSelector('filterForm');
 export default connect(
 	(state, props) => (
-		{ filterVal: selector(state, 'agentId') }
+		{ filterVal: selector(state, 'agentId2') }
 	)
 , null)(FilterButton);

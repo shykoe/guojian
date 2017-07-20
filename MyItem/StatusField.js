@@ -27,15 +27,15 @@ const dealText = (record) =>{
 		case ORDER_STATUS_UNCLAIMED:
     case ORDER_STATUS_CLAIMED: {
       if (record.agentId) {
-        return "订单已认领";
+        return "已认领";
       } else {
-        return "订单未认领";
+        return "未认领";
       }
     }
 		case ORDER_STATUS_REJECTED:
-			return "订单被拒绝";
+			return "审核被拒绝";
 		case ORDER_STATUS_APPROVED:
-			return "订单审核通过";
+			return "审核通过";
 		case ORDER_STATUS_CLOSED:
 			return "订单关闭";
 		case ORDER_STATUS_PAID:
@@ -43,7 +43,7 @@ const dealText = (record) =>{
 		case ORDER_STATUS_PROCESSED:
 			return "已安排物流";
 		case ORDER_STATUS_SAMPLE_RECEIVED:
-			return "收到样品";
+			return "已收到样品";
 		case ORDER_STATUS_ASSIGNED:
 			return "检测任务已分配";
 		case ORDER_STATUS_TESTED:
