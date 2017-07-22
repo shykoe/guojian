@@ -8,6 +8,7 @@ import { asteroid } from '../asteroid';
 import Checkbox from 'material-ui/Checkbox';
 import { Field, reduxForm, formValueSelector  } from 'redux-form';
 import { connect } from 'react-redux';
+import Consts from '../pr-schema/consts';
 
 class AddCheckers extends React.Component{
 	componentDidMount(){
@@ -71,22 +72,26 @@ class AddCheckers extends React.Component{
       return (<div></div>);
     }
 
-		return (
-			<div>
-  			<RaisedButton label="分配" onTouchTap={this.handleOpen} />
-  			<Dialog
-  	      title="分配质检员"
-  	      actions={actions}
-  	      modal={false}
-  	      open={this.state.open}
-  	      onRequestClose={this.handleClose}
-  	    >
-          <div style={{display: 'flex', flexDirection: 'row'}} >
-            { testers.map((item) => <Field name={`${record.id}.testerIds`} key={item._id} testerId={item._id} component={this.renderCheckbox} label={item.name}/> ) }
-          </div>
-        </Dialog>
-  		</div>
-		);
+    if (record.status === Consts.ORDER_STATUS_SAMPLE_RECEIVED) {
+      return (
+        <div>
+          <RaisedButton label="分配" onTouchTap={this.handleOpen} />
+          <Dialog
+            title="分配质检员"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            <div style={{display: 'flex', flexDirection: 'row'}} >
+              { testers.map((item) => <Field name={`${record.id}.testerIds`} key={item._id} testerId={item._id} component={this.renderCheckbox} label={item.name}/> ) }
+            </div>
+          </Dialog>
+        </div>
+      );
+    } else {
+      return null;
+    }
 	}
 }
 

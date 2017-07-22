@@ -1,5 +1,4 @@
 import Icon from 'material-ui/svg-icons/social/person';
-
 import React, { Component } from 'react';
 import {
     BooleanField,
@@ -43,7 +42,7 @@ import Chip from 'material-ui/Chip';
 import CheckField from '../Pick/CheckField';
 import TextButton from './TextButton';
 import { WorkSpace } from './WorkSpace';
-import { FinishButton } from './FinishButton';
+import FinishButton from './FinishButton';
 import OrderFilter from '../Utils/OrderFilter';
 import CheckersField from '../Allocatoritems/CheckersField';
 import MyCheckAction from './MyCheckAction';
