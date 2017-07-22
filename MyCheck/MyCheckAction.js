@@ -13,18 +13,18 @@ const cardActionStyle = {
     float: 'right',
 };
 
-class KeepActions extends React.Component{
-	render(){
+class MyCheckActions extends React.Component{
+	render() {
 		const { resource, filters, displayedFilters, filterValues, basePath, showFilter, refresh, hideFilter } = this.props;
 		return(
-	    	<CardActions style={cardActionStyle}>
-	        {filters && React.cloneElement(filters, { resource, showFilter, displayedFilters, filterValues, context: 'button' }) }
-	        <FlatButton primary label="刷新" onClick={refresh} icon={<NavigationRefresh />} />
-	        <FilterButton showFilter={showFilter}  />
-	        {/* Add your custom actions */}
-
-	    	</CardActions>);
+    	<CardActions style={cardActionStyle}>
+        {filters && React.cloneElement(filters, { resource, showFilter, displayedFilters, filterValues, context: 'button' }) }
+        <FlatButton primary label="刷新" onClick={refresh} icon={<NavigationRefresh />} />
+        <FilterButton showFilter={showFilter}  />
+        {/* Add your custom actions */}
+    	</CardActions>
+    );
 	}
 }
 
-export default KeepActions;
+export default MyCheckActions;

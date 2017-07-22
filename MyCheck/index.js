@@ -46,6 +46,7 @@ import { WorkSpace } from './WorkSpace';
 import { FinishButton } from './FinishButton';
 import OrderFilter from '../Utils/OrderFilter';
 import CheckersField from '../Allocatoritems/CheckersField';
+import MyCheckAction from './MyCheckAction';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
@@ -62,7 +63,7 @@ const rowStyle = (record) => {
 };
 
 export const MyCheckList = ({ ...props }) => (
-    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} actions={<MyCheckAction />} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}>
         <Responsive
             small={
                 <SimpleList

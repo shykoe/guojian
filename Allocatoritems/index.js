@@ -44,6 +44,7 @@ import CheckersField from './CheckersField';
 import AddCheckers from './AddCheckers';
 import { Field, reduxForm } from 'redux-form';
 import { Title }  from '../Utils';
+import AllocatorAction from './AllocatorAction';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
@@ -56,7 +57,7 @@ import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
 export const AitemsIcon = Icon;
 
 export const AitemsList = ({ ...props }) => (
-    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
+    <List {...props} actions={<AllocatorAction />} filters={<OrderFilter />} perPage={25} sort={{ field: 'published_at', order: 'DESC' }}   >
         <Responsive
             small={
                 <SimpleList
