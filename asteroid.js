@@ -223,11 +223,12 @@ export const websockClient = (type, resource, params) =>{
 		case 'MyCheck':{
 			switch(type){
 				case GET_LIST:{
-    				const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        const { username, role } = params;
-			        return asteroid.call('tester.orders.get',username, role, page, perPage, field, order)
-			        .then(response => mapResponse2Rest(response, type, params));
+  				const { page, perPage } = params.pagination;
+	        const { field, order } = params.sort;
+	        const { username, role, filter } = params;
+	        return asteroid.call('tester.orders.get',username, role, page, perPage, field, order,
+                               procFilter(filter, 'MyCheck')).then(
+                               response => mapResponse2Rest(response, type, params));
 				};
 				case GET_ONE:{
 					const { id } = params;
