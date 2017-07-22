@@ -32,7 +32,10 @@ const fields = {
   keeperMsg: '仓库备注',
   ShippingInfo: '物流信息',
   sampleImages: '样品图片',
-  testingImages: '检验图片'
+  testingImages: '检验图片',
+  sampleInf: '样品信息',
+  clientInf: '客户信息',
+  contactInf: '联系方式',
 };
 
 export const messages = {
@@ -88,7 +91,7 @@ export const messages = {
             name: '检测录入查看',
             fields: {
                 order: '厂商和样品名',
-                user: '用户名',
+                user: '检验员',
                 orderId: '订单号',
                 userId: '检测员ID',
                 categoryName: '种类',

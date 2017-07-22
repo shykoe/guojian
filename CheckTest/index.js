@@ -60,12 +60,11 @@ export const CheckTestList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
-                    <TextField source="order" />
                     <TextField source="user" />
+                    <TextField source="order" />
                     <TextField source="categoryName" />
                     <TextField source="levelName" />
                     <TextField source="itemName" />
-                    <TextField source="requirement" />
                     <DateField source="createdAt" />
                     <TextField source="result" />
                     <BooleanField source="verdict"/>
