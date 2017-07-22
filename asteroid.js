@@ -70,6 +70,7 @@ function mapStatusKey(filter, value) {
         filter.status = Consts.ORDER_STATUS_REFUNDED;
         break;
       default:
+        filter.status = value;
     }
   }
 
@@ -258,13 +259,15 @@ export const websockClient = (type, resource, params) =>{
 			}
 			break;
 		};
-		case 'Allocatoritems':{
+		case 'Allocatoritems': {
 			switch(type){
 				case GET_LIST:{
 					const { page, perPage } = params.pagination;
-			        const { field, order } = params.sort;
-			        return asteroid.call('orders.get', page, perPage, field, order, params.filter)
-			        .then(response => mapResponse2Rest(response, type, params));
+	        const { field, order } = params.sort;
+          const { filter } = params;
+	        return asteroid.call('orders.get', page, perPage, field, order,
+                               procFilter(filter, 'Allocatoritems')).then(
+                               response => mapResponse2Rest(response, type, params));
 				};
 				case UPDATE:{
 					var { id, data, previousData } = params;
@@ -289,7 +292,7 @@ export const websockClient = (type, resource, params) =>{
 				case GET_LIST: {
 					const { page, perPage } = params.pagination;
 	        const { field, order } = params.sort;
-	        let { username, role, filter } = params;
+	        const { username, role, filter } = params;
 	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order,
                                procFilter(filter, 'Keepers')).then(
                                response => mapResponse2Rest(response, type, params) );
