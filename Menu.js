@@ -14,6 +14,7 @@ import { translate, DashboardMenuItem } from 'admin-on-rest';
 import { AddUserIcon } from './AddUser';
 import { AllOrderIcon }from './AllOrder';
 import {CheckTestIcon} from './CheckTest';
+
 const items = [
     { name: 'ApplyItem', icon: <ApplyIcon />, role: 'agent' },
     { name: 'MyItem', icon: <MyItemIcon />, role: 'agent' },
@@ -32,6 +33,7 @@ const styles = {
         height: '100%',
     },
 };
+
 class Menu extends Component{
 	render(){
 	const {hasDashboard, onMenuTap, translate, logout} = this.props;

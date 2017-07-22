@@ -66,7 +66,7 @@ export const CheckTestList = ({ ...props }) => (
                     <TextField source="levelName" />
                     <TextField source="itemName" />
                     <TextField source="requirement" />
-                    <DateField source="createAt" />
+                    <DateField source="createdAt" />
                     <TextField source="result" />
                     <BooleanField source="verdict"/>
                 </Datagrid>

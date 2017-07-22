@@ -68,7 +68,7 @@ export const AllOrderList = ({ ...props }) => (
             }
             medium={
                 <Datagrid>
-                    <TextField source="id" />
+                    <TextField source="_id" />
                     <TextField source="sampleName"  />
                     <TextField source="sampleProducer"  />
                     <TextField source="producerBatch" />

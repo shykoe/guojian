@@ -328,9 +328,7 @@ export const websockClient = (type, resource, params) =>{
       	case GET_LIST: {
 			  const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
-        var temp=asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
-      	    console.log('--adduser---getlist---',temp);
-      	    return temp;
+        return asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
       	}
       	case GET_ONE: {
       		const {Mytype,username} = params;
@@ -370,35 +368,14 @@ export const websockClient = (type, resource, params) =>{
 		case 'AllOrder': {
       switch(type) {
       	case GET_LIST: {
-      		if(params.filter)
-      		{
-            const { page, perPage } = params.pagination;
-            var { field, order } = params.sort;
-            if (field === 'id') {
-            	field = '_id';
-            }
-            const { filter } = params
-            delete filter["id"];
-            delete filter["q"];
-            for(var key in filter) {
-            	var temp = filter[key];
-            	temp = '.*' + temp + '.*';
-            	temp = { '$regex': temp, $options: '$i' };
-            	filter[key] = temp;
-            }
-            const orders = [field,order];
-            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders).then(response => mapResponse2Rest (response, type, params));
-      		} else {
-      			const { page, perPage } = params.pagination;
-            var { field, order } = params.sort;
-            if (field === 'id') {
-            	field = '_id';
-            }
+    			const { page, perPage } = params.pagination;
+          const { field, order } = params.sort;
+          const { filter } = params;
 
-            const orders = [field,order];
-            return asteroid.call('agent.allorder.get', page, perPage, '_id', orders,{}).then(response => mapResponse2Rest (response, type, params));
-          }
-		    }
+          return asteroid.call('agent.allorder.get', page, perPage, field, order,
+                               procFilter(filter, 'AllOrder')).then(
+                               response => mapResponse2Rest(response, type, params));
+        }
 				case GET_ONE: {
 					const { id } = params;
 					return asteroid.call('order.get',id)

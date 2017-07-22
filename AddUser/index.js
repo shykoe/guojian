@@ -38,7 +38,6 @@ import {
     required,
     translate,
 } from 'admin-on-rest';
-
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import MyEditButton from './EditButton';
@@ -54,7 +53,6 @@ const rowStyle = (record) => {
 export const AddUserList = ({ ...props }) => (
     <List {...props} perPage={25} sort={{ field: 'id', order: 'ASC' }}  >
         <Responsive
-
             medium={
                 <Datagrid  >
                     <TextField source="username" />
@@ -72,10 +70,9 @@ const validateUserUpdate= (values) => {
 
     var password=values.password;
     console.log(password);
-    if(!password){
+    if(!password) {
 
-    }else if(password.length<6)
-    {
+    } else if(password.length < 6) {
        errors.password = ['密码太短了'];
     }
     return errors
@@ -111,27 +108,27 @@ const validateUserCreation = (values) => {
     //errors.username = ['The firstName is required'];
 
     var setusername=values.username;
-    if(setusername=='账户名已存在')
-    {
+    if(setusername=='账户名已存在') {
         errors.username = ['账户名已存在'];
     }
-    if(!setusername){
-       errors.username = ['账户名不能为空'];
-    }else  if((setusername!='账户名已存在')){
-     // var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername});
+
+    if(!setusername) {
+      errors.username = ['账户名不能为空'];
+    } else if((setusername!='账户名已存在')) {
+      // var checkResult=websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername});
       websockClient('GET_ONE','AddUser',{'Mytype':'checkUsername','username':setusername})
        .then(response => {if(response.data){  errors.username = ['用户名已存在']; return errors}});
     }
+
     var setpassword=values.password;
     console.log(setpassword);
-    if(!setpassword){
+    if(!setpassword) {
       errors.password = ['密码不能为空'];
-    }else if(setpassword.length<6)
-    {
+    } else if(setpassword.length < 6) {
        errors.password = ['密码太短了'];
     }
-    if(!(values.role))
-    {
+
+    if(!(values.role)) {
          errors.role = ['角色不能为空'];
     }
     return errors
