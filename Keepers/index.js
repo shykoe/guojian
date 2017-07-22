@@ -42,6 +42,7 @@ import Icon from 'material-ui/svg-icons/action/event';
 import { Field, option, reduxForm, formValueSelector } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import Consts from '../pr-schema/consts';
 import KeepMsg from './KeepMsg';
 import OrderFilter from '../Utils/OrderFilter';
 import { Title }  from '../Utils';
@@ -53,7 +54,8 @@ import CustServField from '../MyItem/CustServField';
 import TestersField from '../MyItem/TestersField';
 import ShippingField from '../MyItem/ShippingField';
 import SampleDisposalTypeField from '../MyItem/SampleDisposalTypeField';
-import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
+import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField';
+import KeeperEditButton from './KeeperEditButton';
 
 export const KeepersIcon = Icon;
 
@@ -68,7 +70,7 @@ export const KeepersList = ({ ...props }) => (
                 />
             }
             medium={
-                <Datagrid  >
+                <Datagrid>
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
                     <TextField source="sampleType" />
@@ -76,8 +78,8 @@ export const KeepersList = ({ ...props }) => (
                     <TextField source="clientName" />
                     <StatusField />
                     <TextField source="agent" />
-                    <ShowButton/>
-                    <EditButton label='审核' addLabel/>
+                    <ShowButton />
+                    <KeeperEditButton label='审核' addLabel />
                 </Datagrid>
             }
         />
@@ -163,7 +165,7 @@ export class KeepersEdit extends Component {
                     <ImageField source="sampleImages" addLabel label="样品图片" itemStyle={{ width: '100%' }} />
                     <ImageField source="testingImages" addLabel label="检验图片" itemStyle={{ width: '100%' }} />
                     <ImageInput source="pictures" label="Related pictures" accept="image/*" itemStyle={{ width: '100%' }}>
-                        <ImageField source="src" title="title" />
+                      <ImageField source="src" title="title" />
                     </ImageInput>
                     <br/>
                     <IsApproved itemStyle={{ width: '100%' }} />
@@ -175,7 +177,11 @@ export class KeepersEdit extends Component {
 }
 
 class IsApproved extends Component{
-    selectValue = [{name:'样品审核通过',value:8}, {name:'样品审核未通过',value:6}];
+    selectValue = [
+      { name: '样品审核通过', value: Consts.ORDER_STATUS_SAMPLE_RECEIVED },
+      { name: '样品审核未通过', value: Consts.ORDER_STATUS_PAID }
+    ];
+
     renderItem = (item) => {
       return (
         <MenuItem value={item['value']} key={item['value']} primaryText={item['name']} />
@@ -198,8 +204,11 @@ class IsApproved extends Component{
     render(){
         const { record } = this.props;
         return(
-            <Field name="status" component={this.renderSelectField} disabled={record.status!=7} >
-                {this.selectValue.map(this.renderItem)}
+            <Field name="status" component={this.renderSelectField}
+              disabled={record.status != Consts.ORDER_STATUS_PROCESSED}
+              label="更新订单状态"
+            >
+              {this.selectValue.map(this.renderItem)}
             </Field>
         )
     }

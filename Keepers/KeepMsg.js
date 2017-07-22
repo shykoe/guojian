@@ -2,6 +2,8 @@ import { Field, option, reduxForm, formValueSelector } from 'redux-form';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
+import Consts from '../pr-schema/consts';
+
 const selector = formValueSelector('record-form');
 const renderTextField = ({ input, label, meta: { touched, error },disabled, ...custom }) => (
     <TextField
@@ -13,28 +15,25 @@ const renderTextField = ({ input, label, meta: { touched, error },disabled, ...c
         {...custom}
     />
 );
+
 class KeepMsg extends Component {
-
-    render() {
-        const { status,record } = this.props;
-         if((status === 6 || status === 8) && record.status === 7){
-
-
-            return (    
-                <Field name="keeperMsg" component={renderTextField} label="keeperMsg"/>
-            
-            );
-        }
-        else{
-            return(<Field name="keeperMsg" component={renderTextField} disabled={true} label="keeperMsg"/>);
-        }
-
+  render() {
+    const { status, record } = this.props;
+    if ((status === Consts.ORDER_STATUS_PAID || status === Consts.ORDER_STATUS_SAMPLE_RECEIVED) &&
+        record.status === Consts.ORDER_STATUS_PROCESSED) {
+      return (
+        <Field name="keeperMsg" component={renderTextField} label="备注"/>
+      );
     }
+    else {
+      return(<Field name="keeperMsg" component={renderTextField} disabled label="备注"/>);
+    }
+  }
 }
-KeepMsg = connect(
+
+export default connect(
   state => {
     const status = selector(state, 'status')
     return { status };
   }
-  )(KeepMsg)
-export default KeepMsg;
+)(KeepMsg);

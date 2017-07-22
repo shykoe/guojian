@@ -299,27 +299,32 @@ export const websockClient = (type, resource, params) =>{
                                procFilter(filter, 'Keepers')).then(
                                response => mapResponse2Rest(response, type, params) );
 				};
-				case GET_ONE:{
+				case GET_ONE: {
 					const { id } = params;
 					return asteroid.call('order.get',id)
             		.then(response => mapResponse2Rest(response, type, params));
 				};
-				case UPDATE:{
+				case UPDATE: {
 					const { id, data, previousData } = params;
-					if(data.status === previousData.status){
+
+					if (data.status === previousData.status) {
 						return mapResponse2Rest(previousData, type, params);
 					}
-					if(data.status === ''){
+					if (data.status === '') {
 						data.status = previousData.status;
 					}
-					if(data.pictures != undefined){
+
+					if (data.pictures != undefined) {
 						const newPictures = data.pictures.filter(p => p instanceof File);
 						const reader = new FileReader();
 						reader.readAsDataURL(newPictures[0]);
-						reader.onload = () => ( asteroid.call('keeper.img.update', id, reader.result));
+						reader.onload = () => {
+              asteroid.call('keeper.img.update', id, reader.result)
+            };
 					}
+
 					return asteroid.call('keeper.order.update', id, data)
-					.then(response => mapResponse2Rest(response, type, params));
+            .then(response => mapResponse2Rest(response, type, params));
 				}
 			}
 			break;
