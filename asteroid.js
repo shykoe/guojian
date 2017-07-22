@@ -11,15 +11,11 @@ import {
 import { CHANGEPWD } from './UserCenter/ChangePwdAction';
 import Consts from './pr-schema/consts';
 
-function mapStatusKey(filter) {
-  const key = 'status';
-  let temp = filter[key];
-  if (temp === '') {
-    delete filter[key];
-  } else {
-    switch(temp) {
+function mapStatusKey(filter, value) {
+  if (value) {
+    switch(value) {
       case '未认领':
-        filter[key] = Consts.ORDER_STATUS_UNCLAIMED;
+        filter.status = Consts.ORDER_STATUS_UNCLAIMED;
         if (filter.agentId && filter.agentId.$eq !== undefined && filter.agentId.$eq !== null) {
           filter.agentId = { eq: 'N/A' };
         } else {
@@ -30,7 +26,7 @@ function mapStatusKey(filter) {
         }
         break;
       case '已认领':
-        filter[key] = Consts.ORDER_STATUS_UNCLAIMED;
+        filter.status = Consts.ORDER_STATUS_UNCLAIMED;
         if (filter.agentId && filter.agentId.$ne !== undefined && filter.agentId.$ne !== null) {
           filter.agentId = { eq: 'N/A' };
         } else {
@@ -41,37 +37,37 @@ function mapStatusKey(filter) {
         }
         break;
       case '审核被拒绝':
-        filter[key] = Consts.ORDER_STATUS_REJECTED;
+        filter.status = Consts.ORDER_STATUS_REJECTED;
         break;
       case '审核通过':
-        filter[key] = Consts.ORDER_STATUS_APPROVED;
+        filter.status = Consts.ORDER_STATUS_APPROVED;
         break;
       case '订单关闭':
-        filter[key] = Consts.ORDER_STATUS_CLOSED;
+        filter.status = Consts.ORDER_STATUS_CLOSED;
         break;
       case '已支付':
-        filter[key] = Consts.ORDER_STATUS_PAID;
+        filter.status = Consts.ORDER_STATUS_PAID;
         break;
       case '已安排物流':
-        filter[key] = Consts.ORDER_STATUS_PROCESSED;
+        filter.status = Consts.ORDER_STATUS_PROCESSED;
         break;
       case '已收到样品':
-        filter[key] = Consts.ORDER_STATUS_SAMPLE_RECEIVED;
+        filter.status = Consts.ORDER_STATUS_SAMPLE_RECEIVED;
         break;
       case '检测任务已分配':
-        filter[key] = Consts.ORDER_STATUS_ASSIGNED;
+        filter.status = Consts.ORDER_STATUS_ASSIGNED;
         break;
       case '检测完成':
-        filter[key] = Consts.ORDER_STATUS_TESTED;
+        filter.status = Consts.ORDER_STATUS_TESTED;
         break;
       case '检测报告已寄出':
-        filter[key] = Consts.ORDER_STATUS_REPORT_SHIPPED;
+        filter.status = Consts.ORDER_STATUS_REPORT_SHIPPED;
         break;
       case '订单完成':
-        filter[key] = Consts.ORDER_STATUS_COMPLETED;
+        filter.status = Consts.ORDER_STATUS_COMPLETED;
         break;
       case '已退款':
-        filter[key] = Consts.ORDER_STATUS_REFUNDED;
+        filter.status = Consts.ORDER_STATUS_REFUNDED;
         break;
       default:
     }
@@ -81,18 +77,26 @@ function mapStatusKey(filter) {
 }
 
 function procFilter(fltr, route) {
-  let filter = fltr;
-  if (filter) {
-    for (const key in filter) {
-      if (key === 'status') {
-        filter = mapStatusKey(filter);
-        continue;
-      } else {
-        let temp = filter[key];
+  let filter = {};
+
+  if (fltr) {
+    // 特殊处理status和status2
+    if (fltr.status && fltr.status2 && fltr.status !== fltr.status2) {
+      filter.status = { $eq: 'N/A' };
+    } else {
+      const status = fltr.status || fltr.status2;
+      if (status) {
+        filter = mapStatusKey(filter, status);
+      }
+    }
+
+    for (const key in fltr) {
+      if (key !== 'status' && key !== 'status2') {
+        let value = fltr[key];
 
         if (route === 'ApplyItem') {
           if (key === 'agentId2') {
-            if (temp === null) {
+            if (value === null) {
               if (filter.agentId && filter.agentId.$eq !== undefined &&
                   filter.agentId.$eq !== null) {
                 filter.agentId = { eq: 'N/A' };
@@ -103,17 +107,14 @@ function procFilter(fltr, route) {
                 };
               }
             }
-            delete filter['agentId2'];
             continue;
           }
         }
 
-        if (temp !== undefined) {
-          temp = '.*' + temp + '.*';
-          temp = { '$regex': temp, $options: '$i' };
-          filter[key] = temp;
-        } else {
-          return {};
+        if (value) {
+          value = '.*' + value + '.*';
+          value = { '$regex': value, $options: '$i' };
+          filter[key] = value;
         }
       }
     }
@@ -289,33 +290,9 @@ export const websockClient = (type, resource, params) =>{
 					const { page, perPage } = params.pagination;
 	        const { field, order } = params.sort;
 	        let { username, role, filter } = params;
-	        if (filter) {
-            for (const key in filter) {
-            	let temp = filter[key];
-            	if (key === 'status') {
-            		if (temp === 'all'){
-            			delete filter['status'];
-            		}
-            		continue;
-            	}
-            	if (key === 'agent') {
-            		if (temp === 'all') {
-            			delete filter['agent'];
-            		}
-            		continue;
-            	}
-            	if (temp !== undefined) {
-            		temp = '.*' + temp + '.*';
-            		temp = { '$regex': temp, $options: '$i' };
-            		filter[key] = temp;
-            	} else {
-            		filter = {};
-                break;
-            	}
-            }
-			    }
-	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order, filter)
-	          .then(response => mapResponse2Rest(response, type, params) );
+	        return asteroid.call('agent.orders.get', username, role, page, perPage, field, order,
+                               procFilter(filter, 'Keepers')).then(
+                               response => mapResponse2Rest(response, type, params) );
 				};
 				case GET_ONE:{
 					const { id } = params;

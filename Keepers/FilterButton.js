@@ -6,19 +6,20 @@ import { CardActions } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { formValueSelector } from 'redux-form';
+
 class FilterButton extends React.Component{
     ontap = () =>{
     	const { filterVal, showFilter } = this.props;
-    	if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
-    		showFilter('status', 7);
+    	if (this.props.filterVal === undefined || this.props.filterVal === '') {
+    		showFilter('status2', '已安排物流');
     	} else {
-    		showFilter('status', 'all');
+    		showFilter('status2', '');
     	}
     }
 	render(){
 		const { icon } = this.props;
 
-		if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
+		if (this.props.filterVal === undefined || this.props.filterVal === '') {
 			return (
 				<FlatButton primary label="待处理的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
 			);
@@ -32,6 +33,6 @@ class FilterButton extends React.Component{
 const selector = formValueSelector('filterForm');
 export default connect(
 	(state, props)=>(
-		{ filterVal: selector(state,'status') }
+		{ filterVal: selector(state, 'status2') }
 	)
 ,null)(FilterButton)

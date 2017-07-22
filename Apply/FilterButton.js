@@ -10,17 +10,17 @@ import { formValueSelector } from 'redux-form';
 class FilterButton extends React.Component{
   ontap = () => {
   	const { filterVal, showFilter } = this.props;
-  	if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
+  	if (this.props.filterVal === undefined || this.props.filterVal === '') {
   		showFilter('agentId2', null);
   	} else {
-  		showFilter('agentId2', 'all');
+  		showFilter('agentId2', '');
   	}
   }
 
 	render(){
 		const { icon } = this.props;
 
-		if (this.props.filterVal === undefined || this.props.filterVal === 'all') {
+		if (this.props.filterVal === undefined || this.props.filterVal === '') {
 			return (
 				<FlatButton primary label="待领取的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
 			);
