@@ -40,67 +40,68 @@ import {
 import SelectField from 'material-ui/SelectField'
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
-import { Field, FieldArray,reduxForm, option, formValueSelector } from 'redux-form';
+import { Field, FieldArray, reduxForm, option, formValueSelector } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/svg-icons/content/clear';
+
 const defaultLabelStyle = {
-    paddingTop: '2.58em',
-    height: 'auto',
-    
+  paddingTop: '2.58em',
+  height: 'auto',
 };
-const selector = formValueSelector('record-form');
-export class WorkSpace extends Component {
+
+export default class WorkSpace extends Component {
     renderField = ({ input, label, type, meta: { touched, error },...custom }) => (
-        <TextField hintText={label}
+      <TextField
+        hintText={label}
         floatingLabelText={label}
-        
         errorText={touched && error}
         {...input}
         {...custom}
-        />
-    )
-   renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+      />
+    );
+
+    renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
       <SelectField
         floatingLabelText={label}
         errorText={touched && error}
         hintText={label}
-        
         {...input}
         onChange={(event, index, value) => input.onChange(value)}
         children={children}
-        {...custom}/>
-    )
+        {...custom}
+      />
+    );
+
     render() {
         const { record } = this.props;
-        console.log();
         return(
             <div>
               {record.items.map((item, ind) => (
-                  <div key={item.name} style={{display: 'flex', flexWrap: 'wrap',alignItems: 'flex-end'}}>
-                    <Chip style={{ display: 'flex', height:''}}>{item.name}</Chip>
-                      <div style={{ display:'flex', flexDirection: 'row'}} >
-                        <Field
-                          name={`items[${ind}].requirements.result`}
-                          type="text"
-                          component={this.renderField}
-                          label="检测结果"/>
-                        <Field
-                          name={`items[${ind}].requirements.verdict`}
-                          type="text"
-                          component={this.renderSelectField}
-                          label="是否合格">
-                          <MenuItem value={'true'} primaryText="合格"/>
-                          <MenuItem value={'false'} primaryText="不合格"/>
-                          </Field>
-                      </div>
-                    </div>
-
-                     ))}
+                <div key={item.name} style={{display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end'}}>
+                  <Chip style={{ display: 'flex', height:''}}>{item.name}</Chip>
+                  <div style={{ display:'flex', flexDirection: 'row', marginLeft: 40 }}>
+                    {/*<Field
+                      name={`items.${ind}.result`}
+                      type="text"
+                      component={this.renderField}
+                      label="检测结果"
+                    />*/}
+                    <Field
+                      name={`items.${ind}.verdict`}
+                      component={this.renderSelectField}
+                      label="是否合格"
+                    >
+                      <MenuItem value={true} primaryText="合格" />
+                      <MenuItem value={false} primaryText="不合格" />
+                    </Field>
+                  </div>
+                </div>
+              ))}
             </div>
-            )
+        );
     }
 }

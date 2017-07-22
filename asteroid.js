@@ -239,24 +239,21 @@ export const websockClient = (type, resource, params) =>{
 				case UPDATE:{
 					const { id, data, previousData, username } = params;
 					var ops = {};
-					if(data.pictures != undefined){
+
+					if (data.pictures != undefined) {
 						const newPictures = data.pictures.filter(p => p instanceof File);
 						const reader = new FileReader();
 						reader.readAsDataURL(newPictures[0]);
-						reader.onload = () => ( asteroid.call('tester.img.update', id, reader.result));
+						reader.onload = () => (asteroid.call('tester.img.update', id, reader.result));
 					}
-					for(var i=0; i<data.items.length;i++){
-						if(previousData.items[i].requirements.result === undefined || previousData.items[i].requirements.verdict == undefined){
-							ops[data.items[i].name] = data.items[i].requirements;
-							continue;
-						}
-						if(previousData.items[i].requirements.result !== data.items[i].requirements.result
-							||  previousData.items[i].requirements.verdict !== data.items[i].requirements.verdict ){
-							ops[data.items[i].name] = data.items[i].requirements;
+
+					for (let i = 0; i < data.items.length; i++) {
+						if (previousData.items[i].verdict !== data.items[i].verdict) {
+							ops[data.items[i].name] = data.items[i].verdict;
 						}
 					}
 					return asteroid.call('tester.order.update', id, data, ops, username)
-					.then(response => mapResponse2Rest(response, type, params));
+					  .then(response => mapResponse2Rest(response, type, params));
 				}
 			}
 			break;

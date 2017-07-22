@@ -41,7 +41,7 @@ import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
 import CheckField from '../Pick/CheckField';
 import TextButton from './TextButton';
-import { WorkSpace } from './WorkSpace';
+import WorkSpace from './WorkSpace';
 import FinishButton from './FinishButton';
 import OrderFilter from '../Utils/OrderFilter';
 import CheckersField from '../Allocatoritems/CheckersField';
