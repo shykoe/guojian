@@ -36,7 +36,7 @@ export class FinishButton extends Component {
 		asteroid.call('reports.find.orderid',record._id)
 		.then((response) =>{
 			//console.log(response);
-			if(response){				
+			if(response){
 				disabled = false;
 			}else{
 				disabled = true;
@@ -80,8 +80,8 @@ export class FinishButton extends Component {
     	delete value._id;
     	asteroid.call('reports.upsert', value, orderId, userName);
       	this.setState({open: false,disabled: false});
-      	
-    }  	  	 
+
+    }
     render() {
     	const { record } = this.props;
 		const actions = [
@@ -101,9 +101,9 @@ export class FinishButton extends Component {
 		console.log(this.state.disabled);
     	return(
     		<div>
-    		<RaisedButton  onTouchTap={this.handleOpen} label="检测报告"/>
+    		<RaisedButton  onTouchTap={this.handleOpen} label="生成报告"/>
     		<Dialog
-		      title="检测报告"
+		      title="生成报告"
 		      actions={actions}
 		      modal={false}
 		      open={this.state.open}
@@ -130,7 +130,7 @@ export class FinishButton extends Component {
 			<Field name="ManufacturedLot" key="ManufacturedLot"  component={this.renderField} label="生产日期/批号"/>
 			<Field name="SampleBase" key="SampleBase"  component={this.renderField} label="抽样基数"/>
 			<Field name="ReceivedDate" key="ReceivedDate"  component={this.renderField} label="到样日期"/>
-			
+
 			<Field name="SampleDate" key="SampleDate"  component={this.renderField} label="抽样日期"/>
 			<Field name="SampleStaff" key="SampleStaff"  component={this.renderField} label="抽样人员"/>
 			<Field name="TestItems" key="TestItems"  component={this.renderField} label="检测项目"/>
@@ -152,5 +152,5 @@ FinishButton = connect(
     initialValues: state.report,
     value:getFormValues('reportsForm')(state),
     user:state.admin.user.userName,
-  }),{reportInit:reportInit, ResetForm:reset}             
+  }),{reportInit:reportInit, ResetForm:reset}
 )(FinishButton)

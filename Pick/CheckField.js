@@ -1,6 +1,7 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
 import { translate } from 'admin-on-rest';
+
 const styles = {
     main: { display: 'flex', flexWrap: 'wrap' },
     chip: { margin: 4 },
@@ -9,22 +10,24 @@ const styles = {
 const CheckField = ({ record, translate,detail }) => {
     if(detail){
         return(
-        <span style={styles.main}>
-            {record.items.map(item => (
-                <Chip key={item.name} style={styles.chip}>
-                    {item.name}
-                </Chip>
-            ))}
-        </span>);
+          <span style={styles.main}>
+              {record.items.map(item => (
+                  <Chip key={item.name} style={styles.chip}>
+                      {item.name}
+                  </Chip>
+              ))}
+          </span>
+        );
     }
     return(
-    <span style={styles.main}>
-        {record.items.map(item => (
-            <Chip key={item.name} style={styles.chip}>
-                {item.name}
-            </Chip>
-        ))}
-    </span>);
+      <span style={styles.main}>
+          {record.items.map(item => (
+              <Chip key={item.name} style={styles.chip}>
+                  {item.name}
+              </Chip>
+          ))}
+      </span>
+    );
 };
 
 const TranslatedCheckField = translate(CheckField);

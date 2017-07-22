@@ -9,27 +9,18 @@ const styles = {
 };
 
 class CheckersField extends Component  {
-    componentWillMount(){
-        asteroid.call('tester.get').then(data=>{ this.setState({ tester: data })} );
-    };
-
-    state = {
-    };
-
     render(){
-        const { tester } = this.state;
         const { record } = this.props;
-        if(tester == undefined){
-            return (<div></div>);
-        }
+
         return(
-        <span style={styles.main}>
-            {(record.tester || []).map(item => (
-                <Chip key={item} style={styles.chip}>
-                    {tester.find(i=>i._id ==item).name}
-                </Chip>
+          <span style={styles.main}>
+            {(record.testers || []).map(item => (
+              <Chip key={item} style={styles.chip}>
+                {item}
+              </Chip>
             ))}
-        </span>);
+          </span>
+        );
     }
 };
 

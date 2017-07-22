@@ -11,40 +11,41 @@ import { connect } from 'react-redux';
 
 class AddCheckers extends React.Component{
 	componentDidMount(){
-		asteroid.call('tester.get').then(data=>{ this.setState({ tester: data })} );
+		asteroid.call('tester.get').then(data => { this.setState({ testers: data }) });
 	}
+
 	state = {
 		open: false,
 	};
 
   handleOpen = () => {
-  	this.setState({open: true});
+  	this.setState({ open: true });
 	};
 
 	handleClose = () => {
-  	this.setState({open: false});
+  	this.setState({ open: false });
 	};
 
-  handleUpdate =() =>{
+  handleUpdate = () => {
     const { Update, record } = this.props;
     Update('Allocatoritems', record.id, this.props.formData, this.props.record, '/');
-    this.setState({open: false});
-  }
+    this.setState({ open: false });
+  };
 
-  renderCheckbox = ({ input, label, userid}) => {
+  renderCheckbox = ({ input, label, testerId }) => {
     const handleCheck = (event, isChecked) => {
       if (isChecked) {
-          input.onChange([...input.value, event.target.value]);
+        input.onChange([...input.value, event.target.value]);
       } else {
-          input.onChange(input.value.filter(v => (v != event.target.value)));
+        input.onChange(input.value.filter(v => (v != event.target.value)));
       }
     };
     return (
       <Checkbox
       	label={label}
-      	checked={input.value ? input.value.find(v => v === userid) !== undefined : false}
+      	checked={input.value ? input.value.find(v => v === testerId) !== undefined : false}
       	onCheck={handleCheck}
-        value = {userid}
+        value = {testerId}
         style={{ display: 'block', width: '', margin: '10px 20px' }}
       />
     );
@@ -53,16 +54,20 @@ class AddCheckers extends React.Component{
 	render() {
 		const actions = [
 		  <FlatButton
-		    label="Ok"
-		    primary={true}
-		    keyboardFocused={true}
+		    label="确定"
+		    primary
+		    keyboardFocused
 		    onTouchTap={this.handleUpdate}
 		  />,
+      <FlatButton
+        label="取消"
+        onTouchTap={this.handleClose}
+      />,
 		];
 		const { record, initialValues } = this.props;
-    const { tester } = this.state;
+    const { testers } = this.state;
 
-    if (tester === undefined) {
+    if (testers === undefined) {
       return (<div></div>);
     }
 
@@ -77,7 +82,7 @@ class AddCheckers extends React.Component{
   	      onRequestClose={this.handleClose}
   	    >
           <div style={{display: 'flex', flexDirection: 'row'}} >
-            { tester.map((item) => <Field name={`${record.id}.tester`} key={item._id} userid={item._id} component={this.renderCheckbox} label={item.name}/> ) }
+            { testers.map((item) => <Field name={`${record.id}.testerIds`} key={item._id} testerId={item._id} component={this.renderCheckbox} label={item.name}/> ) }
           </div>
         </Dialog>
   		</div>

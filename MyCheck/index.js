@@ -45,6 +45,7 @@ import TextButton from './TextButton';
 import { WorkSpace } from './WorkSpace';
 import { FinishButton } from './FinishButton';
 import OrderFilter from '../Utils/OrderFilter';
+import CheckersField from '../Allocatoritems/CheckersField';
 import StatusField from '../MyItem/StatusField';
 import AddrField from '../MyItem/AddrField';
 import ItemsField from '../MyItem/ItemsField';
@@ -74,12 +75,12 @@ export const MyCheckList = ({ ...props }) => (
                 <Datagrid rowStyle={rowStyle}  >
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
-                    <TextField source="sampleType" />
-                    <TextField source="sampleLevel" />
-                    <TextField source="clientName" />
+                    <TextField source="categoryName" />
+                    <TextField source="levelName" />
+                    <CheckField label="检测项" />
                     <StatusField />
                     <TextField source="agent" />
-                    <CheckField />
+                    <CheckersField />
                     <TextButton />
                     <FinishButton />
                 </Datagrid>
