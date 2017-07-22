@@ -36,6 +36,8 @@ const fields = {
   sampleInf: '样品信息',
   clientInf: '客户信息',
   contactInf: '联系方式',
+  checkers: '质检员',
+  tester: '任务分配'
 };
 
 export const messages = {

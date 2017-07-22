@@ -68,9 +68,9 @@ class AddCheckers extends React.Component{
 
 		return (
 			<div>
-  			<RaisedButton label="添加质检员" onTouchTap={this.handleOpen} />
+  			<RaisedButton label="分配" onTouchTap={this.handleOpen} />
   			<Dialog
-  	      title="添加质检员"
+  	      title="分配质检员"
   	      actions={actions}
   	      modal={false}
   	      open={this.state.open}

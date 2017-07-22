@@ -42,11 +42,11 @@ export const ApplyList = ({ ...props }) => (
             }
             medium={
                 <Datagrid   >
-                    <TextField source="sampleName" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
-                    <TextField source="sampleProducer" />
-                    <TextField source="clientName" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
-                    <TextField source="producerBatch" />
+                    <TextField source="sampleName" />
+                    <TextField source="sampleType" />
+                    <TextField source="sampleLevel" />
+                    <TextField source="clientName" />
                     <StatusField/>
                     <TextField source="agent" />
                     <ShowButton/>

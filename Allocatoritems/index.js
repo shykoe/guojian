@@ -67,21 +67,23 @@ export const AitemsList = ({ ...props }) => (
             }
             medium={
                 <Datagrid  >
-                    <TextField source="sampleName" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
-                    <TextField source="sampleProducer" />
-                    <TextField source="clientName" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                    <TextField source="sampleName" />
                     <TextField source="sampleType" />
+                    <TextField source="sampleLevel" />
+                    <TextField source="clientName" />
+                    <StatusField />
+                    <TextField source="agent" />
                     <CheckersField />
-                    <ShowButton/>
                     <AddCheckers source="tester" />
+                    <ShowButton/>
                 </Datagrid>
             }
         />
     </List>
 );
 export const AitemsShow = ({ ...props }) => (
-    <Show title={<Title />} {...props}>
+    <Show {...props}>
         <GridShowLayout>
             <TextField source="userId" itemStyle={{ width: '25%' }} />
             <StatusField source="status" itemStyle={{ width: '25%' }} />

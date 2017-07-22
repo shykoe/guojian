@@ -72,13 +72,15 @@ export const MyCheckList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
+                    <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
-                    <TextField source="sampleProducer" />
-                    <TextField source="clientName" style={{ fontStyle: 'italic' }} />
-                    <TextField source="producerBatch" />
-                    <TextField source="notes" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                    <TextField source="sampleType" />
+                    <TextField source="sampleLevel" />
+                    <TextField source="clientName" />
+                    <StatusField />
+                    <TextField source="agent" />
                     <CheckField />
-                    <TextButton  />
+                    <TextButton />
                     <FinishButton />
                 </Datagrid>
             }

@@ -70,10 +70,10 @@ export const AllOrderList = ({ ...props }) => (
                 <Datagrid>
                     <TextField source="reportNo" />
                     <TextField source="sampleName" />
-                    <SegmentsFieldSampleInf/>
-                    <TextField source="categoryName"  />
-                    <TextField source="levelName"  />
-                    <SegmentsFieldClientInf/>
+                    <SegmentsFieldSampleInf />
+                    <TextField source="categoryName" />
+                    <TextField source="levelName" />
+                    <SegmentsFieldClientInf />
                     <SegmentsFieldContactInf />
                     <ShowButton/>
                 </Datagrid>

@@ -72,10 +72,11 @@ export const MyItemList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
+                    <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
-                    <TextField source="sampleProducer" style={{ fontStyle: 'italic' }} />
-                    <TextField source="producerBatch" />
-                    <TextField source="sampleType" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} />
+                    <TextField source="sampleType" />
+                    <TextField source="sampleLevel" />
+                    <TextField source="clientName" />
                     <StatusField/>
                     <EditButton label='编辑' addLabel/>
                     <UnpickButton/>
