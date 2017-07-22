@@ -134,8 +134,9 @@ export const asteroidMethod = asteroid.call;
 const mapResponse2Rest = (response, type, params)=>{
 	switch(type){
 		case GET_LIST:
-			response.data.map((item)=>{item['id']=item._id});
-			return { data: response.data, total: response.total };
+      const data = response.data || [];
+			data.map((item)=>{item['id']=item._id});
+			return { data, total: response.total };
 		case GET_ONE:
 			response['id'] = response._id;
 			return {data: response};
@@ -326,9 +327,9 @@ export const websockClient = (type, resource, params) =>{
 		case 'AddUser': {
       switch(type) {
       	case GET_LIST: {
-			  const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        return asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
+  			  const { page, perPage } = params.pagination;
+          const { field, order } = params.sort;
+          return asteroid.call('agent.adduser.get', page, perPage, '_id', order).then(response => mapResponse2Rest (response, type, params));
       	}
       	case GET_ONE: {
       		const {Mytype,username} = params;
@@ -361,7 +362,7 @@ export const websockClient = (type, resource, params) =>{
       	case GET_LIST: {
     			const { page, perPage } = params.pagination;
           const { field, order } = params.sort;
-          return asteroid.call('agent.checktest.get', page, perPage, 'orderid', order).then(response => mapResponse2Rest (response, type, params));
+          return asteroid.call('agent.checktest.get', page, perPage, 'orderId', order).then(response => mapResponse2Rest (response, type, params));
 			  }
       }
 		}

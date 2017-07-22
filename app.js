@@ -37,14 +37,14 @@ const restClient = jsonRestClient(data, true);
 const uploadCapableClient = addUploadFeature(restClient);
 const delayedRestClient = (type, resource, params) => new Promise(resolve => setTimeout(() => resolve(uploadCapableClient(type, resource, params)), 1000));
 render(
-    <Admin 
+    <Admin
         authClient={authClient}
-        customSagas={saga}  
-        customRoutes={customRoutes} 
-        restClient={websockClient} 
-        title="系统" 
-        locale="cn" 
-        menu={Menu} 
+        customSagas={saga}
+        customRoutes={customRoutes}
+        restClient={websockClient}
+        title="系统"
+        locale="cn"
+        menu={Menu}
         messages={messages}
         customReducers={{ report: reportReducer }}
     >
@@ -54,7 +54,7 @@ render(
         <Resource name="Allocatoritems" list={AitemsList} show={AitemsShow} icon={AitemsIcon} role='assigner'/>
         <Resource name="Keepers" list={KeepersList}  show={KeepersShow} edit={KeepersEdit} icon={KeepersIcon} role='keeper' />
         <Resource name="AddUser"  list={AddUserList} create={AddUserCreate} edit={AddUserEdit} role='admin' />
-        <Resource name="AllOrder" list={AllOrderList}  show={AllOrderShow} create={AllOrderCreate} />
+        <Resource name="AllOrder" list={AllOrderList}  show={AllOrderShow} create={AllOrderCreate} role='admin' />
         <Resource name="CheckTest" list={CheckTestList}  icon={CheckTestIcon} role='admin' />
     </Admin>,
     document.getElementById('root'),
