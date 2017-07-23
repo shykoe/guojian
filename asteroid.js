@@ -11,6 +11,22 @@ import {
 import { CHANGEPWD } from './UserCenter/ChangePwdAction';
 import Consts from './pr-schema/consts';
 
+const statusMap = {
+  '未认领': Consts.ORDER_STATUS_UNCLAIMED,
+  '已认领': Consts.ORDER_STATUS_CLAIMED,
+  '审核被拒绝': Consts.ORDER_STATUS_REJECTED,
+  '审核通过': Consts.ORDER_STATUS_APPROVED,
+  '订单关闭': Consts.ORDER_STATUS_CLOSED,
+  '已支付': Consts.ORDER_STATUS_PAID,
+  '已安排物流': Consts.ORDER_STATUS_PROCESSED,
+  '已收到样品': Consts.ORDER_STATUS_SAMPLE_RECEIVED,
+  '检测任务已分配': Consts.ORDER_STATUS_ASSIGNED,
+  '检测完成': Consts.ORDER_STATUS_TESTED,
+  '检测报告已寄出': Consts.ORDER_STATUS_REPORT_SHIPPED,
+  '订单完成': Consts.ORDER_STATUS_COMPLETED,
+  '已退款': Consts.ORDER_STATUS_REFUNDED
+}
+
 function mapStatusKey(filter, value) {
   if (value) {
     switch(value) {
@@ -36,41 +52,8 @@ function mapStatusKey(filter, value) {
           };
         }
         break;
-      case '审核被拒绝':
-        filter.status = Consts.ORDER_STATUS_REJECTED;
-        break;
-      case '审核通过':
-        filter.status = Consts.ORDER_STATUS_APPROVED;
-        break;
-      case '订单关闭':
-        filter.status = Consts.ORDER_STATUS_CLOSED;
-        break;
-      case '已支付':
-        filter.status = Consts.ORDER_STATUS_PAID;
-        break;
-      case '已安排物流':
-        filter.status = Consts.ORDER_STATUS_PROCESSED;
-        break;
-      case '已收到样品':
-        filter.status = Consts.ORDER_STATUS_SAMPLE_RECEIVED;
-        break;
-      case '检测任务已分配':
-        filter.status = Consts.ORDER_STATUS_ASSIGNED;
-        break;
-      case '检测完成':
-        filter.status = Consts.ORDER_STATUS_TESTED;
-        break;
-      case '检测报告已寄出':
-        filter.status = Consts.ORDER_STATUS_REPORT_SHIPPED;
-        break;
-      case '订单完成':
-        filter.status = Consts.ORDER_STATUS_COMPLETED;
-        break;
-      case '已退款':
-        filter.status = Consts.ORDER_STATUS_REFUNDED;
-        break;
       default:
-        filter.status = value;
+        filter.status = statusMap[value] || value;
     }
   }
 
@@ -82,12 +65,22 @@ function procFilter(fltr, route) {
 
   if (fltr) {
     // 特殊处理status和status2
-    if (fltr.status && fltr.status2 && fltr.status !== fltr.status2) {
-      filter.status = { $eq: 'N/A' };
+    if (Array.isArray(fltr.status2)) {
+      if (fltr.status && fltr.status2.find(fltr.status) === -1) {
+        filter.status = { $eq: 'N/A' };
+      } else {
+        filter.status = {
+          $in: fltr.status2.map(item => statusMap[item])
+        };
+      }
     } else {
-      const status = fltr.status || fltr.status2;
-      if (status) {
-        filter = mapStatusKey(filter, status);
+      if (fltr.status && fltr.status2 && fltr.status !== fltr.status2) {
+        filter.status = { $eq: 'N/A' };
+      } else {
+        const status = fltr.status || fltr.status2;
+        if (status) {
+          filter = mapStatusKey(filter, status);
+        }
       }
     }
 
@@ -113,8 +106,10 @@ function procFilter(fltr, route) {
         }
 
         if (value) {
-          value = '.*' + value + '.*';
-          value = { '$regex': value, $options: '$i' };
+          if (typeof value === 'string') {
+            value = '.*' + value + '.*';
+            value = { '$regex': value, $options: '$i' };
+          }
           filter[key] = value;
         }
       }

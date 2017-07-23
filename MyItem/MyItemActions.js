@@ -5,9 +5,8 @@ import ToggleCheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-o
 import { CardActions } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import FilterButton from './FilterButton';
-import ProcFilterButton from './ProcFilterButton';
-import CsFilterButton from './CsFilterButton';
+import ProcFilterButton from '../Apply/ProcFilterButton';
+import CsFilterButton from '../Apply/CsFilterButton';
 
 const cardActionStyle = {
     zIndex: 2,
@@ -15,14 +14,13 @@ const cardActionStyle = {
     float: 'right',
 };
 
-class ApplyActions extends React.Component{
+class MyItemActions extends React.Component{
 	render(){
 		const { resource, filters, displayedFilters, filterValues, basePath, showFilter, refresh, hideFilter } = this.props;
 		return(
 	    	<CardActions style={cardActionStyle}>
 	        {filters && React.cloneElement(filters, { resource, showFilter, displayedFilters, filterValues, context: 'button' }) }
 	        <FlatButton primary label="刷新" onClick={refresh} icon={<NavigationRefresh />} />
-	        <FilterButton showFilter={showFilter}  />
           <ProcFilterButton showFilter={showFilter}  />
           <CsFilterButton showFilter={showFilter}  />
 	        {/* Add your custom actions */}
@@ -31,4 +29,4 @@ class ApplyActions extends React.Component{
 	}
 }
 
-export default ApplyActions;
+export default MyItemActions;

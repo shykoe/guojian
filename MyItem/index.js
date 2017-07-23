@@ -38,10 +38,12 @@ import {
 } from 'admin-on-rest';
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
-import { ProductType, TestCriteria, PriceField, StatusSelect, MsgField } from './WorkSpace';
+import { ProductType, TestCriteria, PriceField, StatusSelect, MsgField,
+  CustServProcField } from './WorkSpace';
 import { CheckboxGr, Pppp } from './CheckBox';
 import { ExpressNum } from './ExpressNum';
 import OrderFilter from '../Utils/OrderFilter';
+import MyItemActions from './MyItemActions';
 import StatusField from './StatusField';
 import AddrField from './AddrField';
 import ItemsField from './ItemsField';
@@ -61,7 +63,7 @@ const rowStyle = (record) => {
 };
 
 export const MyItemList = ({ ...props }) => (
-    <List {...props} filters={<OrderFilter />} perPage={25} sort={{ field: 'id', order: 'DESC' }}>
+    <List {...props} actions={<MyItemActions />} filters={<OrderFilter />} perPage={25} sort={{ field: 'id', order: 'DESC' }}>
         <Responsive
             small={
                 <SimpleList
@@ -140,6 +142,7 @@ export class MyItemEdit extends Component {
                     itemStyle={{ width: '100%' }}
                   />
                   <PriceField itemStyle={{ width: '100%' }} />
+                  <CustServProcField itemStyle={{ width: '100%' }} />
                   <StatusSelect itemStyle={{ width: '100%' }} />
                   <MsgField itemStyle={{ width: '100%' }} />
                   <ExpressNum itemStyle={{ width: '100%' }} />

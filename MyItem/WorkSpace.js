@@ -195,3 +195,20 @@ export class MsgField extends Component {
     );
   }
 }
+
+export class CustServProcField extends Component {
+  render() {
+    const { record } = this.props;
+
+    if (record.activeCustServRequest) {
+      return (
+        <div>
+          <Field name="activeCustServReply" component={renderTextField} label="售后答复" />
+          <span style={{ marginLeft: 20 }}>(售后要求: {record.activeCustServRequest})</span>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+}
