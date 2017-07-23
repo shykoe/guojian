@@ -46,6 +46,8 @@ import { reduxForm } from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import Checkbox from 'material-ui/Checkbox'
 import { asteroid } from '../asteroid';
+import Consts from '../pr-schema/consts';
+
 const renderSelectField = ({ input, label, meta: { touched, error }, children,disabled, ...custom }) => (
   <SelectField
     floatingLabelText={label}
@@ -57,6 +59,7 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children,di
     disabled={disabled}
     {...custom}/>
 );
+
 const renderTextField = ({ input, label, meta: { touched, error },disabled, ...custom }) => (
     <TextField
         hintText={label}
@@ -69,53 +72,57 @@ const renderTextField = ({ input, label, meta: { touched, error },disabled, ...c
 );
 
 export class ProductType extends Component {
-    renderItem = (item) =>{ return ( <MenuItem value={item['name']}  key={item['name']} primaryText={item['name']} />)};
-    render() {
-        const { record, categories, status } = this.props;
-        if(categories.Categories == undefined){
-            return(<div></div>)
-        }
+  renderItem = (item) => {
+    return (<MenuItem value={item['name']} key={item['name']} primaryText={item['name']} />);
+  };
 
-        return (    
-          <Field name="categoryName" component={renderSelectField} >
-          {categories.Categories.map(this.renderItem)}
-          </Field>
-        
-        );
-    
-
+  render() {
+    const { record, categories, status } = this.props;
+    if (categories.Categories == undefined) {
+        return null;
     }
+
+    if (record.status <= Consts.ORDER_STATUS_CLAIMED) {
+      return (
+        <Field name="categoryName" component={renderSelectField} label="产品类别" >
+          {categories.Categories.map(this.renderItem)}
+        </Field>
+      );
+    } else {
+      return null;
+    }
+  }
 }
+
 const selector = formValueSelector('record-form');
 ProductType = connect(
   state => {
     const status = selector(state, 'status')
     return { status };
-  }
-  )(ProductType)
+})(ProductType);
 
 export class TestCriteria extends Component {
-
     render() {
         const { record, categories, status } = this.props;
-        const categorie = categories.Categories;
-        if(categories.Categories == undefined){
-            return(<div></div>)
-        }        
-        if(categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0   ){
-            return (    
-              <Field name="levelName" component={renderSelectField} >
-              {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
-              .map((item) =>{return( <MenuItem value={item.name}  key={item.name} primaryText={item.name} />)} ) 
-                }
-              </Field>
-            
-            );
-        }
-        else{
-            return(<div></div>)
+
+        if (record.status <= Consts.ORDER_STATUS_CLAIMED) {
+          const categorie = categories.Categories;
+          if (categories.Categories == undefined) {
+              return(<div></div>)
+          }
+
+          if (categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0) {
+              return (
+                <Field name="levelName" component={renderSelectField} label="性能等级">
+                  {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
+                    .map((item) =>{return( <MenuItem value={item.name}  key={item.name} primaryText={item.name} />)} )
+                  }
+                </Field>
+              );
+          }
         }
 
+        return null;
     }
 }
 
@@ -124,54 +131,85 @@ TestCriteria = connect(
     const categoryName = selector(state, 'categoryName');
     const status = selector(state, 'status')
     return {categoryName, status};
-  }
-  )(TestCriteria)
+})(TestCriteria);
+
 export class PriceField extends Component {
+  render() {
+    const { status, record } = this.props;
 
-    render() {
-        const { status,record } = this.props;
-        return (    
-            <Field name="price" component={renderTextField} label="price"/>
-
-        );
-
+    if (record.status <= Consts.ORDER_STATUS_CLAIMED) {
+      return (
+        <Field name="price" component={renderTextField} label="报价" />
+      );
+    } else {
+      return null;
     }
+  }
 }
+
 PriceField = connect(
   state => {
     const status = selector(state, 'status')
     return { status };
-  }
-  )(PriceField)
+})(PriceField);
+
 export class StatusSelect extends Component {
-    renderItem = (item) =>{ return ( <MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />)};
-    selectValue = [{name:'审核通过',value:4}, {name:'审核拒绝',value:3},{name:'退款',value:13}]
+    renderItem = (item) => {
+      return (<MenuItem value={item['value']}  key={item['value']} primaryText={item['name']} />);
+    };
+
     render() {
         const { record } = this.props;
+
+        let selectValue;
+        switch (record.status) {
+          case Consts.ORDER_STATUS_UNCLAIMED:
+          case Consts.ORDER_STATUS_CLAIMED:
+            selectValue = [
+              { name: '审核通过', value: Consts.ORDER_STATUS_APPROVED },
+              { name: '审核被拒绝', value: Consts.ORDER_STATUS_REJECTED }
+            ];
+            break;
+          case Consts.ORDER_STATUS_PAID:
+            selectValue = [
+              { name: '已安排物流', value: Consts.ORDER_STATUS_PROCESSED }
+            ];
+            break;
+          case Consts.ORDER_STATUS_TESTED:
+            selectValue = [
+              { name: '检测报告已寄出', value: Consts.ORDER_STATUS_REPORT_SHIPPED }
+            ];
+            break;
+          default:
+            selectValue = [];
+            break;
+        }
+
+        if (record.status >= Consts.ORDER_STATUS_PAID) {
+          selectValue.push({ name: '退款', value: Consts.ORDER_STATUS_REFUNDED });
+        } else {
+          selectValue.push({ name: '关闭订单', value: Consts.ORDER_STATUS_CLOSED });
+        }
+
         return (
-            <Field name="status" component={renderSelectField} >
-            {this.selectValue.map(this.renderItem)}
+            <Field name="status" component={renderSelectField} label="订单状态">
+              {selectValue.map(this.renderItem)}
             </Field>
         );
-        
-
     }
 }
-export class MsgField extends Component {
 
+export class MsgField extends Component {
     render() {
         const { status,record } = this.props;
-        return (    
-            <Field name="agentMsg" component={renderTextField} label="agentMsg"/>
-        
+        return (
+            <Field name="agentMsg" component={renderTextField} label="备注" />
         );
-
     }
 }
+
 MsgField = connect(
   state => {
     const status = selector(state, 'status')
     return { status };
-  }
-  )(MsgField)
-  
+})(MsgField);
