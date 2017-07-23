@@ -60,7 +60,7 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children,di
     {...custom}/>
 );
 
-const renderTextField = ({ input, label, meta: { touched, error },disabled, ...custom }) => (
+const renderTextField = ({ input, label, meta: { touched, error }, disabled, ...custom }) => (
     <TextField
         hintText={label}
         floatingLabelText={label}
@@ -71,13 +71,15 @@ const renderTextField = ({ input, label, meta: { touched, error },disabled, ...c
     />
 );
 
+const selector = formValueSelector('record-form');
+
 export class ProductType extends Component {
   renderItem = (item) => {
     return (<MenuItem value={item['name']} key={item['name']} primaryText={item['name']} />);
   };
 
   render() {
-    const { record, categories, status } = this.props;
+    const { record, categories } = this.props;
     if (categories.Categories == undefined) {
         return null;
     }
@@ -94,16 +96,9 @@ export class ProductType extends Component {
   }
 }
 
-const selector = formValueSelector('record-form');
-ProductType = connect(
-  state => {
-    const status = selector(state, 'status')
-    return { status };
-})(ProductType);
-
 export class TestCriteria extends Component {
     render() {
-        const { record, categories, status } = this.props;
+        const { record, categories, categoryName } = this.props;
 
         if (record.status <= Consts.ORDER_STATUS_CLAIMED) {
           const categorie = categories.Categories;
@@ -111,10 +106,10 @@ export class TestCriteria extends Component {
               return(<div></div>)
           }
 
-          if (categorie.filter((item)=>(item.name == this.props.categoryName)).length != 0) {
+          if (categorie.filter((item)=>(item.name == categoryName)).length != 0) {
               return (
                 <Field name="levelName" component={renderSelectField} label="性能等级">
-                  {categorie.filter((item)=>(item.name == this.props.categoryName))[0].levels
+                  {categorie.filter((item)=>(item.name == categoryName))[0].levels
                     .map((item) =>{return( <MenuItem value={item.name}  key={item.name} primaryText={item.name} />)} )
                   }
                 </Field>
@@ -129,13 +124,12 @@ export class TestCriteria extends Component {
 TestCriteria = connect(
   state => {
     const categoryName = selector(state, 'categoryName');
-    const status = selector(state, 'status')
-    return {categoryName, status};
+    return { categoryName };
 })(TestCriteria);
 
 export class PriceField extends Component {
   render() {
-    const { status, record } = this.props;
+    const { record } = this.props;
 
     if (record.status <= Consts.ORDER_STATUS_CLAIMED) {
       return (
@@ -146,12 +140,6 @@ export class PriceField extends Component {
     }
   }
 }
-
-PriceField = connect(
-  state => {
-    const status = selector(state, 'status')
-    return { status };
-})(PriceField);
 
 export class StatusSelect extends Component {
     renderItem = (item) => {
@@ -200,16 +188,10 @@ export class StatusSelect extends Component {
 }
 
 export class MsgField extends Component {
-    render() {
-        const { status,record } = this.props;
-        return (
-            <Field name="agentMsg" component={renderTextField} label="备注" />
-        );
-    }
+  render() {
+    const { record } = this.props;
+    return (
+      <Field name="agentMsg" component={renderTextField} label="备注" />
+    );
+  }
 }
-
-MsgField = connect(
-  state => {
-    const status = selector(state, 'status')
-    return { status };
-})(MsgField);
