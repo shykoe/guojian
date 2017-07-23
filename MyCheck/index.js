@@ -54,6 +54,7 @@ import TestersField from '../MyItem/TestersField';
 import ShippingField from '../MyItem/ShippingField';
 import SampleDisposalTypeField from '../MyItem/SampleDisposalTypeField';
 import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
+import TestProgressField from './TestProgressField';
 
 export const MyCheckIcon = Icon;
 const rowStyle = (record) => {
@@ -81,6 +82,7 @@ export const MyCheckList = ({ ...props }) => (
                     <StatusField />
                     <TextField source="agent" />
                     <CheckersField />
+                    <TestProgressField label="进度" />
                     <TextButton />
                     <FinishButton />
                 </Datagrid>
