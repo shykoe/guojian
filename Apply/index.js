@@ -66,6 +66,8 @@ export const ApplyShow = ({ ...props }) => (
             <DateField source="approvedAt" itemStyle={{ width: '25%' }} />
             <DateField source="paidAt" itemStyle={{ width: '25%' }} />
             <DateField source="refundedAt" itemStyle={{ width: '25%' }} />
+            <DateField source="sampleReceivedAt" itemStyle={{ width: '25%' }} />
+            <DateField source="testedAt" itemStyle={{ width: '25%' }} />
             <TextField source="sampleName" itemStyle={{ width: '25%' }} />
             <TextField source="sampleProducer" itemStyle={{ width: '25%' }} />
             <TextField source="producerBatch" itemStyle={{ width: '25%' }} />

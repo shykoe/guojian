@@ -6,6 +6,8 @@ const fields = {
   approvedAt: '审核通过日期',
   paidAt: '付款日期',
   refundedAt: '退款日期',
+  sampleReceivedAt: '到样日期',
+  testedAt: '检测日期',
   sampleName: '样品名称',
   sampleProducer: '样品生产厂',
   producerBatch: '样品型号规格',
