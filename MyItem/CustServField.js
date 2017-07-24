@@ -7,8 +7,8 @@ const CustServField = ({ record }) => {
       request: record.activeCustServRequest
     });
   }
-  if (record.CustServHistory) {
-    for (const item of record.CustServHistory) {
+  if (record.custServHistory) {
+    for (const item of record.custServHistory) {
       history.push({
         request: item.request,
         reply: item.reply
