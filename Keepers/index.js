@@ -89,6 +89,7 @@ export const KeepersList = ({ ...props }) => (
 export const KeepersShow = ({ ...props }) => (
     <Show  {...props}>
         <GridShowLayout>
+            <TextField source="reportNo" itemStyle={{ width: '25%' }} />
             <TextField source="userId" itemStyle={{ width: '25%' }} />
             <StatusField source="status" itemStyle={{ width: '25%' }} />
             <DateField source="createdAt" itemStyle={{ width: '25%' }} />
@@ -115,6 +116,7 @@ export const KeepersShow = ({ ...props }) => (
             <TextField source="levelName" itemStyle={{ width: '25%' }} />
             <ItemsField source="items" itemStyle={{ width: '100%' }} />
             <TextField source="price" itemStyle={{ width: '25%' }} />
+            <TextField source="rejectionReason" itemStyle={{ width: '100%' }} />
             <CustServField source="custServHistory" itemStyle={{ width: '100%' }} />
             <TextField source="agent" itemStyle={{ width: '25%' }} />
             <TestersField source="testers" itemStyle={{ width: '25%' }} />
@@ -133,6 +135,7 @@ export class KeepersEdit extends Component {
         return(
             <Edit title={<Title />} {...this.props} >
                 <GridForm>
+                    <TextField source="reportNo" itemStyle={{ width: '25%' }} />
                     <TextField source="userId" itemStyle={{ width: '25%' }} />
                     <StatusField source="status" itemStyle={{ width: '25%' }} />
                     <DateField source="createdAt" itemStyle={{ width: '25%' }} />
@@ -159,6 +162,7 @@ export class KeepersEdit extends Component {
                     <TextField source="levelName" itemStyle={{ width: '25%' }} />
                     <ItemsField source="items" itemStyle={{ width: '100%' }} />
                     <TextField source="price" itemStyle={{ width: '25%' }} />
+                    <TextField source="rejectionReason" itemStyle={{ width: '100%' }} />
                     <CustServField source="custServHistory" itemStyle={{ width: '100%' }} />
                     <TextField source="agent" itemStyle={{ width: '25%' }} />
                     <TestersField source="testers" itemStyle={{ width: '25%' }} />

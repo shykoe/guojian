@@ -1,5 +1,6 @@
 const fields = {
   _id: '订单ID',
+  reportNo: '检测报告号',
   userId: '用户ID',
   status: '订单状态',
   createdAt:'下单日期',
@@ -27,6 +28,7 @@ const fields = {
   levelName: '性能等级',
   items: '检验项目',
   price: '价格',
+  rejectionReason: '审核拒绝原因',
   custServHistory: '售后历史',
   agent: '业务员',
   testers: '检验员',

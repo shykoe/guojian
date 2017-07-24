@@ -73,6 +73,28 @@ const renderTextField = ({ input, label, meta: { touched, error }, disabled, ...
 
 const selector = formValueSelector('record-form');
 
+export class ReportNoField extends Component {
+  render() {
+    const { record, status } = this.props;
+
+    if (record.status >= Consts.ORDER_STATUS_PAID &&
+        record.status <= Consts.ORDER_STATUS_COMPLETED &&
+        status !== Consts.ORDER_STATUS_REFUNDED) {
+      return (
+        <Field name="reportNo" component={renderTextField} label="检测报告号" />
+      );
+    } else {
+      return null;
+    }
+  }
+}
+
+ReportNoField = connect(
+  state => {
+    const status = selector(state, 'status');
+    return { status };
+})(ReportNoField);
+
 export class ProductType extends Component {
   renderItem = (item) => {
     return (<MenuItem value={item['name']} key={item['name']} primaryText={item['name']} />);
@@ -195,6 +217,26 @@ export class MsgField extends Component {
     );
   }
 }
+
+export class RejectionReasonField extends Component {
+  render() {
+    const { record, status } = this.props;
+
+    if (record.status === Consts.ORDER_STATUS_REJECTED || status === Consts.ORDER_STATUS_REJECTED) {
+      return (
+        <Field name="rejectionReason" component={renderTextField} label="审核拒绝原因" />
+      );
+    } else {
+      return null;
+    }
+  }
+}
+
+RejectionReasonField = connect(
+  state => {
+    const status = selector(state, 'status');
+    return { status };
+})(RejectionReasonField);
 
 export class CustServProcField extends Component {
   render() {

@@ -38,8 +38,8 @@ import {
 } from 'admin-on-rest';
 import RichTextInput from 'aor-rich-text-input';
 import Chip from 'material-ui/Chip';
-import { ProductType, TestCriteria, PriceField, StatusSelect, MsgField,
-  CustServProcField } from './WorkSpace';
+import { ReportNoField, ProductType, TestCriteria, PriceField, StatusSelect, MsgField,
+  RejectionReasonField, CustServProcField } from './WorkSpace';
 import { CheckboxGr, Pppp } from './CheckBox';
 import { ExpressNum } from './ExpressNum';
 import OrderFilter from '../Utils/OrderFilter';
@@ -98,6 +98,7 @@ export class MyItemEdit extends Component {
   		return(
           <Edit {...this.props} >
               <GridForm>
+                  <TextField source="reportNo" itemStyle={{ width: '25%' }} />
                   <TextField source="userId" itemStyle={{ width: '25%' }} />
                   <StatusField source="status" itemStyle={{ width: '25%' }} />
                   <DateField source="createdAt" itemStyle={{ width: '25%' }} />
@@ -124,6 +125,7 @@ export class MyItemEdit extends Component {
                   <TextField source="levelName" itemStyle={{ width: '25%' }} />
                   <ItemsField source="items" itemStyle={{ width: '100%' }} />
                   <TextField source="price" itemStyle={{ width: '25%' }} />
+                  <TextField source="rejectionReason" itemStyle={{ width: '100%' }} />
                   <CustServField source="custServHistory" itemStyle={{ width: '100%' }} />
                   <TextField source="agent" itemStyle={{ width: '25%' }} />
                   <TestersField source="testers" itemStyle={{ width: '25%' }} />
@@ -146,6 +148,8 @@ export class MyItemEdit extends Component {
                   <PriceField itemStyle={{ width: '100%' }} />
                   <CustServProcField itemStyle={{ width: '100%' }} />
                   <StatusSelect itemStyle={{ width: '100%' }} />
+                  <ReportNoField itemStyle={{ width: '100%' }} />
+                  <RejectionReasonField itemStyle={{ width: '100%' }} />
                   <MsgField itemStyle={{ width: '100%' }} />
                   <ExpressNum itemStyle={{ width: '100%' }} />
               </GridForm>
