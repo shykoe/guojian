@@ -46,7 +46,10 @@ class FinishButton extends Component {
 		this.props.ResetForm('reportsForm');
 		asteroid.call('reports.find.orderid', record._id).then((response) => {
 			if (response && !response.errors) {
-				this.props.reportInit(response);
+				this.props.reportInit({
+          ...response,
+          reportNo: record.reportNo
+        });
 
         let finished = true;
         record.items.forEach(
@@ -71,6 +74,7 @@ class FinishButton extends Component {
         ].join(', ');
 
 				this.props.reportInit({
+          reportNo: record.reportNo,
           ProductName: record.sampleName,
           InspectedBody: record.clientName,
           ContactAddress: address,
