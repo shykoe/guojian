@@ -55,7 +55,7 @@ export const AllOrderIcon = Icon;
 const choicesx=[
     { "roles": 'admin', "name": '管理员' },
     { "roles": 'clerk', "name": '业务员' },
-    { "roles": 'checker', "name": '检测员' },
+    { "roles": 'checker', "name": '检验员' },
 ];
 
 export const AllOrderList = ({ ...props }) => (

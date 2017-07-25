@@ -81,7 +81,7 @@ export class ReportNoField extends Component {
         record.status <= Consts.ORDER_STATUS_COMPLETED &&
         status !== Consts.ORDER_STATUS_REFUNDED) {
       return (
-        <Field name="reportNo" component={renderTextField} label="检测报告号" />
+        <Field name="reportNo" component={renderTextField} label="检验报告号" />
       );
     } else {
       return null;
@@ -187,7 +187,7 @@ export class StatusSelect extends Component {
             break;
           case Consts.ORDER_STATUS_TESTED:
             selectValue = [
-              { name: '检测报告已寄出', value: Consts.ORDER_STATUS_REPORT_SHIPPED }
+              { name: '检验报告已寄出', value: Consts.ORDER_STATUS_REPORT_SHIPPED }
             ];
             break;
           default:

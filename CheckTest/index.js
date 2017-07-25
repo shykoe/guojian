@@ -46,7 +46,7 @@ import {websockClient} from '../asteroid';
 
 export const CheckTestIcon = Icon;
 const rowStyle = (record) => {
-   // if (record.status === "检测完成") return { backgroundColor: '#dfd' };
+   // if (record.status === ORDER_STATUS_TESTED) return { backgroundColor: '#dfd' };
     return {};
 };
 

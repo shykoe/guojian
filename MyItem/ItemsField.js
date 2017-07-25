@@ -9,7 +9,7 @@ const ItemsField = ({ record }) => {
   const items = (record.items || []).map(item => {
     let verdict;
     if (item.verdict === undefined) {
-      verdict = '未检测';
+      verdict = '未检验';
     } else if (item.verdict) {
       verdict = '合格';
     } else {

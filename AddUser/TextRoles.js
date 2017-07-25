@@ -27,9 +27,9 @@ class TextRoles extends Component {
         case 7:
             return "仓库操作员";
         case 8:
-            return "检测任务分配员";  
+            return "检验任务分配员";  
         case 9:
-            return "检测员"; 
+            return "检验员"; 
         case 20:
             return "正常"; 
         case 30:

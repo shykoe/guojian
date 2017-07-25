@@ -88,7 +88,7 @@ export default class WorkSpace extends Component {
                       name={`items.${ind}.result`}
                       type="text"
                       component={this.renderField}
-                      label="检测结果"
+                      label="检验结果"
                     />*/}
                     <Field
                       name={`items.${ind}.verdict`}

@@ -25,7 +25,7 @@ class TextRoles extends Component {
         case 2:
             return "业务员";
         case 3:
-            return "检测员";     
+            return "检验员";     
     }
 };
     render() {

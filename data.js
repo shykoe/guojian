@@ -62,7 +62,7 @@ export default {
             published_at: new Date('2012-08-06'),
             Product:"消防软管卷盘",
             notes:"无",
-            status:"检测完成",
+            status:"检验完成",
             ispicked:false,           
             
         },
@@ -221,7 +221,7 @@ export default {
             published_at: new Date('2012-08-06'),
             Product:"消防软管卷盘",
             notes:"无",
-            status:"检测完成",           
+            status:"检验完成",           
             ispicked:true,
             finished:false,
             InsItems:[1, 2]
@@ -244,7 +244,7 @@ export default {
             published_at: new Date('2012-08-06'),
             Product:"消防软管卷盘",
             notes:"无",
-            status:"检测完成",           
+            status:"检验完成",           
             ispicked:true,
             finished:true,
             InsItems:[1, 2]
@@ -364,7 +364,7 @@ export default {
             published_at: new Date('2012-08-06'),
             Product:"消防软管卷盘",
             notes:"无",
-            status:"检测完成",
+            status:"检验完成",
             ispicked:false,
             InsItems:[1, 2, 3, 4],
             finished:false,           

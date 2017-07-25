@@ -11,7 +11,7 @@ class FilterButton extends React.Component{
     ontap = () =>{
     	const { filterVal, showFilter } = this.props;
     	if (this.props.filterVal === undefined || this.props.filterVal === '') {
-    		showFilter('status2', '检测任务已分配');
+    		showFilter('status2', '检验任务已分配');
     	} else {
     		showFilter('status2', '');
     	}
@@ -21,11 +21,11 @@ class FilterButton extends React.Component{
 
 		if (this.props.filterVal === undefined || this.props.filterVal === '') {
 			return (
-				<FlatButton primary label="待检测的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
+				<FlatButton primary label="待检验的订单" onClick={this.ontap} icon={<ToggleCheckBoxOutlineBlank/>} />
 			);
 		} else {
 			return (
-				<FlatButton primary label="待检测的订单" onClick={this.ontap} icon={<ToggleCheckBox/>} />
+				<FlatButton primary label="待检验的订单" onClick={this.ontap} icon={<ToggleCheckBox/>} />
 			);
 		}
 	}

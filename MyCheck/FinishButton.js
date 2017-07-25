@@ -169,11 +169,11 @@ class FinishButton extends Component {
             <Field name="ReceivedDate" key="ReceivedDate"  component={this.renderField} label="到样日期"/>
             <Field name="SampleDate" key="SampleDate"  component={this.renderField} label="抽样日期"/>
             <Field name="SampleStaff" key="SampleStaff"  component={this.renderField} label="抽样人员"/>
-            <Field name="TestItems" key="TestItems"  component={this.renderField} label="检测项目"/>
+            <Field name="TestItems" key="TestItems"  component={this.renderField} label="检验项目"/>
             <Field name="TestPlace" key="TestPlace"  component={this.renderField} label="检测地点"/>
             <Field name="TestDate" key="TestDate"  component={this.renderField} label="检测日期"/>
-            <Field name="TestCriteria" key="TestCriteria"  component={this.renderField} label="检测依据"/>
-            <Field name="TestConclusion" key="TestConclusion"  component={this.renderField} label="检测结论"/>
+            <Field name="TestCriteria" key="TestCriteria"  component={this.renderField} label="检验依据"/>
+            <Field name="TestConclusion" key="TestConclusion"  component={this.renderField} label="检验结论"/>
             <Field name="Remark" key="Remark"  component={this.renderField} label="备注"/>
           </Dialog>
         </div>

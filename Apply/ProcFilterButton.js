@@ -15,7 +15,7 @@ class ProcFilterButton extends React.Component{
         '未认领',
         '已认领',
         '已支付',
-        '检测完成'
+        '检验完成'
       ]);
   	} else {
   		showFilter('status2', '');

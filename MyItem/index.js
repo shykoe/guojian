@@ -74,6 +74,7 @@ export const MyItemList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
+                    <TextField source="reportNo" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
                     <TextField source="sampleType" />

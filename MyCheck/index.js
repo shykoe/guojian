@@ -55,10 +55,11 @@ import ShippingField from '../MyItem/ShippingField';
 import SampleDisposalTypeField from '../MyItem/SampleDisposalTypeField';
 import ReportFetchingTypeField from '../MyItem/ReportFetchingTypeField'
 import TestProgressField from './TestProgressField';
+import Consts from '../pr-schema/consts';
 
 export const MyCheckIcon = Icon;
 const rowStyle = (record) => {
-    if (record.status === "检测完成") return { backgroundColor: '#dfd' };
+    if (record.status === Consts.ORDER_STATUS_TESTED) return { backgroundColor: '#dfd' };
     return {};
 };
 
@@ -74,11 +75,12 @@ export const MyCheckList = ({ ...props }) => (
             }
             medium={
                 <Datagrid rowStyle={rowStyle}  >
+                    <TextField source="reportNo" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
                     <TextField source="categoryName" />
                     <TextField source="levelName" />
-                    <CheckField label="检测项" />
+                    <CheckField label="检验项" />
                     <StatusField />
                     <TextField source="agent" />
                     <CheckersField />

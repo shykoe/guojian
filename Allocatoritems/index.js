@@ -68,6 +68,7 @@ export const AitemsList = ({ ...props }) => (
             }
             medium={
                 <Datagrid  >
+                    <TextField source="reportNo" />
                     <DateField source="createdAt" style={{ fontStyle: 'italic' }} />
                     <TextField source="sampleName" />
                     <TextField source="sampleType" />

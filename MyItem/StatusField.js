@@ -45,11 +45,11 @@ const dealText = (record) =>{
 		case ORDER_STATUS_SAMPLE_RECEIVED:
 			return "已收到样品";
 		case ORDER_STATUS_ASSIGNED:
-			return "检测任务已分配";
+			return "检验任务已分配";
 		case ORDER_STATUS_TESTED:
-			return "检测完成";
+			return "检验完成";
 		case ORDER_STATUS_REPORT_SHIPPED:
-			return "检测报告已寄出";
+			return "检验报告已寄出";
 		case ORDER_STATUS_COMPLETED:
 			return "订单完成";
 		case ORDER_STATUS_REFUNDED:

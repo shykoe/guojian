@@ -8,6 +8,7 @@ const OrderFilter = (props) => {
     return (
         <Filter {...props} >
             <TextInput source="_id" />
+            <TextInput source="reportNo" />
             <TextInput source="status" />
             <TextInput source="clientName" />
             <TextInput source="sampleName" />

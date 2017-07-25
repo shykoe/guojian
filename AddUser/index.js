@@ -46,7 +46,7 @@ import {websockClient} from '../asteroid';
 
 export const AddUserIcon = Icon;
 const rowStyle = (record) => {
-   // if (record.status === "检测完成") return { backgroundColor: '#dfd' };
+   // if (record.status === Consts.ORDER_STATUS_TESTED) return { backgroundColor: '#dfd' };
     return {};
 };
 
@@ -93,8 +93,8 @@ const choices=[
     { role: 1, name: '管理员' },
     { role: 6, name: '业务员' },
     { role: 7, name: '仓库操作员' },
-    { role: 8, name: '检测任务分配员' },
-    { role: 9, name: '检测员' },
+    { role: 8, name: '检验任务分配员' },
+    { role: 9, name: '检验员' },
     { role: 20, name: '正常' },
     { role: 30, name: '不可见' },
     { role: 31, name: '已删除' },

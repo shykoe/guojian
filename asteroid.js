@@ -20,9 +20,9 @@ const statusMap = {
   '已支付': Consts.ORDER_STATUS_PAID,
   '已安排物流': Consts.ORDER_STATUS_PROCESSED,
   '已收到样品': Consts.ORDER_STATUS_SAMPLE_RECEIVED,
-  '检测任务已分配': Consts.ORDER_STATUS_ASSIGNED,
-  '检测完成': Consts.ORDER_STATUS_TESTED,
-  '检测报告已寄出': Consts.ORDER_STATUS_REPORT_SHIPPED,
+  '检验任务已分配': Consts.ORDER_STATUS_ASSIGNED,
+  '检验完成': Consts.ORDER_STATUS_TESTED,
+  '检验报告已寄出': Consts.ORDER_STATUS_REPORT_SHIPPED,
   '订单完成': Consts.ORDER_STATUS_COMPLETED,
   '已退款': Consts.ORDER_STATUS_REFUNDED
 }
