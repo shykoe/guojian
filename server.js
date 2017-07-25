@@ -7,6 +7,19 @@ const fs = require('fs');
 const path = require('path');
 
 const indexFile = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+const reportFile = fs.readFileSync(path.join(__dirname, 'report.html'), 'utf8');
+const reportKeys = [
+  'reportNo',
+  'ProductName',
+  'ModelType',
+  'Manufacturer',
+  'KindofTest',
+  'TestCriteria',
+  'SampleGrade',
+  'TestItems',
+  'TestConclusion',
+  'TestDate'
+];
 
 const app = express();
 app.use(bodyParser.json());
@@ -36,7 +49,11 @@ app.get('/report/:reportNo', function(req, res) {
 
   asteroid.call('reports.get', reportNo).then(function(data) {
     if (data) {
-      res.status(200).send(data);
+      let html = reportFile;
+      for (const key of reportKeys) {
+        html = html.replace('%%' + key + '%%', data[key] || '');
+      }
+      res.status(200).send(html);
     } else {
       res.status(404).send('Not Found');
     }
