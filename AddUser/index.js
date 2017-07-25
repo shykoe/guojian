@@ -68,11 +68,9 @@ const validateUserUpdate= (values) => {
     const errors = {};
     //console.log('--valuse -',values);
 
-    var password=values.password;
-    console.log(password);
+    var password = values.password;
     if(!password) {
-
-    } else if(password.length < 6) {
+    } else if (password.length < 6) {
        errors.password = ['密码太短了'];
     }
     return errors
@@ -120,18 +118,22 @@ const validateUserCreation = (values) => {
        .then(response => {if(response.data){  errors.username = ['用户名已存在']; return errors}});
     }
 
-    var setpassword=values.password;
-    console.log(setpassword);
-    if(!setpassword) {
+    var setpassword = values.password;
+    if (!setpassword) {
       errors.password = ['密码不能为空'];
-    } else if(setpassword.length < 6) {
+    } else if (setpassword.length < 6) {
        errors.password = ['密码太短了'];
     }
 
-    if(!(values.role)) {
+    if (!(values.phone)) {
+         errors.phone = ['手机号不能为空'];
+    }
+
+    if (!(values.role)) {
          errors.role = ['角色不能为空'];
     }
-    return errors
+
+    return errors;
 };
 
 //validate={validateUserSetusername}

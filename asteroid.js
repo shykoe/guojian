@@ -127,7 +127,10 @@ export const asteroid = new Asteroid({
 export const asteroidMethod = asteroid.call;
 
 const mapResponse2Rest = (response, type, params)=>{
-	switch(type){
+  if (response.errors) {
+    throw new Error(response.errors);
+  }
+	switch(type) {
 		case GET_LIST:
       const data = response.data || [];
 			data.map((item)=>{item['id']=item._id});
@@ -143,25 +146,28 @@ const mapResponse2Rest = (response, type, params)=>{
 
 const mapResponse2RestAddI = (response, type, params,page, perpage)=>{
 	// const { headers, json } = response;
-	switch(type){
+  if (response.errors) {
+    throw new Error(response.errors);
+  }
+	switch(type) {
 		case GET_LIST:
-		     //skiped = ( parseInt(page) - 1 ) * parseInt(perpage);
-		     var i=( parseInt(page) - 1 ) * parseInt(perpage)+1;
-			 for (var key in response){
-			        	response[key]["id"]=response[key]["_id"];
-                            ++i;
-			        }
-			return {data: response,total: response.length };
+	     //skiped = ( parseInt(page) - 1 ) * parseInt(perpage);
+	     var i = (parseInt(page) - 1) * parseInt(perpage) + 1;
+			 for (var key in response) {
+        	response[key]["id"]=response[key]["_id"];
+          ++i;
+       }
+			return { data: response, total: response.length };
 		case GET_ONE:
-		    if(response==false){
-		    	//console.log('--zero-')
-		    	return false;
-		    }
-		    return {data:response};
+	    if(response==false){
+	    	//console.log('--zero-')
+	    	return false;
+	    }
+	    return {data:response};
 		case UPDATE:
 		 	return {data:response};
 		case CREATE:
-		    response['id'] = response._id ;
+      response['id'] = response._id ;
 		 	return {data:response};
 	}
 }
